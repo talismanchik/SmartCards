@@ -7,7 +7,13 @@
   align-items: center;
   justify-content: center;
 
+  box-sizing: border-box;
   padding: 6px 28px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+
+  border-radius: 4px;
 
   &:focus-visible {
     outline: 2px solid var(--color-info-500);
@@ -15,11 +21,39 @@
 }
 
 .primary {
-  background-color: red;
+  background-color: var(--color-accent-500);
+
+  &:hover {
+    background-color: var(--color-accent-300);
+    transition: 0.15s;
+  }
+
+  &:active {
+    background-color: var(--color-accent-700);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-accent-900);
+  }
 }
 
 .secondary {
-  background-color: green;
+  background-color: var(--color-dark-300);
+
+  &:hover {
+    background-color: var(--color-dark-100);
+    transition: 0.15s;
+  }
+
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-dark-300);
+  }
 }
 
 .tertiary {
