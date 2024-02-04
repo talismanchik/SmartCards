@@ -1,0 +1,58 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.ToggleGroup {
+  display: inline-flex;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
+}
+
+.ToggleGroupItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 24px;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  border-right: 1px solid var(--color-dark-300);
+  border-block: 1px solid var(--color-dark-300);
+
+  transition: background-color 0.15s;
+
+  &:first-child {
+    margin-left: 0;
+    border: 1px solid var(--color-dark-300);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
+  &:hover {
+    color: var(--color-light-900);
+    background-color: var(--color-dark-300);
+  }
+
+  &[data-state='on'] {
+    background-color: var(--color-accent-500);
+  }
+
+  &:focus {
+    position: relative;
+  }
+
+  &[data-disabled] {
+    color: var(--color-dark-300);
+    background-color: var(--color-dark-700);
+  }
+}
