@@ -1,4 +1,4 @@
-import { Item, Root } from '@radix-ui/react-toggle-group'
+import { List, Root, Trigger } from '@radix-ui/react-tabs'
 
 import s from './tabSwitcher.module.scss'
 
@@ -10,27 +10,18 @@ type Props = {
 export const TabSwitcher = ({ disabled, items }: Props) => {
   const itemMarkup = items.map((item, key) => {
     return (
-      <Item
-        aria-label={'' + key}
-        className={`${s.ToggleGroupItem}`}
-        disabled={disabled}
-        key={key}
-        value={'' + key}
-      >
+      <Trigger className={s.TabsTrigger} disabled={disabled} key={key} value={'' + key}>
         {item}
-      </Item>
+      </Trigger>
     )
   })
 
   return (
-    <Root
-      aria-label={'Text alignment'}
-      className={s.ToggleGroup}
-      defaultValue={'0'}
-      disabled={disabled}
-      type={'single'}
-    >
-      {itemMarkup}
+    <Root className={'TabsRoot'} defaultValue={'0'}>
+      <List className={s.TabsList}>{itemMarkup}</List>
     </Root>
   )
 }
+
+//по рэдиксу есть компонент который отображается в зависимости от выбраной кнопки
+//<Content className={'TabsContent'} value={'0'}></Content>
