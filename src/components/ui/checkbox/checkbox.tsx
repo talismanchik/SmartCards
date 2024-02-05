@@ -1,5 +1,5 @@
 import { CheckIcon } from '@/components/assets/icons/CheckIcon'
-import * as RadixCheckbox from '@radix-ui/react-checkbox'
+import { Indicator, Root } from '@radix-ui/react-checkbox'
 import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
@@ -35,7 +35,7 @@ export const Checkbox = ({
   return (
     <p className={classNames.label}>
       <div className={classNames.checkboxWrapper}>
-        <RadixCheckbox.Root
+        <Root
           checked={checked}
           className={classNames.root}
           disabled={disabled}
@@ -43,11 +43,11 @@ export const Checkbox = ({
           onCheckedChange={onCheckedChange}
         >
           {checked && (
-            <RadixCheckbox.Indicator className={classNames.indicator} forceMount>
+            <Indicator className={classNames.indicator} forceMount>
               <CheckIcon disabled={disabled} />
-            </RadixCheckbox.Indicator>
+            </Indicator>
           )}
-        </RadixCheckbox.Root>
+        </Root>
       </div>
       {label}
     </p>
