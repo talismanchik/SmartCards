@@ -4,9 +4,15 @@ import { Input } from './'
 
 const meta = {
   argTypes: {
+    disabled: {
+      defaultValue: false,
+      type: 'boolean',
+    },
+    error: {
+      type: 'string',
+    },
     variant: {
-      control: { type: 'radio' },
-      options: ['withoutDecoration', 'eyeDecoration', 'searchDecoration'],
+      options: ['eyeDecoration', 'searchDecoration', 'withoutDecoration'],
     },
   },
   component: Input,
@@ -17,34 +23,31 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const WithoutDecoration: Story = {
+export const Base: Story = {
   args: {
-    disabled: false,
-
-    placeholder: 'WithoutDecoration Input',
-    variant: 'withoutDecoration',
+    placeholder: 'Input',
   },
 }
-
-export const EyeDecoration: Story = {
-  args: {
-    disabled: false,
-    placeholder: 'EyeDecoration Input',
-    variant: 'eyeDecoration',
-  },
-}
-export const SearchDecoration: Story = {
-  args: {
-    disabled: false,
-    placeholder: 'SearchDecoration Input',
-    variant: 'searchDecoration',
-  },
-}
-export const Error: Story = {
-  args: {
-    disabled: false,
-    error: true,
-    placeholder: 'Error Input',
-    variant: 'withoutDecoration',
-  },
-}
+//
+// export const EyeDecoration: Story = {
+//   args: {
+//     disabled: false,
+//     placeholder: 'EyeDecoration Input',
+//     variant: 'eyeDecoration',
+//   },
+// }
+// export const SearchDecoration: Story = {
+//   args: {
+//     disabled: false,
+//     placeholder: 'SearchDecoration Input',
+//     variant: 'searchDecoration',
+//   },
+// }
+// export const Error: Story = {
+//   args: {
+//     disabled: false,
+//     error: 'Error!',
+//     placeholder: 'Error Input',
+//     variant: 'withoutDecoration',
+//   },
+// }

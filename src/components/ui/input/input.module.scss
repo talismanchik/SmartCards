@@ -1,19 +1,117 @@
+.root {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.eyeSection {
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  right: 12px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+
+  color: white;
+
+  background: none;
+  border: none;
+
+  &:has(~ .input:disabled) {
+    color: var(--color-dark-300);
+  }
+}
+
+.searchSection {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--color-dark-100);
+
+  background: none;
+  border: none;
+
+  &:has(~ .input:focus) {
+    color: var(--color-light-100);
+  }
+}
+
+.crossSection {
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--color-dark-100);
+
+  background: none;
+  border: none;
+
+  &:has(~ .input:focus) {
+    color: var(--color-light-100);
+  }
+}
+
 .input {
   all: unset;
-}
 
-.withoutDecoration {
-  background-color: deepskyblue;
-}
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
 
-.eyeDecoration {
-  background-color: greenyellow;
-}
+  font-size: var(--font-size-m);
+  color: var(--color-light-100);
 
-.searchDecoration {
-  background-color: yellow;
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  &.eyeDecoration {
+    padding-right: 40px;
+  }
+
+  &.searchDecoration {
+    padding-left: 50px;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-100);
+  }
+
+  &:focus {
+    border: 2px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    border: 1px solid var(--color-dark-300);
+  }
+
+  &:active {
+    border: 1px solid var(--color-light-100);
+  }
 }
 
 .error {
-  background-color: red;
+  color: var(--color-danger-300);
+  border: 1px solid var(--color-danger-300);
+}
+
+.errorCaption {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger-300);
 }
