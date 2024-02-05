@@ -38,7 +38,7 @@
 }
 
 .caption {
-  @include typography(var(--font-size-s), var(--font-weight-bold), var(--line-height-m));
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
 }
 
 .overline {
@@ -47,7 +47,7 @@
 
 .link1,
 .link1:visited {
-  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
 
   cursor: pointer;
   color: var(--color-info-500);
@@ -56,7 +56,7 @@
 
 .link2,
 .link2:visited {
-  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
 
   cursor: pointer;
   color: var(--color-info-500);
