@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    children: 'Primary Button',
+    children: 'Primary Checkbox',
     disabled: false,
     variant: 'primary',
   },
@@ -30,7 +30,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    children: 'Secondary Button',
+    children: 'Secondary Checkbox',
     disabled: false,
     variant: 'secondary',
   },
@@ -38,7 +38,7 @@ export const Secondary: Story = {
 
 export const FullWidth: Story = {
   args: {
-    children: 'Full Width Button',
+    children: 'Full Width Checkbox',
     disabled: false,
     fullWidth: true,
     variant: 'primary',

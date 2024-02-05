@@ -1,0 +1,79 @@
+.label {
+  cursor: pointer;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+
+  &.disabled {
+    cursor: initial;
+    color: var(--color-dark-100);
+  }
+
+  .checkboxWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    &:focus-within {
+      background-color: var(--color-dark-100);
+    }
+
+    &:hover:not(.disabled) {
+      background-color: var(--color-dark-500);
+    }
+
+    &:active:not(.disabled) {
+      background-color: var(--color-dark-100);
+    }
+
+    &.left {
+      margin-left: -0.9rem;
+    }
+
+    .root {
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 18px;
+      height: 18px;
+
+      background-color: transparent;
+      border-radius: 2px;
+
+      &:focus-visible {
+        outline: 1px var(--color-dark-100);
+      }
+
+      &:not([data-state='checked']) {
+        border: 2px solid var(--color-light-900);
+      }
+
+      &[data-disabled] {
+        pointer-events: none;
+        cursor: initial;
+        border: 2px solid var(--color-dark-100);
+      }
+
+      &:hover:active:not([data-disabled]) {
+        background-color: var(--color-dark-900);
+      }
+
+      &[data-state='checked'][data-disabled] {
+        background-color: var(--color-light-700);
+      }
+    }
+
+    .indicator {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
