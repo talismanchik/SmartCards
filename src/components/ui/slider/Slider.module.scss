@@ -1,49 +1,74 @@
 .SliderComponent {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .SliderRoot {
+  touch-action: none;
+  user-select: none;
+
   position: relative;
+
   display: flex;
   align-items: center;
-  user-select: none;
-  touch-action: none;
-  width: 200px;
+
   height: 20px;
 }
 
 .SliderTrack {
-  background-color: black;
   position: relative;
+
   flex-grow: 1;
-  border-radius: 9999px;
-  height: 3px;
+
+  width: 155px;
+  height: 5px;
+
+  background-color: #8c61ff80;
+  border-radius: 10px;
 }
 
 .SliderRange {
   position: absolute;
-  background-color: red;
-  border-radius: 9999px;
-  height: 100%;
+  height: 125%;
+  background-color: var(--color-accent-500);
+  border-radius: 10px;
 }
 
 .SliderThumb {
   display: block;
+
   width: 20px;
   height: 20px;
+
   background-color: white;
-  box-shadow: 0 2px 10px gray;
+  border: 5px solid var(--color-accent-500);
   border-radius: 10px;
 }
+
 .SliderThumb:hover {
-  background-color: pink;
+  position: static;
 }
+
 .SliderThumb:focus {
   outline: none;
-  box-shadow: 0 0 0 5px black;
+  box-shadow: 0 0 0 2px white;
 }
 
 .SliderValue {
-  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin: 7px;
+
+  font-size: 16px;
+  color: var(--color-light-100);
+  text-align: center;
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
 }
