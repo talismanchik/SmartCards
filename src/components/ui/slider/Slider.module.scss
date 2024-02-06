@@ -1,3 +1,8 @@
+.SliderComponent {
+  display: flex;
+  flex-direction: row;
+}
+
 .SliderRoot {
   position: relative;
   display: flex;
@@ -37,4 +42,8 @@
 .SliderThumb:focus {
   outline: none;
   box-shadow: 0 0 0 5px black;
+}
+
+.SliderValue {
+  color: black;
 }
