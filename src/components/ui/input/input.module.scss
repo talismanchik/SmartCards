@@ -79,6 +79,26 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
+  &::placeholder:disabled {
+    color: var(--color-dark-300);
+  }
+
+  &:disabled::input-placeholder {
+    color: var(--color-dark-300);
+  }
+
+  &:disabled:placeholder {
+    color: var(--color-dark-300);
+  }
+
+  &:disabled::placeholder {
+    color: var(--color-dark-300);
+  }
+
+  &:disabled:input-placeholder {
+    color: var(--color-dark-300);
+  }
+
   &.eyeDecoration {
     padding-right: 40px;
   }
@@ -87,12 +107,12 @@
     padding-left: 50px;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--color-dark-700);
     border: 1px solid var(--color-dark-100);
   }
 
-  &:focus {
+  &:focus-within {
     border: 2px solid var(--color-info-700);
   }
 
@@ -101,7 +121,7 @@
     border: 1px solid var(--color-dark-300);
   }
 
-  &:active {
+  &:active:not(:disabled) {
     border: 1px solid var(--color-light-100);
   }
 }

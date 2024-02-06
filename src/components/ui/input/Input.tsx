@@ -14,7 +14,7 @@ export type InputProps = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = ({ className, error, variant = 'withoutDecoration', ...rest }: InputProps) => {
-  const [closedEye, setClosedEye] = useState(false)
+  const [closedEye, setClosedEye] = useState(true)
   const [value, setValue] = useState(rest.value ?? '')
 
   return (
@@ -34,7 +34,7 @@ export const Input = ({ className, error, variant = 'withoutDecoration', ...rest
 
         {variant === 'searchDecoration' && (
           <button className={s.searchSection} disabled={rest.disabled}>
-            <Search />
+            <Search disabled={rest.disabled} />
           </button>
         )}
 
@@ -49,7 +49,7 @@ export const Input = ({ className, error, variant = 'withoutDecoration', ...rest
           onChange={event => {
             setValue(event.currentTarget.value)
           }}
-          type={variant === 'eyeDecoration' ? (!closedEye ? 'text' : 'password') : 'text'}
+          type={variant === 'eyeDecoration' && closedEye ? 'password' : 'text'}
           value={value}
           {...rest}
         />
