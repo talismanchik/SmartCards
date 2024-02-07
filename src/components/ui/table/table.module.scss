@@ -1,7 +1,13 @@
 .table {
-  all: unset;
+  border-spacing: 0;
+  width: 100%;
 
   .thead {
     background-color: var(--color-dark-500);
+
+    .tr {
+      padding: 6px 24px;
+      text-align: left;
+    }
   }
 }

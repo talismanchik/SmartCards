@@ -12,5 +12,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const TableStory: Story = {
-  args: {},
+  args: { titles: ['Name', 'Cards', 'Last Update', 'Created by', 'options'] },
 }

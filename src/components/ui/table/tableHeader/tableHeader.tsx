@@ -1,15 +1,27 @@
+import { Typography } from '@/components/ui/typography'
+import clsx from 'clsx'
+
 import s from '../table.module.scss'
 
-export const TableHeader = () => {
+type Props = {
+  titles: string[]
+}
+export const TableHeader = ({ titles }: Props) => {
+  const classNames = {
+    th: clsx(s.tr),
+    thead: clsx(s.thead),
+  }
+  const titleMarkup = titles.map((title, index) => {
+    return (
+      <th className={classNames.th} key={index}>
+        <Typography variant={'subtitle2'}>{title}</Typography>
+      </th>
+    )
+  })
+
   return (
-    <thead className={s.thead}>
-      <tr>
-        <th>Name</th>
-        <th>Cards</th>
-        <th>Last Update</th>
-        <th>Created by</th>
-        <th></th>
-      </tr>
+    <thead className={classNames.thead}>
+      <tr>{titleMarkup}</tr>
     </thead>
   )
 }

@@ -2,10 +2,14 @@ import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
 
 import s from './table.module.scss'
 
-export const Table = () => {
+type Props = {
+  deckLists: []
+  titles: string[]
+}
+export const Table = ({ titles }: Props) => {
   return (
     <table className={s.table}>
-      <TableHeader />
+      <TableHeader titles={titles} />
       <tbody>
         <tr>
           <td>first deck</td>
