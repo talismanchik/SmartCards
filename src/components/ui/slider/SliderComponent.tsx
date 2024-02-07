@@ -6,10 +6,15 @@ import s from './Slider.module.scss'
 
 export type SliderComponentProps = {
   maxValue?: number
+  minValue?: number
   startValues?: number[]
 }
 
-export const SliderComponent = ({ maxValue, startValues = [0, 100] }: SliderComponentProps) => {
+export const SliderComponent = ({
+  maxValue = 100,
+  minValue = 0,
+  startValues = [0, 100],
+}: SliderComponentProps) => {
   const [sliderValues, setSliderValues] = useState(startValues)
 
   return (
@@ -20,7 +25,7 @@ export const SliderComponent = ({ maxValue, startValues = [0, 100] }: SliderComp
           className={s.SliderRoot}
           defaultValue={startValues}
           max={maxValue}
-          min={0}
+          min={minValue}
           onValueChange={(value: number[]) => setSliderValues(value)}
         >
           <Slider.Track className={s.SliderTrack}>
