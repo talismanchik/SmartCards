@@ -11,6 +11,8 @@ export function App() {
       <Icon iconId={'eye_outline'} />
       <Icon iconId={'eye_off'} />
       <Icon iconId={'eye_off_outline'} />
+      <Icon iconId={'checkbox_true'} />
+      <Icon iconId={'checkbox_false'} />
     </div>
   )
 }

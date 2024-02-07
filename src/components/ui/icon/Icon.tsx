@@ -12,9 +12,9 @@ export const Icon = ({ className, height, iconId, viewBox, width }: Props) => {
   return (
     <svg
       className={`${className}`}
-      height={height || '20'}
+      height={height || '16'}
       viewBox={viewBox || '2 2 20 20'}
-      width={width || '20'}
+      width={width || '16'}
     >
       <use xlinkHref={`${sprite}#${iconId}`} />
     </svg>
