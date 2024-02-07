@@ -44,15 +44,19 @@
   background-color: white;
   border: 5px solid var(--color-accent-500);
   border-radius: 10px;
-}
 
-.SliderThumb:hover {
-  position: static;
-}
+  &:hover {
+    position: static;
+  }
 
-.SliderThumb:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px white;
+  &:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--color-accent-500);
+
+    &:not(:hover) {
+      box-shadow: none;
+    }
+  }
 }
 
 .SliderValue {
