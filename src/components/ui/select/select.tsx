@@ -28,13 +28,15 @@ type SelectProps = {
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof Root>
 
-export const SelectDemo = forwardRef<ElementRef<typeof Root>, SelectProps>(
+export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
   (
     {
       className,
       disabled,
       label,
+      onOpenChange,
       onValueChange,
+      open,
       options,
       placeholder = 'Select value...',
       value,
@@ -61,7 +63,7 @@ export const SelectDemo = forwardRef<ElementRef<typeof Root>, SelectProps>(
         <Trigger aria-label={'select'} className={s.trigger}>
           <Value placeholder={placeholder} />
           <SelectIcon className={s.icon}>
-            <Icon iconId={'arrow_down'} />
+            <Icon iconId={open ? 'arrow_down' : 'arrow_up'} />
           </SelectIcon>
         </Trigger>
         <Portal>

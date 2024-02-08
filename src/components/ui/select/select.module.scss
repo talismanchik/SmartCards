@@ -11,8 +11,10 @@
   align-items: center;
   justify-content: space-around;
 
+  box-sizing: border-box;
   padding: 6px 12px;
 
+  background-color: transparent;
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
@@ -33,7 +35,7 @@
   }
 
   &:focus-visible {
-    border: 2px solid var(--color-info-700);
+    outline: 2px solid var(--color-info-700);
   }
 
   &:hover {
@@ -47,8 +49,8 @@
   max-height: var(--radix-select-content-available-height);
   border: 1px solid var(--color-dark-300);
 
-  &[data-state='open'] div {
-    outline: none;
+  &[data-state='open'] div:focus-visible {
+    outline: 0.5px solid var(--color-info-700);
   }
 }
 
@@ -65,6 +67,10 @@
   &:hover {
     color: var(--color-accent-300);
     background-color: var(--color-accent-900);
+  }
+
+  &:focus-visible:not(:hover) {
+    outline: 0.5px solid var(--color-info-700);
   }
 }
 
