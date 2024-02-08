@@ -26,8 +26,9 @@
   }
 
   &[data-state='open'] .icon {
-    transform: rotate(180deg);
+    transform: rotate(-180deg);
     margin-bottom: 5px;
+    transition: 0.2s;
   }
 
   & p {
@@ -50,7 +51,13 @@
   border: 1px solid var(--color-dark-300);
 
   &[data-state='open'] div:focus-visible {
-    outline: 0.5px solid var(--color-info-700);
+    color: var(--color-accent-300);
+
+    background-color: var(--color-accent-900);
+    outline: none;
+    box-shadow: 0 0 10px 3px rgb(56 39 102 / 20%);
+
+    transition: 0.25s ease-out;
   }
 }
 
@@ -67,6 +74,7 @@
   &:hover {
     color: var(--color-accent-300);
     background-color: var(--color-accent-900);
+    transition: 0.25s;
   }
 
   &:focus-visible:not(:hover) {
