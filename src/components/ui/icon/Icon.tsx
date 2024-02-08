@@ -12,6 +12,7 @@ type Props = {
     | 'arrow_up'
     | 'checkbox_false'
     | 'checkbox_true'
+    | 'checkbox1'
     | 'close'
     | 'edit'
     | 'edit_outline'
