@@ -31,11 +31,3 @@ export const DefaultWithLabel: Story = {
     label: 'Check-box',
   },
 }
-
-export const DisabledWithLabel: Story = {
-  args: {
-    checked: true,
-    disabled: true,
-    label: 'Check-box',
-  },
-}
