@@ -1,11 +1,10 @@
 import { ReactNode } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ContentContainer } from '@/components/ui/modal/modalComponent/content/ContentContainer'
 import { ModalButton, ModalFooter } from '@/components/ui/modal/modalComponent/footer/ModalFooter'
 import { ModalHeader } from '@/components/ui/modal/modalComponent/header/ModalHeader'
-import { Content, Overlay, Portal, Root, Trigger } from '@radix-ui/react-dialog'
+import { Content, Overlay, Portal, Root } from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
 import s from './Modal.module.scss'
@@ -13,18 +12,17 @@ import s from './Modal.module.scss'
 type Props = {
   buttons: ModalButton[]
   children: ReactNode
+  onOpenChange: (value: boolean) => void
+  open: boolean
   title: string
 }
-export const Modal = ({ buttons, children, title }: Props) => {
+export const Modal = ({ buttons, children, onOpenChange, open, title }: Props) => {
   const classNames = {
     content: clsx(s.content),
   }
 
   return (
-    <Root>
-      <Trigger asChild>
-        <Button>Edit profile</Button>
-      </Trigger>
+    <Root onOpenChange={onOpenChange} open={open}>
       <Portal>
         <Overlay className={'DialogOverlay'} />
         <Content className={classNames.content}>

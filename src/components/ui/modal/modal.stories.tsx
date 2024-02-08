@@ -1,7 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
+import { useState } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal/Modal'
-import { Typography } from '@/components/ui/typography'
 
 const meta = {
   component: Modal,
@@ -10,34 +13,72 @@ const meta = {
 } satisfies Meta<typeof Modal>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    buttons: [{ title: 'Right Button' }],
-    children: (
-      <Typography variant={'body1'}>
-        {' '}
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniamdsa
-      </Typography>
-    ),
-    title: 'Title',
+export const Default = {
+  render() {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open window</Button>
+        <Modal
+          buttons={[{ title: 'Add New Deck' }]}
+          onOpenChange={setOpen}
+          open={open}
+          title={'Add New Deck'}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Input title={'Title'} />
+            <Input title={'Key words'} />
+          </div>
+        </Modal>
+      </>
+    )
   },
 }
 
-export const TwoButton: Story = {
-  args: {
-    buttons: [{ title: 'Right Button' }, { title: 'Left Button', variant: 'secondary' }],
-    children: <form></form>,
-    title: 'Title',
+export const TwoButton = {
+  render() {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open window</Button>
+        <Modal
+          buttons={[{ title: 'Right Button' }, { title: 'Cancel', variant: 'secondary' }]}
+          onOpenChange={setOpen}
+          open={open}
+          title={'Add New Deck'}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Input title={'Title'} />
+            <Input title={'Key words'} />
+          </div>
+        </Modal>
+      </>
+    )
   },
 }
 
-export const FullWidthButton: Story = {
-  args: {
-    buttons: [{ fullWidth: true, title: 'Right Button' }],
-    children: <div></div>,
-    title: 'Title',
+export const FullWidthButton = {
+  render() {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open window</Button>
+        <Modal
+          buttons={[{ fullWidth: true, title: 'Right Button' }]}
+          onOpenChange={setOpen}
+          open={open}
+          title={'Add New Deck'}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Input title={'Title'} />
+            <Input title={'Key words'} />
+          </div>
+        </Modal>
+      </>
+    )
   },
 }
