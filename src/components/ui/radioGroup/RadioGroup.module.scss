@@ -1,0 +1,96 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.RadioGroupRoot {
+  display: flex;
+  flex-direction: column;
+}
+
+.VariantWrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.RadioButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    color: var(--color-accent-500);
+  }
+
+  &:has(~ .RadioGroupItem:hover) {
+    &::after {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+
+      width: 170%;
+      height: 170%;
+
+      background-color: var(--color-dark-500);
+      border-radius: 50%;
+    }
+  }
+
+  &:has(~ .RadioGroupItem:focus-visible) {
+    &::after {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+
+      width: 170%;
+      height: 170%;
+
+      background-color: var(--color-dark-700);
+      border-radius: 50%;
+    }
+  }
+
+  &:has(~ .RadioGroupItem:active) {
+    &::after {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+
+      width: 170%;
+      height: 170%;
+
+      background-color: var(--color-accent-900);
+      border-radius: 50%;
+    }
+  }
+}
+
+.Label {
+  cursor: pointer;
+
+  padding-left: 13px;
+
+  font-size: var(--font-size-m);
+  line-height: 1;
+  color: white;
+}
+
+.Disabled {
+  color: var(--color-light-900);
+
+  & svg {
+    color: var(--color-accent-900);
+  }
+}
+
+.RadioGroupItem {
+  cursor: pointer;
+  z-index: 10;
+  width: 25px;
+  height: 25px;
+}

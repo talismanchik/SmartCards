@@ -1,13 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { RadioGroup } from '@/components/ui/radioGroup/RadioGroup'
+import { RadioGroupComponent } from '@/components/ui/radioGroup/RadioGroupComponent'
 
 const meta = {
-  argTypes: {},
-  component: RadioGroup,
+  argTypes: {
+    disabled: {
+      defaultValue: false,
+      type: 'boolean',
+    },
+  },
+  component: RadioGroupComponent,
   tags: ['autodocs'],
   title: 'Components/RadioGroup',
-} satisfies Meta<typeof RadioGroup>
+} satisfies Meta<typeof RadioGroupComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -1,1 +1,1 @@
-export * from './RadioGroup'
+export * from 'src/components/ui/radioGroup/RadioGroupComponent'
