@@ -4,8 +4,10 @@ import { Close } from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
 import s from './ModalHeader.module.scss'
-
-export const ModalHeader = () => {
+type Props = {
+  title: string
+}
+export const ModalHeader = ({ title }: Props) => {
   const classNames = {
     button: clsx(s.button),
     root: clsx(s.root),
@@ -13,7 +15,7 @@ export const ModalHeader = () => {
 
   return (
     <div className={classNames.root}>
-      <Typography variant={'h3'}>Edit profile</Typography>
+      <Typography variant={'h3'}>{title}</Typography>
 
       <Close asChild>
         <button aria-label={'Close'} className={classNames.button}>
