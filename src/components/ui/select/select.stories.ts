@@ -19,7 +19,7 @@ export const Default: Story = {
       { title: 'value-2', value: '2' },
       { title: 'value-3', value: '3' },
     ],
-    placeholder: 'Select-boxчччччччччччччччччччччччччччч',
+    placeholder: 'Select-box',
   },
 }
 
