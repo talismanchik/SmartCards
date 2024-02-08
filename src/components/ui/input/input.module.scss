@@ -38,6 +38,10 @@
   background: none;
   border: none;
 
+  &:disabled svg {
+    color: var(--color-dark-300);
+  }
+
   &:has(~ .input:focus) {
     color: var(--color-light-100);
   }
@@ -79,23 +83,7 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
-  &::placeholder:disabled {
-    color: var(--color-dark-300);
-  }
-
-  &:disabled::input-placeholder {
-    color: var(--color-dark-300);
-  }
-
-  &:disabled:placeholder {
-    color: var(--color-dark-300);
-  }
-
   &:disabled::placeholder {
-    color: var(--color-dark-300);
-  }
-
-  &:disabled:input-placeholder {
     color: var(--color-dark-300);
   }
 

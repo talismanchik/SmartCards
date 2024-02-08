@@ -1,9 +1,6 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
-import { ClosedEye } from '@/components/ui/input/assetsForInput/ClosedEye'
-import { Cross } from '@/components/ui/input/assetsForInput/Cross'
-import { Eye } from '@/components/ui/input/assetsForInput/Eye'
-import { Search } from '@/components/ui/input/assetsForInput/Search'
+import { Icon } from '@/components/ui/icon/Icon'
 
 import s from './input.module.scss'
 
@@ -28,19 +25,23 @@ export const Input = ({ className, error, variant = 'withoutDecoration', ...rest
               setClosedEye(prev => !prev)
             }}
           >
-            {closedEye ? <ClosedEye /> : <Eye />}
+            {closedEye ? (
+              <Icon height={'24'} iconId={'eye_off_outline'} width={'24'} />
+            ) : (
+              <Icon height={'24'} iconId={'eye_outline'} width={'24'} />
+            )}
           </button>
         )}
 
         {variant === 'searchDecoration' && (
           <button className={s.searchSection} disabled={rest.disabled}>
-            <Search disabled={rest.disabled} />
+            <Icon height={'18.005802'} iconId={'search'} width={'18.005802'} />
           </button>
         )}
 
         {variant === 'searchDecoration' && value && !rest.disabled && (
           <button className={s.crossSection} onClick={() => setValue('')}>
-            <Cross />
+            <Icon height={'18'} iconId={'close'} width={'18'} />
           </button>
         )}
 
