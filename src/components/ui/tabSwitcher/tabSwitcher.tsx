@@ -1,27 +1,36 @@
+import { Typography } from '@/components/ui/typography'
 import { List, Root, Trigger } from '@radix-ui/react-tabs'
 
 import s from './tabSwitcher.module.scss'
 
 type Props = {
-  disabled: boolean
-  items: string[]
+  items: TabItem[]
+  label?: string
+  onValueChange: (value: string) => void
+  value: string
 }
 
-export const TabSwitcher = ({ disabled, items }: Props) => {
+export const TabSwitcher = ({ items, label, onValueChange, value }: Props) => {
   const itemMarkup = items.map((item, key) => {
     return (
-      <Trigger className={s.TabsTrigger} disabled={disabled} key={key} value={'' + key}>
-        {item}
+      <Trigger className={s.TabsTrigger} disabled={item.disabled} key={key} value={item.value}>
+        {item.title}
       </Trigger>
     )
   })
 
   return (
-    <Root className={'TabsRoot'} defaultValue={'0'}>
-      <List className={s.TabsList}>{itemMarkup}</List>
-    </Root>
+    <Typography as={'div'} variant={'body2'}>
+      {label}
+      <Root className={'TabsRoot'} defaultValue={'0'} onValueChange={onValueChange} value={value}>
+        <List className={s.TabsList}>{itemMarkup}</List>
+      </Root>
+    </Typography>
   )
 }
 
-//по рэдиксу есть компонент который отображается в зависимости от выбраной кнопки
-//<Content className={'TabsContent'} value={'0'}></Content>
+type TabItem = {
+  disabled?: boolean
+  title: string
+  value: string
+}
