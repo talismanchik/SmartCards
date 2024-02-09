@@ -7,7 +7,7 @@
 
   width: 100%;
   height: 60px;
-  padding: 12px;
+  padding: 12px 60px;
 
   background-color: var(--color-dark-700);
 
@@ -19,8 +19,27 @@
     width: 100%;
     max-width: 1370px;
 
-    & a {
+    .logo {
+      cursor: pointer;
       height: 36px;
+    }
+
+    .userInfo {
+      display: inline-flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+
+      height: 36px;
+
+      .userName {
+        cursor: pointer;
+        border-bottom: 2px dashed var(--color-light-100);
+      }
+
+      .userAvatar {
+        cursor: pointer;
+      }
     }
   }
 }
