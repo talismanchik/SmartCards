@@ -1,0 +1,26 @@
+.header {
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 60px;
+  padding: 12px;
+
+  background-color: var(--color-dark-700);
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 1370px;
+
+    & a {
+      height: 36px;
+    }
+  }
+}
