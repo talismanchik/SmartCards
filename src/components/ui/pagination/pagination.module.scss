@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  align-items: center;
+
+  .paginationContainer {
+    .iconWrapper {
+      cursor: pointer;
+      width: 16px;
+      background-color: transparent;
+      border: none;
+    }
+
+    .button {
+      cursor: pointer;
+      min-width: 24px;
+      height: 24px;
+      margin: 0 6px;
+    }
+  }
+
+  .selectContainer {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+  }
+}
