@@ -34,7 +34,6 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
       className,
       disabled,
       label,
-      onOpenChange,
       onValueChange,
       open,
       options,
