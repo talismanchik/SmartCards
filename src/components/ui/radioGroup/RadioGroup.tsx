@@ -21,11 +21,11 @@ export type RadioGroupProps = {
 
 export const RadioGroup = ({ disabled = false, onValueChange, value, values }: RadioGroupProps) => {
   const classNames = {
-    label: clsx(s.Label, disabled ? s.Disabled : ''),
+    label: clsx(s.Label),
     radioGroupItem: clsx(s.RadioGroupItem),
-    radioIndicator: clsx(s.RadioIndicator, disabled ? s.Disabled : ''),
+    radioIndicator: clsx(s.RadioIndicator),
     root: clsx(s.RadioGroupRoot),
-    variantWrap: clsx(s.VariantWrap),
+    variantWrap: clsx(s.VariantWrap, disabled ? s.Disabled : ''),
   }
 
   const onValueChangeHandler = (newValue: string) => {

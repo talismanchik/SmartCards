@@ -17,39 +17,41 @@ button {
       width: 16px;
       height: 16px;
 
-      svg {
-        color: var(--color-accent-500);
-      }
-
       .RadioIndicator {
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--color-accent-500);
 
-        &.Disabled {
-          cursor: initial;
+        svg {
+          color: var(--color-accent-500);
         }
+      }
+    }
 
-        &.Disabled svg {
-          color: var(--color-accent-900);
+    &:not(&.Disabled) {
+      .RadioGroupItem:hover,
+      .RadioGroupItem:focus-visible {
+        .RadioIndicator {
+          width: 170%;
+          height: 170%;
+          margin-top: -6px;
+          margin-left: -6px;
+
+          border-radius: 50%;
         }
+      }
 
-        &:hover,
-        :focus-visible,
-        :active {
-          &:not(.Disabled) {
-            &:not(svg) {
-              width: 170%;
-              height: 170%;
-              margin-top: -5px;
-              margin-left: -5px;
+      .RadioGroupItem:hover .RadioIndicator {
+        background-color: var(--color-dark-500);
+      }
 
-              background-color: var(--color-dark-500);
-              border-radius: 50%;
-            }
-          }
-        }
+      .RadioGroupItem:focus-visible .RadioIndicator {
+        background-color: var(--color-dark-700);
+      }
+
+      .RadioGroupItem:active .RadioIndicator {
+        background-color: var(--color-accent-900);
       }
     }
 
@@ -57,9 +59,11 @@ button {
       cursor: pointer;
       padding-left: 12px;
       line-height: 1;
-      color: white;
+      color: var(--color-light-100);
+    }
 
-      &.Disabled {
+    &.Disabled {
+      .Label {
         cursor: revert;
         color: var(--color-light-900);
       }
