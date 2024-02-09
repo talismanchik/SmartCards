@@ -6,91 +6,63 @@ button {
 .RadioGroupRoot {
   display: flex;
   flex-direction: column;
-}
 
-.VariantWrap {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
+  .VariantWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 
-.RadioButton {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .RadioGroupItem {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
 
-  & svg {
-    color: var(--color-accent-500);
-  }
+      svg {
+        color: var(--color-accent-500);
+      }
 
-  &:has(~ .RadioGroupItem:hover) {
-    &::after {
-      content: '';
+      .RadioIndicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-accent-500);
 
-      position: absolute;
-      z-index: -1;
+        &.Disabled {
+          cursor: initial;
+        }
 
-      width: 170%;
-      height: 170%;
+        &.Disabled svg {
+          color: var(--color-accent-900);
+        }
 
-      background-color: var(--color-dark-500);
-      border-radius: 50%;
+        &:hover,
+        :focus-visible,
+        :active {
+          &:not(.Disabled) {
+            &:not(svg) {
+              width: 170%;
+              height: 170%;
+              margin-top: -5px;
+              margin-left: -5px;
+
+              background-color: var(--color-dark-500);
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+
+    .Label {
+      cursor: pointer;
+      padding-left: 12px;
+      line-height: 1;
+      color: white;
+
+      &.Disabled {
+        cursor: revert;
+        color: var(--color-light-900);
+      }
     }
   }
-
-  &:has(~ .RadioGroupItem:focus-visible) {
-    &::after {
-      content: '';
-
-      position: absolute;
-      z-index: -1;
-
-      width: 170%;
-      height: 170%;
-
-      background-color: var(--color-dark-700);
-      border-radius: 50%;
-    }
-  }
-
-  &:has(~ .RadioGroupItem:active) {
-    &::after {
-      content: '';
-
-      position: absolute;
-      z-index: -1;
-
-      width: 170%;
-      height: 170%;
-
-      background-color: var(--color-accent-900);
-      border-radius: 50%;
-    }
-  }
-}
-
-.Label {
-  cursor: pointer;
-
-  padding-left: 13px;
-
-  font-size: var(--font-size-m);
-  line-height: 1;
-  color: white;
-}
-
-.Disabled {
-  color: var(--color-light-900);
-
-  & svg {
-    color: var(--color-accent-900);
-  }
-}
-
-.RadioGroupItem {
-  cursor: pointer;
-  z-index: 10;
-  width: 25px;
-  height: 25px;
 }
