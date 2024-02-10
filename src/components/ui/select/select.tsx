@@ -45,6 +45,7 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
   ) => {
     const classNames = {
       label: clsx(s.label, disabled && s.disabled),
+      trigger: clsx(s.trigger, className),
     }
 
     return (
@@ -59,10 +60,10 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
             {label}
           </Typography>
         )}
-        <Trigger aria-label={'select'} className={s.trigger}>
+        <Trigger aria-label={'select'} className={classNames.trigger}>
           <Value placeholder={placeholder} />
           <SelectIcon className={s.icon}>
-            <Icon iconId={open ? 'arrow_down' : 'arrow_up'} />
+            <Icon iconId={open ? 'arrow_up' : 'arrow_down'} />
           </SelectIcon>
         </Trigger>
         <Portal>

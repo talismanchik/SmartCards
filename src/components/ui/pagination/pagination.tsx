@@ -48,31 +48,30 @@ export const Pagination = ({
           <Icon iconId={'arrow_back'} />
         </button>
 
-        {paginationItems?.map((num, index) => {
-          if (num === '...') {
-            return (
-              // <button key={index} tabIndex={-1}>
-              //   {num}
-              // </button>
-              <Typography as={'span'} key={index} tabIndex={-1} variant={'body2'}>
-                {num}
-              </Typography>
-            )
-          } else {
-            return (
-              <button
-                className={s.button}
-                key={index}
-                onClick={() => onPageChange(+num)}
-                tabIndex={0}
-              >
-                <Typography as={'span'} variant={'body2'}>
+        <div>
+          {paginationItems?.map((num, index) => {
+            if (num === '...') {
+              return (
+                <Typography as={'span'} key={index} tabIndex={-1} variant={'body2'}>
                   {num}
                 </Typography>
-              </button>
-            )
-          }
-        })}
+              )
+            } else {
+              return (
+                <button
+                  className={s.button}
+                  key={index}
+                  onClick={() => onPageChange(+num)}
+                  tabIndex={0}
+                >
+                  <Typography as={'span'} variant={'body2'}>
+                    {num}
+                  </Typography>
+                </button>
+              )
+            }
+          })}
+        </div>
 
         <button className={s.iconWrapper} onClick={onNextPage} tabIndex={0}>
           <Icon iconId={'arrow_forward'} />
@@ -83,7 +82,7 @@ export const Pagination = ({
         <Typography as={'span'} variant={'body2'}>
           Показать
         </Typography>
-        <Select placeholder={'100'} {...restProps} />
+        <Select className={s.select} placeholder={'100'} {...restProps} />
         <Typography as={'span'} variant={'body2'}>
           на странице
         </Typography>
