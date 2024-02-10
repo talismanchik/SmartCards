@@ -67,6 +67,11 @@ button {
         cursor: revert;
         color: var(--color-light-900);
       }
+
+      .RadioGroupItem .RadioIndicator svg {
+        cursor: initial;
+        color: var(--color-accent-900);
+      }
     }
   }
 }
