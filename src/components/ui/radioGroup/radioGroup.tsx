@@ -3,7 +3,7 @@ import { Typography } from '@/components/ui/typography'
 import { Item, Root } from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 
-import s from './RadioGroup.module.scss'
+import s from './radioGroup.module.scss'
 
 export type ValueType = {
   id: string
@@ -21,11 +21,11 @@ export type RadioGroupProps = {
 
 export const RadioGroup = ({ disabled = false, onValueChange, value, values }: RadioGroupProps) => {
   const classNames = {
-    label: clsx(s.Label),
-    radioGroupItem: clsx(s.RadioGroupItem),
-    radioIndicator: clsx(s.RadioIndicator),
-    root: clsx(s.RadioGroupRoot),
-    variantWrap: clsx(s.VariantWrap, disabled ? s.Disabled : ''),
+    label: clsx(s.label),
+    radioGroupItem: clsx(s.radioGroupItem),
+    radioIndicator: clsx(s.radioIndicator),
+    root: clsx(s.radioGroupRoot),
+    variantWrap: clsx(s.variantWrap, disabled ? s.disabled : ''),
   }
 
   const onValueChangeHandler = (newValue: string) => {
