@@ -9,12 +9,14 @@ type Props = {
   className?: string
 } & ComponentPropsWithoutRef<'div'>
 
-export const Card = forwardRef<HTMLDivElement, Props>(({ children, className, ...restProps }) => {
-  const classNames = clsx(s.root, className)
+export const Card = forwardRef<HTMLDivElement, Props>(
+  ({ children, className, ...restProps }, ref) => {
+    const classNames = clsx(s.root, className)
 
-  return (
-    <div className={classNames} {...restProps}>
-      {children}
-    </div>
-  )
-})
+    return (
+      <div className={classNames} {...restProps} ref={ref}>
+        {children}
+      </div>
+    )
+  }
+)

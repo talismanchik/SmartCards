@@ -4,11 +4,6 @@ import clsx from 'clsx'
 
 import s from './ModalFooter.module.scss'
 
-export type ModalButton = {
-  fullWidth?: boolean
-  title: string
-  variant?: 'primary' | 'secondary'
-}
 type Props = {
   buttons: ModalButton[]
 }
@@ -30,4 +25,10 @@ export const ModalFooter = ({ buttons }: Props) => {
       <div className={classNames.root}>{buttonMarkup}</div>
     </Close>
   )
+}
+
+export type ModalButton = {
+  fullWidth?: boolean
+  title: string
+  variant?: 'primary' | 'secondary'
 }
