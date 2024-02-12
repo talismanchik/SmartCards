@@ -74,8 +74,8 @@
     &:-webkit-autofill:active:not(:disabled) {
       border: 1px solid var(--color-light-100);
     }
-    &:hover:not(:disabled),
-    &:-webkit-autofill:hover:not(:disabled) {
+    &:hover:not(:disabled):not(:focus-within),
+    &:-webkit-autofill:hover:not(:disabled):not(:focus-within) {
       background-color: var(--color-dark-700);
       border: 1px solid var(--color-dark-100);
     }
