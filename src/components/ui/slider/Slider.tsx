@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import * as Slider from '@radix-ui/react-slider'
+import { Range, Root, Thumb, Track } from '@radix-ui/react-slider'
 
 import s from './Slider.module.scss'
 
@@ -10,7 +10,7 @@ export type SliderComponentProps = {
   startValues?: number[]
 }
 
-export const SliderComponent = ({
+export const Slider = ({
   maxValue = 100,
   minValue = 0,
   startValues = [0, 100],
@@ -21,19 +21,19 @@ export const SliderComponent = ({
     <div className={s.SliderComponent}>
       <span className={s.SliderValue}>{sliderValues[0]}</span>
       <form>
-        <Slider.Root
+        <Root
           className={s.SliderRoot}
           defaultValue={startValues}
           max={maxValue}
           min={minValue}
           onValueChange={(value: number[]) => setSliderValues(value)}
         >
-          <Slider.Track className={s.SliderTrack}>
-            <Slider.Range className={s.SliderRange} />
-          </Slider.Track>
-          <Slider.Thumb aria-label={'Volume'} className={s.SliderThumb} />
-          <Slider.Thumb aria-label={'Volume'} className={s.SliderThumb} />
-        </Slider.Root>
+          <Track className={s.SliderTrack}>
+            <Range className={s.SliderRange} />
+          </Track>
+          <Thumb aria-label={'Volume'} className={s.SliderThumb} />
+          <Thumb aria-label={'Volume'} className={s.SliderThumb} />
+        </Root>
       </form>
       <span className={s.SliderValue}>{sliderValues[1]}</span>
     </div>
