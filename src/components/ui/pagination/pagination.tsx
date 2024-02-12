@@ -1,8 +1,9 @@
+import { ComponentPropsWithoutRef } from 'react'
+
 import { Icon } from '@/components/ui/icon/Icon'
 import { usePagination } from '@/components/ui/pagination/usePagination'
 import { Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
-import { SelectProps } from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import s from './pagination.module.scss'
@@ -13,7 +14,7 @@ type PaginationProps = {
   pageSize: number
   siblingCount?: number
   totalCount: number
-} & SelectProps
+} & ComponentPropsWithoutRef<typeof Select>
 
 export const Pagination = ({
   currentPage,
@@ -54,12 +55,6 @@ export const Pagination = ({
       onPageChange(currentPage + 1)
     }
   }
-
-  const optionsSelect = [
-    { title: '100', value: '100' },
-    { title: '50', value: '50' },
-    { title: '20', value: '20' },
-  ]
 
   return (
     <div className={s.root}>
@@ -108,10 +103,11 @@ export const Pagination = ({
         </Typography>
         <Select
           className={s.select}
-          placeholder={'100'}
+          placeholder={restProps.placeholder}
           {...restProps}
           onValueChange={newValue => onPageSizeChange(+newValue)}
-          options={optionsSelect}
+          options={restProps.options}
+          value={restProps.value}
         />
         <Typography as={'span'} variant={'body2'}>
           на странице

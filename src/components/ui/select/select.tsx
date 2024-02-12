@@ -35,7 +35,6 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
       disabled,
       label,
       onValueChange,
-      open,
       options,
       placeholder = 'Select value...',
       value,
@@ -63,7 +62,7 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
         <Trigger aria-label={'select'} className={classNames.trigger}>
           <Value placeholder={placeholder} />
           <SelectIcon className={s.icon}>
-            <Icon iconId={open ? 'arrow_up' : 'arrow_down'} />
+            <Icon iconId={'arrow_down'} />
           </SelectIcon>
         </Trigger>
         <Portal>

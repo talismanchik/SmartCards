@@ -11,11 +11,11 @@ type Props = {
 //www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
 /**
  Generates an array of pagination elements.
- @param {Object} props - The props object.
- @param {number} props.totalPageCount - The total number of pages.
- @param {number} props.currentPage - The current page.
- @param {number} [props.siblingCount=1] - The number of siblings (pages) to display on each side of the current page.
- @returns {Array} An array of pagination elements.
+ @param  props - The props object.
+ @param  props.totalPageCount - The total number of pages.
+ @param props.currentPage - The current page.
+ @param  [props.siblingCount=1] - The number of siblings (pages) to display on each side of the current page.
+ @returns An array of pagination elements.
  */
 
 export const usePagination = ({ currentPage, siblingCount = 1, totalPageCount }: Props) => {
