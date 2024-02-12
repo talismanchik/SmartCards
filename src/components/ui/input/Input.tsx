@@ -52,9 +52,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               }}
             >
               {closedEye ? (
-                <Icon height={'24'} iconId={'eye_off_outline'} width={'24'} />
+                <Icon height={'20'} iconId={'eye_off_outline'} width={'20'} />
               ) : (
-                <Icon height={'24'} iconId={'eye_outline'} width={'24'} />
+                <Icon height={'20'} iconId={'eye_outline'} width={'20'} />
               )}
             </button>
           )}
