@@ -1,0 +1,80 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.radioGroupRoot {
+  display: flex;
+  flex-direction: column;
+
+  .variantWrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .radioGroupItem {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+
+      .radioIndicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-accent-500);
+
+        svg {
+          color: var(--color-accent-500);
+        }
+      }
+    }
+
+    &:not(&.disabled) {
+      .radioGroupItem:hover,
+      .radioGroupItem:focus-visible {
+        .radioIndicator {
+          width: 170%;
+          height: 170%;
+          margin-top: -5.5px;
+          margin-left: -6px;
+
+          border-radius: 50%;
+        }
+      }
+
+      .radioGroupItem:hover .radioIndicator {
+        background-color: var(--color-dark-500);
+        transition: background-color 0.2s;
+      }
+
+      .radioGroupItem:focus-visible .radioIndicator {
+        background-color: var(--color-dark-700);
+        transition: background-color 0.2s;
+      }
+
+      .radioGroupItem:active .radioIndicator {
+        background-color: var(--color-accent-900);
+        transition: background-color 0.2s;
+      }
+    }
+
+    .label {
+      cursor: pointer;
+      padding-left: 12px;
+      line-height: 1;
+      color: var(--color-light-100);
+    }
+
+    &.disabled {
+      .label {
+        cursor: revert;
+        color: var(--color-light-900);
+      }
+
+      .radioGroupItem .radioIndicator svg {
+        cursor: initial;
+        color: var(--color-accent-900);
+      }
+    }
+  }
+}
