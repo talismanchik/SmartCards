@@ -12,7 +12,9 @@
   justify-content: space-around;
 
   box-sizing: border-box;
-  padding: 6px 12px;
+  padding: 0 6px;
+
+  line-height: 24px;
 
   background-color: transparent;
   border: 1px solid var(--color-dark-300);
@@ -25,9 +27,13 @@
     border: 2px solid var(--color-dark-300);
   }
 
+  .icon {
+    display: flex;
+    align-items: center;
+  }
+
   &[data-state='open'] .icon {
     transform: rotate(-180deg);
-    margin-bottom: 5px;
     transition: 0.2s;
   }
 
@@ -41,6 +47,11 @@
 
   &:hover {
     background-color: var(--color-dark-100);
+  }
+
+  & span {
+    font-size: 14px;
+    line-height: 24px;
   }
 }
 
@@ -59,26 +70,26 @@
 
     transition: 0.25s ease-out;
   }
-}
 
-.itemText {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .itemText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  padding: 6px 12px;
+    padding: 0 6px;
 
-  line-height: 24px;
-  color: var(--color-light-100);
+    line-height: 24px;
+    color: var(--color-light-100);
 
-  &:hover {
-    color: var(--color-accent-300);
-    background-color: var(--color-accent-900);
-    transition: 0.25s;
-  }
+    &:hover {
+      color: var(--color-accent-300);
+      background-color: var(--color-accent-900);
+      transition: 0.25s;
+    }
 
-  &:focus-visible:not(:hover) {
-    outline: 0.5px solid var(--color-info-700);
+    &:focus-visible:not(:hover) {
+      outline: 0.5px solid var(--color-info-700);
+    }
   }
 }
 

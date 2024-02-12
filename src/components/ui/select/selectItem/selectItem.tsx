@@ -14,7 +14,7 @@ export const SelectItem = forwardRef<ElementRef<typeof Item>, SelectItemProps>(
     return (
       <Item {...restProps} ref={ref}>
         <ItemText>
-          <Typography className={s.itemText} variant={'body1'}>
+          <Typography className={s.itemText} variant={'body2'}>
             {children}
           </Typography>
         </ItemText>

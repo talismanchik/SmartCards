@@ -1,0 +1,98 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.root {
+  @include flex-center;
+
+  flex-wrap: wrap;
+
+  .paginationContainer {
+    @include flex-center;
+
+    flex-wrap: nowrap;
+    justify-content: center;
+
+    .iconWrapper {
+      cursor: pointer;
+
+      margin: 0 4px;
+
+      line-height: 24px;
+
+      background-color: transparent;
+      border: none;
+
+      svg {
+        display: flex;
+        align-items: center;
+      }
+
+      &:hover {
+        background-color: var(--color-dark-500);
+        border-radius: 2px;
+      }
+
+      &:focus-visible {
+        border-radius: 2px;
+        outline: 2px solid var(--color-info-900);
+
+        svg {
+          scale: 1.2;
+        }
+      }
+    }
+
+    .button {
+      cursor: pointer;
+
+      margin: 0 6px;
+      padding: 0 8px;
+
+      text-align: center;
+
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        background-color: var(--color-dark-500);
+        border-radius: 2px;
+      }
+
+      &:focus-visible {
+        border-radius: 2px;
+        outline: 2px solid var(--color-info-900);
+      }
+
+      & span {
+        line-height: 24px;
+      }
+    }
+
+    .activeItem {
+      color: black;
+      background-color: var(--color-light-100);
+      border-radius: 2px;
+
+      &:hover {
+        background-color: var(--color-light-700);
+      }
+
+      span {
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+
+  .selectContainer {
+    @include flex-center;
+
+    gap: 9px;
+    margin-left: 24px;
+  }
+}
+
+.dots {
+  margin: 0 6px;
+}
