@@ -44,14 +44,17 @@ button {
 
       .radioGroupItem:hover .radioIndicator {
         background-color: var(--color-dark-500);
+        transition: background-color 0.2s;
       }
 
       .radioGroupItem:focus-visible .radioIndicator {
         background-color: var(--color-dark-700);
+        transition: background-color 0.2s;
       }
 
       .radioGroupItem:active .radioIndicator {
         background-color: var(--color-accent-900);
+        transition: background-color 0.2s;
       }
     }
 
