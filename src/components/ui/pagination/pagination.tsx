@@ -68,36 +68,34 @@ export const Pagination = ({
           <Icon iconId={'arrow_back'} />
         </button>
 
-        <div>
-          {paginationItems?.map((num, index) => {
-            if (num === '...') {
-              return (
-                <Typography
-                  as={'span'}
-                  className={s.dots}
-                  key={index}
-                  tabIndex={-1}
-                  variant={'body2'}
-                >
+        {paginationItems?.map((num, index) => {
+          if (num === '...') {
+            return (
+              <Typography
+                as={'span'}
+                className={s.dots}
+                key={index}
+                tabIndex={-1}
+                variant={'body2'}
+              >
+                {num}
+              </Typography>
+            )
+          } else {
+            return (
+              <button
+                className={classNames.item(+num)}
+                key={index}
+                onClick={() => onPageChange(+num)}
+                tabIndex={0}
+              >
+                <Typography as={'span'} variant={'body2'}>
                   {num}
                 </Typography>
-              )
-            } else {
-              return (
-                <button
-                  className={classNames.item(+num)}
-                  key={index}
-                  onClick={() => onPageChange(+num)}
-                  tabIndex={0}
-                >
-                  <Typography as={'span'} variant={'body2'}>
-                    {num}
-                  </Typography>
-                </button>
-              )
-            }
-          })}
-        </div>
+              </button>
+            )
+          }
+        })}
 
         <button className={s.iconWrapper} onClick={onNextPage} tabIndex={0}>
           <Icon iconId={'arrow_forward'} />
