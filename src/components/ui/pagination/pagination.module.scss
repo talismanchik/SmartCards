@@ -1,12 +1,17 @@
-.root {
+@mixin flex-center {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+}
+
+.root {
+  @include flex-center;
+
+  flex-wrap: wrap;
 
   .paginationContainer {
-    display: flex;
+    @include flex-center;
+
     flex-wrap: nowrap;
-    align-items: center;
     justify-content: center;
 
     .iconWrapper {
@@ -81,9 +86,9 @@
   }
 
   .selectContainer {
-    display: flex;
+    @include flex-center;
+
     gap: 9px;
-    align-items: center;
     margin-left: 24px;
   }
 }
