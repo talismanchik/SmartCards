@@ -3,6 +3,7 @@
   box-sizing: border-box;
 
   .label {
+    cursor: pointer;
     color: var(--color-dark-100);
 
     &.labelDisabled {
@@ -61,7 +62,7 @@
     &:-webkit-autofill:focus-within,
     &:-webkit-autofill:active:not(:disabled) {
       transition:
-        background-color 100000s ease-in-out 0s,
+        background-color 1000000000000000000000s ease-in-out 0s,
         border-bottom-color 0.3s,
         border-right-color 0.3s,
         border-top-color 0.3s,
@@ -74,7 +75,7 @@
     &:-webkit-autofill:active:not(:disabled) {
       border: 1px solid var(--color-light-100);
     }
-    &:hover:not(:disabled):not(:focus-within),
+    &:hover:not(:disabled):not(:focus-within):not(.error),
     &:-webkit-autofill:hover:not(:disabled):not(:focus-within) {
       background-color: var(--color-dark-700);
       border: 1px solid var(--color-dark-100);
@@ -100,6 +101,7 @@
     border: none;
 
     &:has(~ .input:disabled) {
+      cursor: default;
       color: var(--color-dark-300);
     }
   }

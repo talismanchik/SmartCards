@@ -35,10 +35,8 @@ export const EditableSpan = React.memo(
     const activateEditeMode = () => {
       !disabled && setEditMode(true)
       setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus()
-          inputRef.current.select()
-        }
+        inputRef.current?.focus()
+        inputRef.current?.select()
       }, 1)
     }
     const activateViewMode = () => {

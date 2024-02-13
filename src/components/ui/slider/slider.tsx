@@ -41,7 +41,7 @@ export const Slider = ({
         spanClassName={s.SliderValue}
         title={'' + values[0]}
       />
-      <form>
+      <form className={s.form}>
         <Root
           className={s.SliderRoot}
           max={maxValue}
