@@ -1,14 +1,14 @@
 import type { Meta } from '@storybook/react'
 
-import { LoginForm } from '@/components/auth/login-form/login-form'
+import { SignInForm } from '@/components/forms/signIn/signInForm'
 import { Card } from '@/components/ui/card'
 
 const meta = {
   argTypes: {},
-  component: LoginForm,
+  component: SignInForm,
   tags: ['autodocs'],
-  title: 'Auth/LoginForm',
-} satisfies Meta<typeof LoginForm>
+  title: 'Auth/SignInForm',
+} satisfies Meta<typeof SignInForm>
 
 export default meta
 
@@ -20,7 +20,7 @@ export const Primary = {
           padding: '33px 36px 25px',
         }}
       >
-        <LoginForm />
+        <SignInForm />
       </Card>
     )
   },
