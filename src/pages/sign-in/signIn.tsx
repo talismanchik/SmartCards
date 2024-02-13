@@ -12,7 +12,7 @@ export const SignIn = () => {
       </Typography>
       <SignInForm>
         <div className={s.forgotPassword}>
-          <Typography as={'a'} variant={'body2'}>
+          <Typography as={'a'} href={''} variant={'body2'}>
             Forgot Password?
           </Typography>
         </div>
