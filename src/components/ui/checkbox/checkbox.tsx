@@ -28,12 +28,13 @@ export const Checkbox = ({
   }
 
   return (
-    <Typography as={'label'} className={classNames.label} variant={'body2'}>
+    <Typography as={'label'} className={classNames.label} htmlFor={'checkbox'} variant={'body2'}>
       <div className={classNames.checkboxWrapper}>
         <Root
           checked={checked}
           className={classNames.root}
           disabled={disabled}
+          id={'checkbox'}
           onCheckedChange={onCheckedChange}
         >
           <Indicator className={classNames.indicator} forceMount>

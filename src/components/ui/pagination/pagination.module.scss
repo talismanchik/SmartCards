@@ -47,8 +47,8 @@
     .button {
       cursor: pointer;
 
+      min-width: 26px;
       margin: 0 6px;
-      padding: 0 8px;
 
       text-align: center;
 
@@ -94,5 +94,9 @@
 }
 
 .dots {
+  @include flex-center;
+
+  justify-content: center;
+  min-width: 26px;
   margin: 0 6px;
 }
