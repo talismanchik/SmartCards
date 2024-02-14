@@ -1,6 +1,12 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .label {
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   gap: 2px;
   align-items: center;
 
@@ -10,52 +16,26 @@
   }
 
   .checkboxWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
 
+    box-sizing: border-box;
     width: 36px;
     height: 36px;
 
     border-radius: 50%;
 
-    &:hover:not(.disabled) {
-      background-color: var(--color-dark-500);
-    }
-
-    &:active:not(.disabled) {
-      background-color: var(--color-dark-100);
-    }
-
-    &.left {
-      margin-left: -0.9rem;
-    }
+    transition: background-color 0.2s ease-in-out;
 
     .root {
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center;
 
       width: 18px;
       height: 18px;
-
       background-color: transparent;
       border-radius: 2px;
 
       &:focus-visible {
         outline: 2px solid var(--color-info-500);
-      }
-
-      &:not([data-state='checked']) {
-        border: 2px solid var(--color-light-900);
-      }
-
-      &[data-disabled] {
-        pointer-events: none;
-        cursor: initial;
-        border: 2px solid var(--color-dark-100);
       }
 
       &:hover:active:not([data-disabled]) {
@@ -64,13 +44,20 @@
 
       &[data-state='checked'][data-disabled] {
         background-color: var(--color-light-700);
-        border: none;
+      }
+
+      .indicator {
+        width: 18px;
+        height: 18px;
       }
     }
+  }
 
-    .indicator {
-      width: 18px;
-      height: 18px;
-    }
+  &:hover:not(.disabled) > div {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active:not(.disabled) > div {
+    background-color: var(--color-dark-100);
   }
 }

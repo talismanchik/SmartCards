@@ -1,0 +1,15 @@
+.root {
+  cursor: default;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  .button {
+    all: unset;
+    cursor: pointer;
+    height: 24px;
+  }
+}

@@ -1,3 +1,9 @@
+import { Header } from '@/components/header/header'
+
 export function App() {
-  return <div>Hello!</div>
+  return (
+    <>
+      <Header isAuth />
+    </>
+  )
 }

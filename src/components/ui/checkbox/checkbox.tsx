@@ -1,55 +1,53 @@
-import { CheckIcon } from '@/components/assets/icons/CheckIcon'
+import { Icon } from '@/components/ui/icon/Icon'
+import { Typography } from '@/components/ui/typography'
 import { Indicator, Root } from '@radix-ui/react-checkbox'
 import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-type PositionType = 'default' | 'left'
-
 export type CheckboxProps = {
   checked?: boolean
   className?: string
   disabled?: boolean
-  id?: string
   label?: string
   onCheckedChange?: (checked: boolean) => void
-  position?: PositionType
 }
 
 export const Checkbox = ({
   checked,
   className,
   disabled,
-  id,
   label,
   onCheckedChange,
-  position = 'default',
 }: CheckboxProps) => {
   const classNames = {
-    checkboxWrapper: clsx(s.checkboxWrapper, disabled && s.disabled, s[position]),
+    checkboxWrapper: clsx(s.checkboxWrapper, disabled && s.disabled),
     indicator: s.indicator,
     label: clsx(s.label, disabled && s.disabled, className),
     root: clsx(s.root),
   }
 
   return (
-    <p className={classNames.label}>
+    <Typography as={'label'} className={classNames.label} htmlFor={'checkbox'} variant={'body2'}>
       <div className={classNames.checkboxWrapper}>
         <Root
           checked={checked}
           className={classNames.root}
           disabled={disabled}
-          id={id}
+          id={'checkbox'}
           onCheckedChange={onCheckedChange}
         >
-          {checked && (
-            <Indicator className={classNames.indicator} forceMount>
-              <CheckIcon disabled={disabled} />
-            </Indicator>
-          )}
+          <Indicator className={classNames.indicator} forceMount>
+            <Icon
+              height={'18'}
+              iconId={checked ? 'checkbox_true' : 'checkbox_false'}
+              viewBox={'3 3 18 18'}
+              width={'18'}
+            />
+          </Indicator>
         </Root>
       </div>
       {label}
-    </p>
+    </Typography>
   )
 }
