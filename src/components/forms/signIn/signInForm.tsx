@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox/controlled-checkbox'
@@ -6,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import s from './login-form.module.scss'
+import s from './signInForm.module.scss'
 
 type FormValues = z.infer<typeof loginSchema>
 
@@ -16,7 +17,11 @@ const loginSchema = z.object({
   rememberMe: z.boolean().optional().default(false),
 })
 
-export const LoginForm = () => {
+type Props = {
+  children?: ReactNode
+  className?: string
+}
+export const SignInForm = ({ children, className }: Props) => {
   const {
     control,
     formState: { errors },
@@ -31,16 +36,29 @@ export const LoginForm = () => {
   })
 
   return (
-    <form onSubmit={onSubmit}>
-      <Input id={'email'} label={'email'} {...register('email')} error={errors.email?.message} />
+    <form className={`${s.form} ${className}`} onSubmit={onSubmit}>
       <Input
+        className={s.email}
+        id={'email'}
+        label={'email'}
+        {...register('email')}
+        error={errors.email?.message}
+      />
+      <Input
+        className={s.password}
         id={'password'}
         label={'password'}
         variant={'eyeDecoration'}
         {...register('password')}
         error={errors.password?.message}
       />
-      <ControlledCheckbox control={control} label={'rememberMe'} name={'rememberMe'} />
+      <ControlledCheckbox
+        className={s.rememberMe}
+        control={control}
+        label={'rememberMe'}
+        name={'rememberMe'}
+      />
+      {children}
       <Button className={s.button} fullWidth type={'submit'}>
         Submit
       </Button>

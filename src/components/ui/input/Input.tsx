@@ -32,7 +32,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className={s.root}>
+        <div className={`${s.root} ${className}`}>
           {label && (
             <Typography
               as={'label'}
@@ -50,6 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               onClick={() => {
                 setClosedEye(prev => !prev)
               }}
+              type={'button'}
             >
               {closedEye ? (
                 <Icon height={'20'} iconId={'eye_off_outline'} width={'20'} />
@@ -72,7 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
 
           <input
-            className={`${s.input} ${s[variant]} ${className} ${error ? s.error : ''} `}
+            className={`${s.input} ${s[variant]} ${error ? s.error : ''} `}
             id={label}
             onChange={onChange}
             ref={ref}

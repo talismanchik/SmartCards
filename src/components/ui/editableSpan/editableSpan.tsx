@@ -35,10 +35,8 @@ export const EditableSpan = React.memo(
     const activateEditeMode = () => {
       !disabled && setEditMode(true)
       setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus()
-          inputRef.current.select()
-        }
+        inputRef.current?.focus()
+        inputRef.current?.select()
       }, 1)
     }
     const activateViewMode = () => {
@@ -73,7 +71,6 @@ export const EditableSpan = React.memo(
         variant={'withoutDecoration'}
       />
     ) : (
-      // <input value={inputValue} onBlur={activateViewMode} autoFocus onChange={onChangeHandler}/>
       <span
         className={`${isDone ? s.isDone : ''} ${spanClassName}`}
         onDoubleClick={activateEditeMode}
