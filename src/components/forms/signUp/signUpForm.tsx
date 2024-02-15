@@ -1,38 +1,15 @@
-import { useForm } from 'react-hook-form'
-
+import { useSignUpForm } from '@/components/forms/signUp/useSignUpForm'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './signUpForm.module.scss'
-
-type FormValues = z.infer<typeof loginSchema>
-
-const loginSchema = z
-  .object({
-    confirmPassword: z.string().min(3),
-    email: z.string().email(),
-    password: z.string().min(3),
-  })
-
-  .refine(data => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  })
 
 type Props = {
   className?: string
 }
 
 export const SignUpForm = ({ className }: Props) => {
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
-  })
+  const { errors, handleSubmit, register } = useSignUpForm()
 
   const onSubmit = handleSubmit(data => {
     console.log(data)
