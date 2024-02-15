@@ -12,6 +12,9 @@ export const CheckEmailPage = () => {
         Check Email
       </Typography>
       <Icon iconId={'image'} />
+      <Typography as={'a'} className={s.info} href={''} variant={'body2'}>
+        We’ve sent an Email with instructions to example@mail.com
+      </Typography>
       <Button className={s.button} fullWidth>
         Back to Sign In
       </Button>

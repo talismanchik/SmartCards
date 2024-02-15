@@ -12,7 +12,7 @@ export const CreateNewPasswordPage = () => {
       </Typography>
       <CreateNewPasswordForm>
         <div className={s.createNewPasswordPage}>
-          <Typography as={'a'} href={''} variant={'body2'}>
+          <Typography as={'a'} className={s.info} href={''} variant={'body2'}>
             Create new password and we will send you further instructions to email
           </Typography>
         </div>
