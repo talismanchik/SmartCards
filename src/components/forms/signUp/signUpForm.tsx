@@ -4,11 +4,11 @@ import { Input } from '@/components/ui/input'
 
 import s from './signUpForm.module.scss'
 
-type Props = {
-  className?: string
-}
+// type Props = {
+//   onSubmit?: (data: SignUpFormValues) => void
+// }
 
-export const SignUpForm = ({ className }: Props) => {
+export const SignUpForm = () => {
   const { errors, handleSubmit, register } = useSignUpForm()
 
   const onSubmit = handleSubmit(data => {
@@ -16,17 +16,15 @@ export const SignUpForm = ({ className }: Props) => {
   })
 
   return (
-    <form className={`${s.form} ${className}`} onSubmit={onSubmit}>
+    <form className={s.form} onSubmit={onSubmit}>
       <Input
         className={s.email}
-        id={'email'}
         label={'Email'}
         {...register('email')}
         error={errors.email?.message}
       />
       <Input
         className={s.password}
-        id={'password'}
         label={'Password'}
         variant={'eyeDecoration'}
         {...register('password')}
@@ -34,7 +32,6 @@ export const SignUpForm = ({ className }: Props) => {
       />
       <Input
         className={s.confirmPassword}
-        id={'confirmPassword'}
         label={'Confirm Password'}
         variant={'eyeDecoration'}
         {...register('confirmPassword')}

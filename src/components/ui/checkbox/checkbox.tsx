@@ -22,7 +22,7 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   const classNames = {
     checkboxWrapper: clsx(s.checkboxWrapper, disabled && s.disabled),
-    indicator: s.indicator,
+    indicator: clsx(s.indicator),
     label: clsx(s.label, disabled && s.disabled, className),
     root: clsx(s.root),
   }

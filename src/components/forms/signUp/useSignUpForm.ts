@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-type signUpFormValues = z.infer<typeof signUpSchema>
+export type SignUpFormValues = z.infer<typeof signUpSchema>
 
 const signUpSchema = z
   .object({
@@ -22,7 +22,7 @@ export const useSignUpForm = () => {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm<signUpFormValues>({
+  } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
   })
 
