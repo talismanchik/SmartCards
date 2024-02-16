@@ -26,7 +26,8 @@ export const TableComponents = ({ data, titles, withOptions }: Props) => {
 
   const handleSubmit = (key: string) => {
     if (sort && sort.key === key) {
-      setSort({ direction: sort.direction === 'asc' ? 'desc' : 'asc', key })
+      // setSort({ direction: sort.direction === 'asc' ? 'desc' : 'asc', key })
+      setSort(sort.direction === 'asc' ? { direction: 'desc', key } : null)
     } else {
       setSort({
         direction: 'asc',

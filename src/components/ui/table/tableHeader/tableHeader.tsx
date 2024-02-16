@@ -17,6 +17,7 @@ export const TableHeader = ({ onHandleSubmit, sort, titles, withOptions }: Props
     rotateIcon: clsx(sort?.direction === 'desc' ? s.rotateIcon : ''),
     sortIconContainer: clsx(s.sortIconContainer),
     tableCell: clsx(s.tableCell),
+    tableCellForOptions: clsx(s.tableCell, s.notActive),
     tableHead: clsx(s.tableHead),
     tableRow: clsx(s.tableRow),
   }
@@ -51,7 +52,7 @@ export const TableHeader = ({ onHandleSubmit, sort, titles, withOptions }: Props
       <TableRow className={classNames.tableRow}>
         {titleMarkup}
         {withOptions && (
-          <TableCell className={classNames.tableCell}>
+          <TableCell className={classNames.tableCellForOptions}>
             <Typography variant={'subtitle2'}>Options</Typography>
           </TableCell>
         )}

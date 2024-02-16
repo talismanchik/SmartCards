@@ -10,7 +10,6 @@
       background-color: var(--color-dark-500);
 
       .tableCell {
-        cursor: pointer;
         padding: 6px 24px;
         text-align: left;
 
@@ -26,6 +25,18 @@
             transition: 0.3s;
           }
         }
+
+
+
+        &:hover:not(.notActive) {
+          cursor: pointer;
+          background-color: var(--color-dark-300);
+          transition: background-color .3s;
+        }
+      }
+
+      .notActive {
+        cursor: default;
       }
     }
   }
@@ -45,8 +56,13 @@
           display: flex;
           gap: 10px;
           align-items: center;
-          justify-content: center;
+          justify-content: left;
         }
+      }
+
+      &:hover{
+        background-color: var(--color-dark-700);
+        transition: background-color .3s;
       }
     }
   }
