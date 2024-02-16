@@ -1,4 +1,4 @@
-import { SignInForm } from '@/components/forms/signIn/signInForm'
+import { SignInForm } from '@/components/forms/signIn'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 

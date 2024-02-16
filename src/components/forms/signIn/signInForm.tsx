@@ -40,14 +40,14 @@ export const SignInForm = ({ children, className }: Props) => {
       <Input
         className={s.email}
         id={'email'}
-        label={'email'}
+        label={'Email'}
         {...register('email')}
         error={errors.email?.message}
       />
       <Input
         className={s.password}
         id={'password'}
-        label={'password'}
+        label={'Password'}
         variant={'eyeDecoration'}
         {...register('password')}
         error={errors.password?.message}
@@ -55,12 +55,12 @@ export const SignInForm = ({ children, className }: Props) => {
       <ControlledCheckbox
         className={s.rememberMe}
         control={control}
-        label={'rememberMe'}
+        label={'Remember me'}
         name={'rememberMe'}
       />
       {children}
       <Button className={s.button} fullWidth type={'submit'}>
-        Submit
+        Sign In
       </Button>
     </form>
   )

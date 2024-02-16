@@ -7,7 +7,7 @@
 .label {
   cursor: pointer;
   display: inline-flex;
-  gap: 2px;
+  gap: 11px;
   align-items: center;
 
   &.disabled {
@@ -19,20 +19,43 @@
     @include flex-center;
 
     box-sizing: border-box;
-    width: 36px;
-    height: 36px;
 
-    border-radius: 50%;
+    //width: 36px;
+    //height: 36px;
+
+    //border-radius: 50%;
 
     transition: background-color 0.2s ease-in-out;
 
     .root {
       @include flex-center;
 
+      position: relative;
+      z-index: 1;
+
       width: 18px;
       height: 18px;
+
       background-color: transparent;
       border-radius: 2px;
+
+      &::after {
+        content: '';
+
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 50%;
+
+        transition: .2s;
+      }
+
 
       &:focus-visible {
         outline: 2px solid var(--color-info-500);
@@ -50,14 +73,22 @@
         width: 18px;
         height: 18px;
       }
+
+      &:hover:not(.disabled)::after {
+        background-color: var(--color-dark-500);
+      }
+
+      &:active:not(.disabled)::after {
+        background-color: var(--color-dark-100);
+      }
     }
+
+
   }
 
-  &:hover:not(.disabled) > div {
-    background-color: var(--color-dark-500);
-  }
-
-  &:active:not(.disabled) > div {
+  &:active:not(.disabled) .checkboxWrapper .root::after{
     background-color: var(--color-dark-100);
   }
+
+
 }
