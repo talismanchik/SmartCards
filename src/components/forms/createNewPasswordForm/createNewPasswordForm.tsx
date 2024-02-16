@@ -11,9 +11,7 @@ import s from './createNewPasswordForm.module.scss'
 type FormValues = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
-  email: z.string().email(),
   password: z.string().min(3),
-  rememberMe: z.boolean().optional().default(false),
 })
 
 type Props = {
