@@ -10,12 +10,12 @@ export const ControlledInput = <T extends FieldValues>({
   ...rest
 }: ControlledInputProps<T>) => {
   const {
-    field,
+    field: { onChange, value },
     fieldState: { error },
   } = useController({
     control,
     name,
   })
 
-  return <Input {...field} {...rest} error={error?.message} />
+  return <Input onChange={onChange} {...rest} error={error?.message} value={value} />
 }
