@@ -22,6 +22,7 @@ export const ForgotPasswordForm = ({ children, className }: Props) => {
   const {
     formState: { errors },
     handleSubmit,
+    register,
   } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
   })
@@ -32,7 +33,13 @@ export const ForgotPasswordForm = ({ children, className }: Props) => {
 
   return (
     <form className={`${s.form} ${className}`} onSubmit={onSubmit}>
-      <Input className={s.email} error={errors.email?.message} id={'email'} label={'Email'} />
+      <Input
+        className={s.email}
+        error={errors.email?.message}
+        {...register('email')}
+        id={'email'}
+        label={'Email'}
+      />
       {children}
       <Button className={s.button} fullWidth type={'submit'}>
         Send Instructions
