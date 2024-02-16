@@ -1,8 +1,9 @@
-import { SignUpForm } from '@/components/forms/signUp'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
 import s from './signUp.module.scss'
+
+import { SignUpForm } from '../../components/forms/signUpForm'
 
 // type Props = {
 //   onSubmit?: (data: SignUpFormValues) => void

@@ -1,4 +1,4 @@
-import { useSignUpForm } from '@/components/forms/signUp/useSignUpForm'
+import { useSignUpForm } from '@/components/forms/signUpForm/useSignUpForm'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 

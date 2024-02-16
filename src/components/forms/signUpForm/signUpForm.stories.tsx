@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { SignUpForm } from '@/components/forms/signUp/signUpForm'
+import { SignUpForm } from '@/components/forms/signUpForm/signUpForm'
 import { Card } from '@/components/ui/card'
 
 const meta = {
