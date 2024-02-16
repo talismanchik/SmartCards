@@ -18,13 +18,9 @@ const signUpSchema = z
   })
 
 export const useSignUpForm = () => {
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<SignUpFormValues>({
+  const { control, handleSubmit } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
   })
 
-  return { errors, handleSubmit, register }
+  return { control, handleSubmit }
 }

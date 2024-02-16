@@ -32,6 +32,7 @@ export const SignInForm = ({ children, className }: Props) => {
   })
 
   const onSubmit = handleSubmit(data => {
+    debugger
     console.log(data)
   })
 
