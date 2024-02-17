@@ -12,7 +12,6 @@ export const SignUpForm = () => {
   const { control, handleSubmit } = useSignUpForm()
 
   const onSubmit = handleSubmit(data => {
-    debugger
     console.log(data)
   })
 
