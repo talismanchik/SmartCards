@@ -1,20 +1,54 @@
 import type { Meta } from '@storybook/react'
 
-import { TableComponents } from '@/components/ui/table/tableComponents'
+import { Icon } from '@/components/ui/icon/Icon'
+import { TableComponent } from '@/components/ui/table/tableComponent'
+import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
+import { Typography } from '@/components/ui/typography'
+
+import s from './table.module.scss'
 
 const meta = {
-  component: TableComponents,
+  component: TableComponent,
   tags: ['autodocs'],
-  title: 'Components/TableComponents',
-} satisfies Meta<typeof TableComponents>
+  title: 'Components/TableComponent',
+} satisfies Meta<typeof TableComponent>
 
 export default meta
 
 export const TableStory = {
   render() {
-    return <TableComponents data={dataForDecks} titles={titlesForDecks} withOptions />
+    const dataMarkup = dataForDecks.map((item, index) => {
+      return (
+        <TableRow key={index}>
+          <TableDataCell>
+            <Typography variant={'body2'}>{item.title}</Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>{item.cardsCount}</Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>{item.updated}</Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>{item.createdBy}</Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <div className={s.iconContainer}>
+              <Icon iconId={'play_circle_outline'} />
+            </div>
+          </TableDataCell>
+        </TableRow>
+      )
+    })
+
+    return (
+      <TableComponent titles={titlesForDecks} withOptions>
+        {dataMarkup}
+      </TableComponent>
+    )
   },
 }
+
 const titlesForDecks = [
   {
     key: 'name',

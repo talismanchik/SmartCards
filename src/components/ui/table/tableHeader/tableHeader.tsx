@@ -1,5 +1,5 @@
 import { Icon } from '@/components/ui/icon/Icon'
-import { Column, Sort } from '@/components/ui/table/tableComponents'
+import { Column, Sort } from '@/components/ui/table/tableComponent'
 import { TableCell, TableHead, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import clsx from 'clsx'
