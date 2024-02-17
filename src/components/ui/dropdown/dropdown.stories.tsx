@@ -16,11 +16,11 @@ type Story = StoryObj<typeof meta>
 // @ts-ignore
 export const Default: Story = {
   render() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <Button>open</Button>
+        <Button onClick={() => setOpen(true)}>open</Button>
         <Dropdown onOpenChange={setOpen} open={open}>
           <DropdownItem>{'bpvtybnm'}</DropdownItem>
           <DropdownItem>{'bpvtybnm'}</DropdownItem>
