@@ -1,0 +1,6 @@
+export * from '@/components/ui/table/tableConstructor/table/table'
+export * from '@/components/ui/table/tableConstructor/tableCell/tableCell'
+export * from '@/components/ui/table/tableConstructor/tableBody/tableBody'
+export * from '@/components/ui/table/tableConstructor/tableRow/tableRow'
+export * from '@/components/ui/table/tableConstructor/tableHead/tableHead'
+export * from '@/components/ui/table/tableConstructor/tableDataCell/tableDataCell'
