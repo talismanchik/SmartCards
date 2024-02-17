@@ -20,10 +20,6 @@ export const Default = {
       setValue(value)
     }, [value])
 
-    return (
-      <>
-        <EditableSpan onChange={setValue} title={value} />
-      </>
-    )
+    return <EditableSpan onChange={setValue} title={value} />
   },
 }
