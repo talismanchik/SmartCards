@@ -1,4 +1,4 @@
-import { SignUpForm } from '@/components/forms/signUp'
+import { SignUpForm } from '@/components/forms/signUpForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 

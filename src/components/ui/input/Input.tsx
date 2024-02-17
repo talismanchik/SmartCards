@@ -75,10 +75,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             className={`${s.input} ${s[variant]} ${error ? s.error : ''} `}
             id={label}
+            name={rest.name}
             onChange={onChange}
             ref={ref}
             type={variant === 'eyeDecoration' && closedEye ? 'password' : 'text'}
-            value={value}
             {...rest}
           />
         </div>

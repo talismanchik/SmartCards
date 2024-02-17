@@ -1,6 +1,6 @@
-import { useSignUpForm } from '@/components/forms/signUp/useSignUpForm'
+import { ControlledInput } from '@/components/controlled/controlledInput'
+import { useSignUpForm } from '@/components/forms/signUpForm/useSignUpForm'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 
 import s from './signUpForm.module.scss'
 
@@ -9,33 +9,28 @@ import s from './signUpForm.module.scss'
 // }
 
 export const SignUpForm = () => {
-  const { errors, handleSubmit, register } = useSignUpForm()
+  const { control, handleSubmit } = useSignUpForm()
 
   const onSubmit = handleSubmit(data => {
     console.log(data)
   })
 
   return (
-    <form className={s.form} onSubmit={onSubmit}>
-      <Input
-        className={s.email}
-        label={'Email'}
-        {...register('email')}
-        error={errors.email?.message}
-      />
-      <Input
+    <form onSubmit={onSubmit}>
+      <ControlledInput control={control} label={'Email'} name={'email'} />
+      <ControlledInput
         className={s.password}
+        control={control}
         label={'Password'}
+        name={'password'}
         variant={'eyeDecoration'}
-        {...register('password')}
-        error={errors.password?.message}
       />
-      <Input
+      <ControlledInput
         className={s.confirmPassword}
+        control={control}
         label={'Confirm Password'}
+        name={'confirmPassword'}
         variant={'eyeDecoration'}
-        {...register('confirmPassword')}
-        error={errors.confirmPassword?.message}
       />
       <Button className={s.button} fullWidth type={'submit'}>
         Sign Up
