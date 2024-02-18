@@ -1,16 +1,21 @@
 import { SignInForm } from '@/components/forms/signIn'
+import { SignUpFormValues } from '@/components/forms/signIn/useSignInForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
 import s from './signIn.module.scss'
 
 export const SignIn = () => {
+  const submitForm = (data: SignUpFormValues) => {
+    console.log(data)
+  }
+
   return (
     <Card className={s.card}>
       <Typography className={s.title} variant={'h1'}>
         Sign In
       </Typography>
-      <SignInForm>
+      <SignInForm onSubmitForm={submitForm}>
         <div className={s.forgotPassword}>
           <Typography as={'a'} href={''} variant={'body2'}>
             Forgot Password?

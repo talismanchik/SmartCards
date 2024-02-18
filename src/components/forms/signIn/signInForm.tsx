@@ -1,57 +1,32 @@
 import { ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
 
-import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox/controlled-checkbox'
+import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox/controlledCheckbox'
+import { ControlledInput } from '@/components/controlled/controlledInput'
+import { SignUpFormValues, useSignInForm } from '@/components/forms/signIn/useSignInForm'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './signInForm.module.scss'
-
-type FormValues = z.infer<typeof loginSchema>
-
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
-  rememberMe: z.boolean().optional().default(false),
-})
 
 type Props = {
   children?: ReactNode
   className?: string
+  onSubmitForm: (data: SignUpFormValues) => void
 }
-export const SignInForm = ({ children, className }: Props) => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
-  })
+export const SignInForm = ({ children, className, onSubmitForm }: Props) => {
+  const { control, handleSubmit } = useSignInForm()
 
   const onSubmit = handleSubmit(data => {
-    debugger
-    console.log(data)
+    onSubmitForm(data)
   })
 
   return (
     <form className={`${s.form} ${className}`} onSubmit={onSubmit}>
-      <Input
-        className={s.email}
-        id={'email'}
-        label={'Email'}
-        {...register('email')}
-        error={errors.email?.message}
-      />
-      <Input
-        className={s.password}
-        id={'password'}
+      <ControlledInput control={control} label={'Email'} name={'email'} />
+      <ControlledInput
+        control={control}
         label={'Password'}
+        name={'password'}
         variant={'eyeDecoration'}
-        {...register('password')}
-        error={errors.password?.message}
       />
       <ControlledCheckbox
         className={s.rememberMe}
