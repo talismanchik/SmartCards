@@ -1,35 +1,25 @@
 import { ReactNode } from 'react'
-import { useForm } from 'react-hook-form'
 
+import { useForgotPasswordForm } from '@/components/forms/forgotPasswordForm/useForgotPasswordForm'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './forgotPasswordForm.module.scss'
-
-type FormValues = z.infer<typeof loginSchema>
-
-const loginSchema = z.object({
-  email: z.string().email(),
-})
 
 type Props = {
   children?: ReactNode
   className?: string
-  submit: (data: { email: string }) => void
+  onSubmitForm: (data: { email: string }) => void
 }
-export const ForgotPasswordForm = ({ children, className, submit }: Props) => {
+export const ForgotPasswordForm = ({ children, className, onSubmitForm }: Props) => {
   const {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
-  })
+  } = useForgotPasswordForm()
 
   const onSubmit = handleSubmit(data => {
-    submit(data)
+    onSubmitForm(data)
   })
 
   return (

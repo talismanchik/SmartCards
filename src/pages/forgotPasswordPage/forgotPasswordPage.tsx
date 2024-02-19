@@ -5,7 +5,7 @@ import { Typography } from '@/components/ui/typography'
 import s from './forgotPasswordPage.module.scss'
 
 export const ForgotPasswordPage = () => {
-  const submit = (data: { email: string }) => {
+  const onSubmitForm = (data: { email: string }) => {
     console.log(data)
   }
 
@@ -14,7 +14,7 @@ export const ForgotPasswordPage = () => {
       <Typography className={s.title} variant={'h1'}>
         Forgot your password?
       </Typography>
-      <ForgotPasswordForm submit={submit}>
+      <ForgotPasswordForm onSubmitForm={onSubmitForm}>
         <div className={s.forgotPasswordPage}>
           <Typography as={'a'} className={s.info} href={''} variant={'body2'}>
             Enter your email address and we will send you further instructions

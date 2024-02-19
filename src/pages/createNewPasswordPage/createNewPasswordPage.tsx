@@ -5,7 +5,7 @@ import { Typography } from '@/components/ui/typography'
 import s from './createNewPasswordPage.module.scss'
 
 export const CreateNewPasswordPage = () => {
-  const submit = (data: { password: string }) => {
+  const onSubmitForm = (data: { password: string }) => {
     console.log(data)
   }
 
@@ -14,7 +14,7 @@ export const CreateNewPasswordPage = () => {
       <Typography className={s.title} variant={'h1'}>
         Create new password
       </Typography>
-      <CreateNewPasswordForm submit={submit}>
+      <CreateNewPasswordForm onSubmitForm={onSubmitForm}>
         <div className={s.createNewPasswordPage}>
           <Typography as={'a'} className={s.info} href={''} variant={'body2'}>
             Create new password and we will send you further instructions to email
