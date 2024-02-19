@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { Icon } from '@/components/ui/icon/Icon'
 import { Typography } from '@/components/ui/typography'
+import clsx from 'clsx'
 
 import s from './input.module.scss'
 
@@ -9,7 +10,6 @@ export type InputProps = {
   clearField?: () => void
   error?: string
   label?: string
-  onValueChange?: (value: string) => void
   variant?: 'eyeDecoration' | 'searchDecoration' | 'withoutDecoration'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -21,7 +21,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       label,
       onChange,
-      onValueChange,
       value,
       variant = 'withoutDecoration',
       ...rest
@@ -30,22 +29,27 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [closedEye, setClosedEye] = useState(true)
 
+    const classNames = {
+      container: clsx(s.root, className),
+      crossSection: clsx(s.crossSection),
+      errorCaption: clsx(s.errorCaption),
+      eyeSection: clsx(s.eyeSection),
+      label: clsx(s.label, rest.disabled && s.labelDisabled),
+      searchSection: clsx(s.searchSection),
+      textarea: clsx(s.input, s[variant], error ? s.error : ''),
+    }
+
     return (
       <>
-        <div className={`${s.root} ${className}`}>
+        <div className={classNames.container}>
           {label && (
-            <Typography
-              as={'label'}
-              className={`${s.label} ${rest.disabled && s.labelDisabled}`}
-              htmlFor={label}
-              variant={'body2'}
-            >
+            <Typography as={'label'} className={classNames.label} htmlFor={label} variant={'body2'}>
               {label}
             </Typography>
           )}
           {variant === 'eyeDecoration' && (
             <button
-              className={s.eyeSection}
+              className={classNames.eyeSection}
               disabled={rest.disabled}
               onClick={() => {
                 setClosedEye(prev => !prev)
@@ -61,20 +65,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
 
           {variant === 'searchDecoration' && (
-            <button className={s.searchSection} disabled={rest.disabled}>
+            <button className={classNames.searchSection} disabled={rest.disabled} type={'button'}>
               <Icon height={'20'} iconId={'search'} width={'20'} />
             </button>
           )}
 
-          {variant === 'searchDecoration' && value !== '' && clearField && !rest.disabled && (
-            <button className={s.crossSection} onClick={clearField}>
+          {variant === 'searchDecoration' && value !== '' && !rest.disabled && (
+            <button className={classNames.crossSection} onClick={clearField} type={'button'}>
               <Icon height={'20'} iconId={'close'} width={'20'} />
             </button>
           )}
 
           <input
-            className={`${s.input} ${s[variant]} ${error ? s.error : ''} `}
+            className={classNames.textarea}
             id={label}
+            name={rest.name}
             onChange={onChange}
             ref={ref}
             type={variant === 'eyeDecoration' && closedEye ? 'password' : 'text'}
@@ -83,7 +88,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
         </div>
         {error && (
-          <Typography className={s.errorCaption} variant={'body2'}>
+          <Typography className={classNames.errorCaption} variant={'body2'}>
             {error}
           </Typography>
         )}

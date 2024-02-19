@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import s from './tabSwitcher.module.scss'
 
 type Props = {
-  className: string
+  className?: string
   items: TabItem[]
   label?: string
   onValueChange: (value: string) => void

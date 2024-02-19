@@ -16,10 +16,6 @@ export const Default = {
   render() {
     const [value, setValue] = useState([0, 100])
 
-    return (
-      <>
-        <Slider onValueChange={setValue} values={value} />
-      </>
-    )
+    return <Slider onValueChange={setValue} values={value} />
   },
 }

@@ -8,8 +8,8 @@ type EditableSpanType = {
   disabled?: boolean
   inputClassName?: string
   isDone?: boolean
-  maxValue: number
-  minValue: number
+  maxValue?: number
+  minValue?: number
   onChange: (title: string) => void
   spanClassName?: string
   title: string
@@ -41,7 +41,7 @@ export const EditableSpan = React.memo(
     }
     const activateViewMode = () => {
       setEditMode(false)
-      if (minValue > +inputValue || maxValue < +inputValue) {
+      if ((minValue && minValue > +inputValue) || (maxValue && maxValue < +inputValue)) {
         onChange(title)
       } else {
         onChange(inputValue)

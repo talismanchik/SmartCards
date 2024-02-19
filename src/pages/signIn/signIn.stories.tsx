@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { SignIn } from '@/pages/sign-in/signIn'
+import { SignIn } from '@/pages/signIn/signIn'
 
 const meta = {
   argTypes: {},
