@@ -17,8 +17,9 @@ const loginSchema = z.object({
 type Props = {
   children?: ReactNode
   className?: string
+  submit: (data: { password: string }) => void
 }
-export const CreateNewPasswordForm = ({ children, className }: Props) => {
+export const CreateNewPasswordForm = ({ children, className, submit }: Props) => {
   const {
     formState: { errors },
     handleSubmit,
@@ -28,7 +29,7 @@ export const CreateNewPasswordForm = ({ children, className }: Props) => {
   })
 
   const onSubmit = handleSubmit(data => {
-    console.log(data)
+    submit(data)
   })
 
   return (
