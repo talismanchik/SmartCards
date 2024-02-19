@@ -1,13 +1,12 @@
-import { SignUpFormValues } from '@/components/forms/signInForm/useSignInForm'
+import { SignInForm } from '@/components/forms/signInForm'
+import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
 import s from './signIn.module.scss'
 
-import { SignInForm } from '../../components/forms/signInForm'
-
 export const SignIn = () => {
-  const submitForm = (data: SignUpFormValues) => {
+  const submitForm = (data: SignInFormValues) => {
     console.log(data)
   }
 

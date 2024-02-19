@@ -12,7 +12,7 @@ import s from './Modal.module.scss'
 type Props = {
   buttons: ModalButton[]
   children: ReactNode
-  className: string
+  className?: string
   onOpenChange: (value: boolean) => void
   open: boolean
   title: string
