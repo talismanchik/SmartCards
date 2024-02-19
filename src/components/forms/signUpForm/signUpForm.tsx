@@ -1,18 +1,18 @@
 import { ControlledInput } from '@/components/controlled/controlledInput'
-import { useSignUpForm } from '@/components/forms/signUpForm/useSignUpForm'
+import { SignUpFormValues, useSignUpForm } from '@/components/forms/signUpForm/useSignUpForm'
 import { Button } from '@/components/ui/button'
 
 import s from './signUpForm.module.scss'
 
-// type Props = {
-//   onSubmit?: (data: SignUpFormValues) => void
-// }
+type Props = {
+  onSubmitForm: (data: SignUpFormValues) => void
+}
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ onSubmitForm }: Props) => {
   const { control, handleSubmit } = useSignUpForm()
 
   const onSubmit = handleSubmit(data => {
-    console.log(data)
+    onSubmitForm(data)
   })
 
   return (
