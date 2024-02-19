@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox/controlledCheckbox'
 import { ControlledInput } from '@/components/controlled/controlledInput'
-import { SignUpFormValues, useSignInForm } from '@/components/forms/signIn/useSignInForm'
+import { SignInFormValues, useSignInForm } from '@/components/forms/signInForm/useSignInForm'
 import { Button } from '@/components/ui/button'
 
 import s from './signInForm.module.scss'
@@ -10,7 +10,7 @@ import s from './signInForm.module.scss'
 type Props = {
   children?: ReactNode
   className?: string
-  onSubmitForm: (data: SignUpFormValues) => void
+  onSubmitForm: (data: SignInFormValues) => void
 }
 export const SignInForm = ({ children, className, onSubmitForm }: Props) => {
   const { control, handleSubmit } = useSignInForm()

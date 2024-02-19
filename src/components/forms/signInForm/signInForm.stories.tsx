@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react'
 
-import { SignInForm } from '@/components/forms/signIn/signInForm'
+import { SignInForm } from '@/components/forms/signInForm/signInForm'
+import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
 import { Card } from '@/components/ui/card'
 
 const meta = {
@@ -14,13 +15,17 @@ export default meta
 
 export const Primary = {
   render() {
+    const onSubmitForm = (data: SignInFormValues) => {
+      console.log(data)
+    }
+
     return (
       <Card
         style={{
           padding: '33px 36px 25px',
         }}
       >
-        <SignInForm />
+        <SignInForm onSubmitForm={onSubmitForm} />
       </Card>
     )
   },
