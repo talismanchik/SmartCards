@@ -1,7 +1,8 @@
-import { EditableSpan } from '@/components/ui/editableSpan'
 import { Range, Root, Thumb, Track } from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
+
+import { EditableSpan } from './editableSpan'
 
 export type SliderComponentProps = {
   maxValue?: number
