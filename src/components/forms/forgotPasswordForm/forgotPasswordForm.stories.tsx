@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react'
 
 import { ForgotPasswordForm } from '@/components/forms/forgotPasswordForm/forgotPasswordForm'
+import { ForgotPasswordFormValues } from '@/components/forms/forgotPasswordForm/useForgotPasswordForm'
 import { Card } from '@/components/ui/card'
 
 const meta = {
@@ -14,13 +15,17 @@ export default meta
 
 export const Primary = {
   render() {
+    const onsubmitHandler = (data: ForgotPasswordFormValues) => {
+      console.log(data)
+    }
+
     return (
       <Card
         style={{
           padding: '33px 36px 25px',
         }}
       >
-        <ForgotPasswordForm />
+        <ForgotPasswordForm onSubmitForm={onsubmitHandler} />
       </Card>
     )
   },
