@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import { Table, TableBody } from '@/components/ui/table/tableConstructor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
@@ -8,10 +8,12 @@ import s from './table.module.scss'
 
 type Props = {
   children?: ReactNode
+  orderBy?: Sort | null
+  setOrderBy?: Dispatch<SetStateAction<Sort | null>>
   titles: Column[]
   withOptions: boolean
 }
-export const TableComponent = ({ children, titles, withOptions }: Props) => {
+export const TableComponent = ({ children, orderBy, setOrderBy, titles, withOptions }: Props) => {
   const classNames = {
     iconContainer: clsx(s.iconContainer),
     table: clsx(s.table),
@@ -20,17 +22,18 @@ export const TableComponent = ({ children, titles, withOptions }: Props) => {
     tableRow: clsx(s.tableRow),
   }
 
-  const [sort, setSort] = useState<Sort>(null)
+  // const [sort, setSort] = useState<Sort>(null)
 
   const handleSubmit = (key: string) => {
-    if (sort && sort.key === key) {
+    if (orderBy && orderBy.key === key) {
       // setSort({ direction: sort.direction === 'asc' ? 'desc' : 'asc', key })
-      setSort(sort.direction === 'asc' ? { direction: 'desc', key } : null)
+      setOrderBy && setOrderBy(orderBy.direction === 'asc' ? { direction: 'desc', key } : null)
     } else {
-      setSort({
-        direction: 'asc',
-        key,
-      })
+      setOrderBy &&
+        setOrderBy({
+          direction: 'asc',
+          key,
+        })
     }
   }
 
@@ -38,7 +41,7 @@ export const TableComponent = ({ children, titles, withOptions }: Props) => {
     <Table className={classNames.table}>
       <TableHeader
         onHandleSubmit={handleSubmit}
-        sort={sort}
+        sort={orderBy}
         titles={titles}
         withOptions={withOptions}
       />

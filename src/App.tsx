@@ -1,9 +1,12 @@
-import { Header } from '@/components/header/header'
+import { Provider } from 'react-redux'
+
+import { Router } from '@/router'
+import { store } from '@/services/store'
 
 export function App() {
   return (
-    <>
-      <Header isAuth />
-    </>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   )
 }

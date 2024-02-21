@@ -8,7 +8,7 @@ import s from '../table.module.scss'
 
 type Props = {
   onHandleSubmit: (key: string) => void
-  sort: Sort
+  sort?: Sort
   titles: Column[]
   withOptions: boolean
 }
