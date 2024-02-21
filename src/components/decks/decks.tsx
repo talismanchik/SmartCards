@@ -8,11 +8,11 @@ import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/useDebounce'
 import {
-  Deck,
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
-} from '@/services/base-api'
+} from '@/services/decks/decks.service'
+import { Deck } from '@/services/decks/decks.types'
 
 import s from '@/components/ui/table/table.module.scss'
 
