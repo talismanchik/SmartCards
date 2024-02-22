@@ -10,7 +10,7 @@ type Props = {
   onHandleSubmit: (key: string) => void
   sort: Sort
   titles: Column[]
-  withOptions: boolean
+  withOptions?: boolean
 }
 export const TableHeader = ({ onHandleSubmit, sort, titles, withOptions }: Props) => {
   const classNames = {

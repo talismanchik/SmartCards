@@ -9,7 +9,7 @@ import s from './table.module.scss'
 type Props = {
   children?: ReactNode
   titles: Column[]
-  withOptions: boolean
+  withOptions?: boolean
 }
 export const TableComponent = ({ children, titles, withOptions }: Props) => {
   const classNames = {
