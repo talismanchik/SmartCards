@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { Icon } from '@/components/ui/icon/Icon'
 import { Typography } from '@/components/ui/typography'
@@ -10,6 +10,7 @@ export type InputProps = {
   clearField?: () => void
   error?: string
   label?: string
+  onValueChange?: (value: string) => void
   variant?: 'eyeDecoration' | 'searchDecoration' | 'withoutDecoration'
 } & ComponentPropsWithoutRef<'input'>
 
@@ -21,6 +22,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       label,
       onChange,
+      onValueChange,
       value,
       variant = 'withoutDecoration',
       ...rest
@@ -28,6 +30,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const [closedEye, setClosedEye] = useState(true)
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      onValueChange?.(e.currentTarget.value)
+    }
 
     const classNames = {
       container: clsx(s.root, className),
@@ -80,7 +87,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className={classNames.textarea}
             id={label}
             name={rest.name}
-            onChange={onChange}
+            onChange={onChangeHandler}
             ref={ref}
             type={variant === 'eyeDecoration' && closedEye ? 'password' : 'text'}
             value={value}

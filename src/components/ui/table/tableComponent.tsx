@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { Table, TableBody } from '@/components/ui/table/tableConstructor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
@@ -8,10 +8,12 @@ import s from './table.module.scss'
 
 type Props = {
   children?: ReactNode
+  setSort: (sort: Sort) => void
+  sort: Sort
   titles: Column[]
   withOptions?: boolean
 }
-export const TableComponent = ({ children, titles, withOptions }: Props) => {
+export const TableComponent = ({ children, setSort, sort, titles, withOptions }: Props) => {
   const classNames = {
     iconContainer: clsx(s.iconContainer),
     table: clsx(s.table),
@@ -20,11 +22,8 @@ export const TableComponent = ({ children, titles, withOptions }: Props) => {
     tableRow: clsx(s.tableRow),
   }
 
-  const [sort, setSort] = useState<Sort>(null)
-
   const handleSubmit = (key: string) => {
     if (sort && sort.key === key) {
-      // setSort({ direction: sort.direction === 'asc' ? 'desc' : 'asc', key })
       setSort(sort.direction === 'asc' ? { direction: 'desc', key } : null)
     } else {
       setSort({

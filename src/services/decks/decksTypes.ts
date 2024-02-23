@@ -24,3 +24,19 @@ export type DeckPagination = {
   totalItems: number
   totalPages: number
 }
+
+export type GetDecksArgs = {
+  authorId?: string
+  currentPage?: number
+  itemsPerPage?: number
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
+  orderBy?: null | string
+}
+
+export type CreateDeckArgs = {
+  cover?: File | null
+  isPrivate?: boolean
+  name: string
+}
