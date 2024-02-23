@@ -14,9 +14,9 @@ export type InitialStateType = ValueType[]
 
 export type RadioGroupProps = {
   disabled?: boolean
-  onValueChange: (newValue: string) => void
-  value: string
-  values: InitialStateType
+  onValueChange?: (newValue: string) => void
+  value?: string
+  values?: InitialStateType
 }
 
 export const RadioGroup = ({ disabled = false, onValueChange, value, values }: RadioGroupProps) => {
@@ -30,7 +30,7 @@ export const RadioGroup = ({ disabled = false, onValueChange, value, values }: R
 
   const onValueChangeHandler = (newValue: string) => {
     if (!disabled) {
-      onValueChange(newValue)
+      onValueChange && onValueChange(newValue)
     }
   }
 
@@ -42,7 +42,7 @@ export const RadioGroup = ({ disabled = false, onValueChange, value, values }: R
         onValueChange={(newValue: string) => onValueChangeHandler(newValue)}
         value={value}
       >
-        {values.map((el: ValueType) => {
+        {values?.map((el: ValueType) => {
           return (
             <div className={classNames.variantWrap} key={el.id}>
               <Item
