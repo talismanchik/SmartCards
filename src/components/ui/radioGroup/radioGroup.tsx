@@ -1,4 +1,4 @@
-import { ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { RadioGroupItem } from '@/components/ui/radioGroup/radioGroupItem/radioGroupItem'
 import { Typography } from '@/components/ui/typography'
@@ -19,10 +19,10 @@ export type RadioGroupProps = {
   onValueChange?: (newValue: string) => void
   value?: string
   values?: InitialStateType
-}
+} & ComponentPropsWithoutRef<typeof Root>
 
 export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
-  ({ disabled = false, onValueChange, value, values }, ref) => {
+  ({ disabled = false, onValueChange, value, values, ...restProps }, ref) => {
     const classNames = {
       label: clsx(s.label),
       root: clsx(s.radioGroupRoot),
@@ -43,6 +43,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
           onValueChange={(newValue: string) => onValueChangeHandler(newValue)}
           ref={ref}
           value={value}
+          {...restProps}
         >
           {values?.map((el: ValueType) => {
             return (
