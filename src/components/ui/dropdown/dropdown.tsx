@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import React, { CSSProperties, ComponentPropsWithoutRef, FC, ReactNode } from 'react'
 
 import { Typography } from '@/components/ui/typography'
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
@@ -55,13 +55,16 @@ export const Dropdown = ({
     arrow: s.arrow,
     arrowBox: s.arrowBox,
     button: s.button,
+    buttonForRadix: s.buttonForRadix,
     content: clsx(s.content, className),
     itemsBox: s.itemsBox,
   }
 
   return (
     <DropdownMenuRadix.Root onOpenChange={onOpenChange} open={open}>
-      <DropdownMenuRadix.Trigger asChild>{trigger}</DropdownMenuRadix.Trigger>
+      <DropdownMenuRadix.Trigger asChild>
+        <button className={classNames.buttonForRadix}>{trigger}</button>
+      </DropdownMenuRadix.Trigger>
       <AnimatePresence>
         {open && (
           <DropdownMenuRadix.Portal forceMount>
@@ -83,7 +86,7 @@ export const Dropdown = ({
                 <DropdownMenuRadix.Arrow asChild className={classNames.arrowBox}>
                   <div className={classNames.arrow} />
                 </DropdownMenuRadix.Arrow>
-                <div className={classNames.itemsBox}>{children}</div>
+                <div className={classNames.itemsBox}> {children}</div>
               </motion.div>
             </DropdownMenuRadix.Content>
           </DropdownMenuRadix.Portal>
@@ -109,8 +112,11 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   style,
 }) => {
   const classNames = {
+    iconLine: s.iconLine,
     item: clsx(s.item, className),
+    motionDiv: s.motionDiv,
   }
+  const childrenArray = React.Children.toArray(children)
 
   return (
     <DropdownMenuRadix.Item
@@ -120,28 +126,42 @@ export const DropdownItem: FC<DropdownItemProps> = ({
       onSelect={onSelect}
       style={style}
     >
-      <motion.div {...item}>{children}</motion.div>
+      <motion.div {...item} className={classNames.motionDiv}>
+        {childrenArray.map((child, index) => (
+          <>
+            <Typography as={'a'} variant={'caption'}>
+              {child}
+            </Typography>
+            {index !== childrenArray.length - 1 && <div className={classNames.iconLine}></div>}
+          </>
+        ))}
+      </motion.div>
     </DropdownMenuRadix.Item>
   )
 }
 
 export type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
+  items: ItemsProps[]
+} & ComponentPropsWithoutRef<'div'>
+type ItemsProps = {
   icon: ReactNode
   text: string
-} & ComponentPropsWithoutRef<'div'>
-
+}
 export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({
   className,
   disabled,
-  icon,
+  items,
   onSelect,
   style,
-  text,
+
   ...rest
 }) => {
   const classNames = {
+    iconLine: s.iconLine,
     item: clsx(s.item, className),
     itemIcon: s.itemIcon,
+    itemWrapper: s.itemWrapper,
+    motionDiv: s.motionDiv,
   }
 
   return (
@@ -154,9 +174,18 @@ export const DropdownItemWithIcon: FC<DropdownItemWithIconProps> = ({
       style={style}
       {...rest}
     >
-      <motion.div {...item}>
-        <div className={classNames.itemIcon}>{icon}</div>
-        <Typography variant={'caption'}>{text}</Typography>
+      <motion.div {...item} className={classNames.motionDiv}>
+        {items.map((i, index) => {
+          return (
+            <>
+              <div className={classNames.itemWrapper}>
+                <div className={classNames.itemIcon}>{i.icon}</div>
+                <Typography variant={'caption'}>{i.text}</Typography>
+              </div>
+              {index !== items.length - 1 && <div className={classNames.iconLine}></div>}
+            </>
+          )
+        })}
       </motion.div>
     </DropdownMenuRadix.Item>
   )

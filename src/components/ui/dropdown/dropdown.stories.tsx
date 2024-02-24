@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
-import { Dropdown, DropdownItem } from '@/components/ui/dropdown/dropdown'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropdown/dropdown'
+import { Icon } from '@/components/ui/icon/Icon'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Button } from '../button/button'
 
 const meta = {
   component: Dropdown,
@@ -14,20 +13,41 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // @ts-ignore
-export const Default: Story = {
+export const WithoutIcon: Story = {
   render() {
     const [open, setOpen] = useState(false)
 
     return (
       <>
-        <Button onClick={() => setOpen(true)}>open</Button>
-        <Dropdown onOpenChange={setOpen} open={open}>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
-          <DropdownItem>{'bpvtybnm'}</DropdownItem>
+        <Dropdown
+          onOpenChange={() => setOpen(!open)}
+          open={open}
+          trigger={<Icon iconId={'arrow_down'} />}
+        >
+          <DropdownItem children={['Изменить', 'Удалить']} />
+        </Dropdown>
+      </>
+    )
+  },
+}
+// @ts-ignore
+export const WithIcon: Story = {
+  render() {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <>
+        <Dropdown
+          onOpenChange={() => setOpen(!open)}
+          open={open}
+          trigger={<Icon iconId={'arrow_down'} />}
+        >
+          <DropdownItemWithIcon
+            items={[
+              { icon: <Icon iconId={'edit'} />, text: 'Изменить' },
+              { icon: <Icon iconId={'close'} />, text: 'Выйти' },
+            ]}
+          />
         </Dropdown>
       </>
     )
