@@ -10,7 +10,7 @@ export type DeckAuthor = {
 export type Deck = {
   author: DeckAuthor
   cardsCount: number
-  cover: string
+  cover: null | string
   created: string
   id: string
   isPrivate: boolean
