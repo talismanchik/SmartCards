@@ -1,10 +1,10 @@
-import { decksApi } from '@/services/decks/decksApi'
+import { baseApi } from '@/services/baseApi'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(decksApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
   reducer: {
-    [decksApi.reducerPath]: decksApi.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
 })
 

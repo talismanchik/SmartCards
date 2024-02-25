@@ -36,7 +36,7 @@ export const TabSwitcher = ({ className, items, label, onValueChange, value }: P
   )
 }
 
-type TabItem = {
+export type TabItem = {
   disabled?: boolean
   title: string
   value: string

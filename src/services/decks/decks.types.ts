@@ -1,7 +1,8 @@
+import { Pagination } from '@/services/common.types'
+
 export type DeckResponse = {
   items: Deck[]
-  maxCardsCount: number
-  pagination: DeckPagination
+  pagination: Pagination
 }
 export type DeckAuthor = {
   id: string
@@ -18,12 +19,6 @@ export type Deck = {
   updated: string
   userId: string
 }
-export type DeckPagination = {
-  currentPage: number
-  itemsPerPage: number
-  totalItems: number
-  totalPages: number
-}
 
 export type GetDecksArgs = {
   authorId?: string
@@ -34,9 +29,17 @@ export type GetDecksArgs = {
   name?: string
   orderBy?: null | string
 }
+export type GetMinMaxCards = {
+  max: number
+  min: number
+}
 
 export type CreateDeckArgs = {
   cover?: File | null
   isPrivate?: boolean
   name: string
+}
+
+export type DeleteDeckArgs = {
+  id: string
 }

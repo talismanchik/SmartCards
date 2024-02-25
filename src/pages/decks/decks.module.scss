@@ -1,0 +1,27 @@
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 25px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-top: 7px;
+  margin-bottom: 36px;
+
+  .filterButton {
+    height: auto;
+  }
+
+}
+
+
+.pagination {
+  margin-top: 25px;
+  margin-inline: auto;
+}

@@ -7,9 +7,9 @@ export function App() {
   return (
     <>
       <Header isAuth />
-      <section className={s.container}>
+      <div className={s.container}>
         <Router />
-      </section>
+      </div>
     </>
   )
 }
