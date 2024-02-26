@@ -8,11 +8,9 @@ import s from '../cards.module.scss'
 import defaultImage from '../../../assets/default.png'
 type Props = {
   cards: DeckByIDItems[]
-  // isOwner?: boolean
+  isOwner: boolean
 }
-export const TableCards = ({ cards }: Props) => {
-  const isOwner = false
-
+export const TableCards = ({ cards, isOwner }: Props) => {
   return (
     <>
       {cards.map((item: DeckByIDItems) => {
