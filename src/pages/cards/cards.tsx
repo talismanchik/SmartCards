@@ -1,24 +1,55 @@
 // import s from './cardsService.ts.module.scss'
 
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
+import { useDebounce } from '@/components/hooks/useDebounce'
 import { useOrderByString } from '@/components/hooks/useOrderByString'
 import { Icon } from '@/components/ui/icon/Icon'
+import { Input } from '@/components/ui/input'
+import { Pagination } from '@/components/ui/pagination'
 import { Column, Sort, TableComponent } from '@/components/ui/table/tableComponent'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
-import { DecksByIDItems, useGetDecksByIDQuery } from '@/services/cards/cardsService'
+import { DecksByIDItems } from '@/services/cards/cards.types'
+import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
 
 export const Cards = () => {
-  const [orderBy, setOrderBy] = useState<Sort>(null)
+  const [searchParams, setSearchParams] = useSearchParams({})
+  const orderBy = JSON.parse(searchParams.get('orderBy') || '""')
+  const inputSearch = searchParams.get('question') || ''
+  const currentPage = searchParams.get('currentPage') || '1'
+  const portionSize = searchParams.get('itemsPerPage') || '5'
+
+  const debounceSearch = useDebounce(inputSearch, 500)
 
   const orderByString = useOrderByString(orderBy)
 
   const { data } = useGetDecksByIDQuery({
+    currentPage: +currentPage,
     id: 'cls3s7drs035wrr2ufg2v1ik1',
+    itemsPerPage: +portionSize,
     orderBy: orderByString,
+    question: debounceSearch,
   })
+
+  const onChangeSort = (value: Sort) => {
+    searchParams.set('orderBy', JSON.stringify(value))
+    setSearchParams(searchParams)
+  }
+
+  const onChangeInputValue = (value: string) => {
+    searchParams.set('question', value)
+    setSearchParams(searchParams)
+  }
+  const onChangeCurrentPage = (page: number) => {
+    searchParams.set('currentPage', page.toString())
+    setSearchParams(searchParams)
+  }
+
+  const onChangePortionSize = (portion: string) => {
+    searchParams.set('itemsPerPage', portion)
+    setSearchParams(searchParams)
+  }
 
   console.log(data)
 
@@ -37,7 +68,9 @@ export const Cards = () => {
           </Typography>
         </TableDataCell>
         <TableDataCell>
-          <Typography variant={'body2'}>{item.grade}</Typography>
+          <Typography variant={'body2'}>
+            <Icon iconId={'star_outline'} />
+          </Typography>
         </TableDataCell>
         {/*<TableDataCell>*/}
         {/*  <div className={s.iconContainer} onClick={() => deleteDeck({ id: item.id })}>*/}
@@ -49,16 +82,33 @@ export const Cards = () => {
   })
 
   return (
-    <div>
+    <>
       <Link to={''}>
         <Icon iconId={'arrow_back_outline'} />
         Return to Previous Page
       </Link>
-
-      <TableComponent setSort={setOrderBy} sort={orderBy} titles={columns}>
+      <Typography variant={'h1'}>Название deck</Typography>
+      <Input
+        clearField={() => onChangeInputValue('')}
+        onValueChange={onChangeInputValue}
+        placeholder={'Search by question'}
+        value={inputSearch}
+        variant={'searchDecoration'}
+      />
+      <TableComponent setSort={onChangeSort} sort={orderBy} titles={columns}>
         {dataMap}
       </TableComponent>
-    </div>
+      {data && (
+        <Pagination
+          currentPage={+currentPage}
+          onPageChange={onChangeCurrentPage}
+          onValueChange={onChangePortionSize}
+          pageSize={data.pagination.itemsPerPage}
+          placeholder={data.pagination.itemsPerPage.toString()}
+          totalCount={data.pagination.totalItems}
+        />
+      )}
+    </>
   )
 }
 
