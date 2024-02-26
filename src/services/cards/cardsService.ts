@@ -5,8 +5,9 @@ export const cardsService = baseApi.injectEndpoints({
     return {
       getDecksByID: builder.query<GetDecksByIDResponse, GetCardsArgs>({
         providesTags: ['Decks'],
-        query: args => ({
-          url: `v1/decks/${args.id}/cards`,
+        query: ({ id, ...args }) => ({
+          params: args ?? undefined,
+          url: `v1/decks/${id}/cards`,
         }),
       }),
     }
@@ -16,11 +17,16 @@ export const cardsService = baseApi.injectEndpoints({
 export const { useGetDecksByIDQuery } = cardsService
 
 export type GetCardsArgs = {
+  answer?: string
+  currentPage?: number
   id: string
+  itemsPerPage?: number
+  orderBy?: null | string
+  question?: string
 }
 
 export type GetDecksByIDResponse = {
-  items: GetDecksByIDItems[]
+  items: DecksByIDItems[]
   pagination: GetDecksByIDPagination
 }
 export type GetDecksByIDPagination = {
@@ -29,7 +35,7 @@ export type GetDecksByIDPagination = {
   totalItems: number
   totalPages: number
 }
-export type GetDecksByIDItems = {
+export type DecksByIDItems = {
   answer: string
   answerImg: string
   answerVideo: string
