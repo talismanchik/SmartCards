@@ -52,17 +52,16 @@ export const TableCards = ({ cards, isOwner }: Props) => {
             </TableDataCell>
             {isOwner && (
               <TableDataCell>
-                <Typography variant={'body2'}>
-                  <Icon iconId={'edit'} />
-                  <Icon iconId={'trash_outline'} />
-                </Typography>
+                <div className={s.iconsWrapper}>
+                  <div className={s.iconWrap}>
+                    <Icon className={s.editIcon} iconId={'edit'} />
+                  </div>
+                  <div className={s.iconWrap}>
+                    <Icon className={s.trashIcon} iconId={'trash_outline'} />
+                  </div>
+                </div>
               </TableDataCell>
             )}
-            {/*<TableDataCell>*/}
-            {/*  <div className={s.iconContainer} onClick={() => deleteDeck({ id: item.id })}>*/}
-            {/*    <Icon iconId={'play_circle_outline'} />*/}
-            {/*  </div>*/}
-            {/*</TableDataCell>*/}
           </TableRow>
         )
       })}
@@ -70,10 +69,10 @@ export const TableCards = ({ cards, isOwner }: Props) => {
   )
 }
 
-type PropsStar = {
+type StarProps = {
   grade: number
 }
-const GradeStar = ({ grade }: PropsStar) => {
+const GradeStar = ({ grade }: StarProps) => {
   const maxStars = 5
 
   const stars = Array.from({ length: maxStars }, (_, index) => {
@@ -83,5 +82,5 @@ const GradeStar = ({ grade }: PropsStar) => {
     return <Icon className={s.grade} iconId={iconId} key={index} />
   })
 
-  return <>{stars}</>
+  return <span>{stars}</span>
 }

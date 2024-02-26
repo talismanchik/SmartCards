@@ -1,11 +1,16 @@
 .wrapper {
   .previousPage {
-    display: inline-block;
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+
     margin-bottom: 33px;
+
     text-decoration: none;
 
     &:hover {
       color: var(--color-accent-300);
+      transition: 0.2s ease-in-out;
     }
   }
 
@@ -33,10 +38,6 @@
   }
 }
 
-.grade {
-  color: #e5ac39;
-}
-
 .imageWrapper {
   display: flex;
   gap: 20px;
@@ -47,6 +48,45 @@
       width: 70px;
       height: 50px;
       object-fit: cover;
+    }
+  }
+}
+
+.grade {
+  z-index: 3;
+  margin-right: 10px;
+  color: #e5ac39;
+}
+
+.iconsWrapper {
+  display: flex;
+
+  .iconWrap {
+    position: relative;
+    margin-right: 10px;
+
+    &:hover::before {
+      content: '';
+
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 25px;
+      height: 25px;
+
+      background-color: #6cc2f8;
+      border-radius: 50%;
+
+      transition: 0.2s;
+    }
+
+    .editIcon,
+    .trashIcon {
+      cursor: pointer;
+      z-index: 2;
     }
   }
 }

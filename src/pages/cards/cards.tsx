@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/Icon'
 import { Input } from '@/components/ui/input'
 import { Pagination } from '@/components/ui/pagination'
-import { Column, TableComponent } from '@/components/ui/table/tableComponent'
+import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
+import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 
@@ -19,7 +20,7 @@ import defaultImage from '../../assets/default.png'
 //   title: string
 // }
 export const Cards = () => {
-  const isOwner = false
+  const isOwner = true
 
   const {
     currentPage,
@@ -38,13 +39,13 @@ export const Cards = () => {
     <div className={s.wrapper}>
       <Link className={s.previousPage} to={''}>
         <Icon iconId={'arrow_back_outline'} />
-        Return to Previous Page
+        <Typography variant={'body2'}>Back to Previous Page</Typography>
       </Link>
       <div className={s.titleButtonWrapper}>
         <Typography className={s.title} variant={'h1'}>
           Название deck
         </Typography>
-        {isOwner ? <Button>Add New Card</Button> : <Button>Learn to Deck</Button>}
+        {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
       </div>
 
       <div className={s.deckImage}>
@@ -83,22 +84,3 @@ export const Cards = () => {
     </div>
   )
 }
-
-const columns: Column[] = [
-  {
-    key: 'question',
-    title: 'Question',
-  },
-  {
-    key: 'answer',
-    title: 'Answer',
-  },
-  {
-    key: 'updated',
-    title: 'Last Updated',
-  },
-  {
-    key: 'grade',
-    title: 'Grade',
-  },
-]
