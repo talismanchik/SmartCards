@@ -61,7 +61,6 @@ export const Decks = () => {
     pagination: clsx(s.pagination),
     topRow: clsx(s.topRow),
   }
-
   // @@@@@@@@@@@@@@@@@@@@@@@@@
 
   const [page, setPage] = useState(1)
