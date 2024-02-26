@@ -1,0 +1,52 @@
+.wrapper {
+  .previousPage {
+    display: inline-block;
+    margin-bottom: 33px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-accent-300);
+    }
+  }
+
+  .titleButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .deckImage {
+    img {
+      width: 170px;
+      height: 130px;
+      margin-top: 15px;
+      object-fit: cover;
+    }
+  }
+
+  .input {
+    margin: 24px 0;
+  }
+
+  .pagination {
+    margin: 24px 0 120px;
+  }
+}
+
+.grade {
+  color: #e5ac39;
+}
+
+.imageWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .image {
+    img {
+      width: 70px;
+      height: 50px;
+      object-fit: cover;
+    }
+  }
+}

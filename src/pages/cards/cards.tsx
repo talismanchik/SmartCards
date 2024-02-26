@@ -1,19 +1,27 @@
-// import s from './cardsService.ts.module.scss'
-
 import { Link, useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
 import { useOrderByString } from '@/components/hooks/useOrderByString'
+import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/Icon'
 import { Input } from '@/components/ui/input'
 import { Pagination } from '@/components/ui/pagination'
 import { Column, Sort, TableComponent } from '@/components/ui/table/tableComponent'
-import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
-import { DecksByIDItems } from '@/services/cards/cards.types'
+import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
 
+import s from './cards.module.scss'
+
+import defaultImage from '../../assets/default.png'
+
+// type CardsProps = {
+//   id: string
+//   isOwner: boolean
+//   title: string
+// }
 export const Cards = () => {
+  const isOwner = true
   const [searchParams, setSearchParams] = useSearchParams({})
   const orderBy = JSON.parse(searchParams.get('orderBy') || '""')
   const inputSearch = searchParams.get('question') || ''
@@ -53,62 +61,48 @@ export const Cards = () => {
 
   console.log(data)
 
-  const dataMap = data?.items.map((item: DecksByIDItems) => {
-    return (
-      <TableRow key={item.id}>
-        <TableDataCell>
-          <Typography variant={'body2'}>{item.question}</Typography>
-        </TableDataCell>
-        <TableDataCell>
-          <Typography variant={'body2'}>{item.answer}</Typography>
-        </TableDataCell>
-        <TableDataCell>
-          <Typography variant={'body2'}>
-            {new Date(item.updated).toLocaleDateString('ru-RU')}
-          </Typography>
-        </TableDataCell>
-        <TableDataCell>
-          <Typography variant={'body2'}>
-            <Icon iconId={'star_outline'} />
-          </Typography>
-        </TableDataCell>
-        {/*<TableDataCell>*/}
-        {/*  <div className={s.iconContainer} onClick={() => deleteDeck({ id: item.id })}>*/}
-        {/*    <Icon iconId={'play_circle_outline'} />*/}
-        {/*  </div>*/}
-        {/*</TableDataCell>*/}
-      </TableRow>
-    )
-  })
-
   return (
-    <>
-      <Link to={''}>
+    <div className={s.wrapper}>
+      <Link className={s.previousPage} to={''}>
         <Icon iconId={'arrow_back_outline'} />
         Return to Previous Page
       </Link>
-      <Typography variant={'h1'}>Название deck</Typography>
+      <div className={s.titleButtonWrapper}>
+        <Typography className={s.title} variant={'h1'}>
+          Название deck
+        </Typography>
+        {isOwner ? <Button>Add New Card</Button> : <Button>Learn to Deck</Button>}
+      </div>
+
+      <div className={s.deckImage}>
+        <img alt={'deck-image'} src={defaultImage} />
+      </div>
       <Input
+        className={s.input}
         clearField={() => onChangeInputValue('')}
         onValueChange={onChangeInputValue}
         placeholder={'Search by question'}
         value={inputSearch}
         variant={'searchDecoration'}
       />
-      <TableComponent setSort={onChangeSort} sort={orderBy} titles={columns}>
-        {dataMap}
-      </TableComponent>
+
       {data && (
-        <Pagination
-          currentPage={+currentPage}
-          onPageChange={onChangeCurrentPage}
-          onValueChange={onChangePortionSize}
-          pageSize={data.pagination.itemsPerPage}
-          placeholder={data.pagination.itemsPerPage.toString()}
-          totalCount={data.pagination.totalItems}
-        />
+        <>
+          <TableComponent setSort={onChangeSort} sort={orderBy} titles={columns} withOptions>
+            <TableCards cards={data.items} />
+          </TableComponent>
+          <Pagination
+            className={s.pagination}
+            currentPage={+currentPage}
+            onPageChange={onChangeCurrentPage}
+            onValueChange={onChangePortionSize}
+            pageSize={data.pagination.itemsPerPage}
+            placeholder={data.pagination.itemsPerPage.toString()}
+            totalCount={data.pagination.totalItems}
+          />
+        </>
       )}
-    </>
+    </div>
   )
 }
 
