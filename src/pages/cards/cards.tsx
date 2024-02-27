@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom'
-
 import { Button } from '@/components/ui/button'
-import { Icon } from '@/components/ui/icon/Icon'
 import { Input } from '@/components/ui/input'
+import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
@@ -38,10 +36,7 @@ export const Cards = () => {
 
   return (
     <div className={s.wrapper}>
-      <Link className={s.previousPage} to={''}>
-        <Icon iconId={'arrow_back_outline'} />
-        <Typography variant={'body2'}>Back to Previous Page</Typography>
-      </Link>
+      <LinkBack />
       <div className={s.titleButtonWrapper}>
         <Typography className={s.title} variant={'h1'}>
           Название deck

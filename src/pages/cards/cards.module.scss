@@ -1,19 +1,4 @@
 .wrapper {
-  .previousPage {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-
-    margin-bottom: 33px;
-
-    text-decoration: none;
-
-    &:hover {
-      color: var(--color-accent-300);
-      transition: 0.2s ease-in-out;
-    }
-  }
-
   .titleButtonWrapper {
     display: flex;
     align-items: center;
