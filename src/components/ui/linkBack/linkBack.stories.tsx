@@ -18,4 +18,3 @@ const meta: Meta = {
 export default meta
 
 export const Default = () => <LinkBack />
-// Default.storyName = 'Default'
