@@ -1,3 +1,4 @@
+import { GradeStar } from '@/components/ui/gradeStar'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
@@ -61,20 +62,4 @@ export const TableCards = ({ cards, isOwner }: Props) => {
       )}
     </TableRow>
   )
-}
-
-type StarProps = {
-  grade: number
-}
-const GradeStar = ({ grade }: StarProps) => {
-  const maxStars = 5
-
-  const stars = Array.from({ length: maxStars }, (_, index) => {
-    const isFilled = index < grade
-    const iconId = isFilled ? 'star' : 'star_outline'
-
-    return <Icon className={s.grade} iconId={iconId} key={index} />
-  })
-
-  return <span>{stars}</span>
 }
