@@ -99,7 +99,7 @@ export const Decks = () => {
         <Button
           disabled={isDeckBingCreated}
           onClick={() => {
-            createDeck({ name: '🚀 newDeck' })
+            createDeck({ name: '🚀 newDeck!' })
           }}
         >
           Create Deck
