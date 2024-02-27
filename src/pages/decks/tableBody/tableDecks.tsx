@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom'
-
-import defaultImage from '@/assets/photo-camera.png'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
@@ -30,14 +27,12 @@ export const TableDecks = ({ decks }: props) => {
 
         return (
           <TableRow key={deck.id}>
-            <Link to={'/cards'}>
-              <TableDataCell>
-                <span className={styles.nameWrapper}>
-                  <img alt={'deck photo'} className={s.tableImage} src={defaultImage} />
-                  <Typography variant={'body2'}>{deck.name}</Typography>
-                </span>
-              </TableDataCell>
-            </Link>
+            <TableDataCell>
+              <span className={styles.nameWrapper}>
+                {/*<img alt={'deck photo'} className={s.tableImage} src={defaultImage} />*/}
+                <Typography variant={'body2'}>{deck.name}</Typography>
+              </span>
+            </TableDataCell>
             <TableDataCell>
               <Typography variant={'body2'}>{deck.cardsCount}</Typography>
             </TableDataCell>

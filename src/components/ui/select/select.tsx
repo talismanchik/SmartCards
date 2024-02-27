@@ -35,8 +35,13 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
       disabled,
       label,
       onValueChange,
-      options,
-      placeholder = 'Select value...',
+      options = [
+        { title: '5', value: '5' },
+        { title: '10', value: '10' },
+        { title: '15', value: '15' },
+        { title: '20', value: '20' },
+      ],
+      placeholder = '5',
       value,
       ...restProps
     },

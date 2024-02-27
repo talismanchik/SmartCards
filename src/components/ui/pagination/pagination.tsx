@@ -26,6 +26,7 @@ export const Pagination = ({
   ...restProps
 }: PaginationProps) => {
   const classNames = {
+    iconWrapper: clsx(s.iconWrapper),
     item(currentItem: number) {
       return clsx(s.button, currentItem === currentPage && s.activeItem)
     },
@@ -61,7 +62,12 @@ export const Pagination = ({
   return (
     <div className={classNames.paginationContainer}>
       <div className={s.paginationContainer}>
-        <button className={s.iconWrapper} onClick={onPrevPage} tabIndex={0}>
+        <button
+          className={classNames.iconWrapper}
+          disabled={currentPage === 1}
+          onClick={onPrevPage}
+          tabIndex={0}
+        >
           <Icon iconId={'arrow_back'} />
         </button>
 
@@ -94,7 +100,12 @@ export const Pagination = ({
           }
         })}
 
-        <button className={s.iconWrapper} onClick={onNextPage} tabIndex={0}>
+        <button
+          className={s.iconWrapper}
+          disabled={currentPage === totalPageCount}
+          onClick={onNextPage}
+          tabIndex={0}
+        >
           <Icon iconId={'arrow_forward'} />
         </button>
       </div>
