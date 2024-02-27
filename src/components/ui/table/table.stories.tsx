@@ -1,7 +1,9 @@
 import type { Meta } from '@storybook/react'
 
+import { useState } from 'react'
+
 import { Icon } from '@/components/ui/icon/Icon'
-import { TableComponent } from '@/components/ui/table/tableComponent'
+import { Sort, TableComponent } from '@/components/ui/table/tableComponent'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 
@@ -40,9 +42,10 @@ export const TableStory = {
         </TableRow>
       )
     })
+    const [sort, setSort] = useState<Sort | null>(null)
 
     return (
-      <TableComponent titles={titlesForDecks} withOptions>
+      <TableComponent setSort={setSort} sort={sort} titles={titlesForDecks} withOptions>
         {dataMarkup}
       </TableComponent>
     )
