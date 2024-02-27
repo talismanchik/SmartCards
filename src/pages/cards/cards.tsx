@@ -1,9 +1,12 @@
+import { useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
+import { AddNewDeck } from '@/features/deck/addNewDeck/addNewDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
@@ -18,7 +21,7 @@ import defaultImage from '../../assets/default.png'
 //   title: string
 // }
 export const Cards = () => {
-  const isOwner = true
+  const isOwner = false
 
   const {
     currentPage,
@@ -33,6 +36,7 @@ export const Cards = () => {
   } = useCardFilter()
 
   console.log(data)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className={s.wrapper}>
@@ -41,7 +45,14 @@ export const Cards = () => {
         <Typography className={s.title} variant={'h1'}>
           Название deck
         </Typography>
-        {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
+        {isOwner ? (
+          <Button>Add New Card</Button>
+        ) : (
+          <>
+            <Button onClick={() => setIsOpen(true)}>Learn Cards</Button>
+            <AddNewDeck isOpen={isOpen} onOpenChange={() => setIsOpen(false)} />
+          </>
+        )}
       </div>
 
       <div className={s.deckImage}>
