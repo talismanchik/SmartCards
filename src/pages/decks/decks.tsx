@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { useOrderByString } from '@/components/hooks/useOrderByString'
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
 import { TabItem } from '@/components/ui/tabSwitcher'
@@ -21,25 +20,36 @@ import s from './decks.module.scss'
 
 export const Decks = () => {
   const [queryParams, setQueryParams] = useSearchParams()
-  //const [cardsCount, setCardsCount] = useState<number[]>([1, 100])
-  //const [orderBy, setOrderBy] = useState<Sort>(null)
-  const orderBy = JSON.parse(queryParams.get('orderBy') ?? 'null')
-  const name = queryParams.get('name') || ''
-  const setOrderBy = (value: Sort) => {
-    queryParams.set('orderBy', JSON.stringify(value))
-    setQueryParams(queryParams)
-  }
-  const orderByString = useOrderByString(orderBy)
 
-  //const debouncedSearch = useDebounce(name, 500)
+  const name = queryParams.get('name') || ''
+  const orderBy = queryParams.get('orderBy')
+  const minCardsCount = queryParams.get('minCardsCount') || ''
+  const maxCardsCount = queryParams.get('maxCardsCount') || ''
+
+  const parsedOrderBy = () => {
+    if (!orderBy) {
+      return null
+    }
+    const [key, direction] = orderBy.split('-') as [string, 'asc' | 'desc']
+
+    if (!key || !direction) {
+      return null
+    }
+
+    return { direction, key }
+  }
+  const setOrderBy = (value: Sort) => {
+    const query = Object.fromEntries(queryParams)
+
+    setQueryParams({ ...query, orderBy: value ? `${value.key}-${value.direction}` : [] })
+  }
   const { data: minMaxCards } = useGetMinMaxCardsQuery()
 
-  //const [getDeckArgs, setGetDeckArgs] = useState<GetDecksArgs>({name:debouncedSearch})
   const getDeckArgs: GetDecksArgs = {
-    //maxCardsCount: cardsCount[1],
-    // minCardsCount: cardsCount[0],
-    name: name,
-    orderBy: orderByString,
+    maxCardsCount: +maxCardsCount || undefined,
+    minCardsCount: +minCardsCount || undefined,
+    name: name || undefined,
+    orderBy: orderBy ?? undefined,
   }
 
   const { data, error, isLoading } = useGetDecksQuery(getDeckArgs, {
@@ -47,12 +57,13 @@ export const Decks = () => {
   })
   const [createDeck, { isLoading: isDeckBingCreated }] = useCreateDeckMutation()
 
-  const changeFiltersParams = (value: string) => {
-    setQueryParams({ name: value })
+  const changeFiltersParam = (field: string, value: null | string) => {
+    const query = Object.fromEntries(queryParams)
+
+    setQueryParams({ ...query, [field]: value ?? [] })
   }
   const clearFilter = () => {
-    setQueryParams({ name: '' })
-    queryParams.delete(name)
+    setQueryParams({})
   }
 
   const styles = {
@@ -62,18 +73,19 @@ export const Decks = () => {
     topRow: clsx(s.topRow),
   }
 
-  // @@@@@@@@@@@@@@@@@@@@@@@@@
+  // ///////////////////////////////////////
 
   const [page, setPage] = useState(1)
-  const [portionSize, setPortionSize] = useState('50')
+  const [portionSize, setPortionSize] = useState('10')
 
   const optionsSelect = [
-    { title: '50', value: '50' },
     { title: '20', value: '20' },
+    { title: '15', value: '15' },
     { title: '10', value: '10' },
+    { title: '5', value: '5' },
   ]
 
-  //@@@@@@@@@@@@@@@@@@@@@@@@
+  // ////////////////////////////////////////
   if (isLoading) {
     return <h1>Loading...</h1>
   }
@@ -95,11 +107,13 @@ export const Decks = () => {
         </Button>
       </div>
       <Filters
-        changeFiltersParams={changeFiltersParams}
+        changeFiltersParam={changeFiltersParam}
         clearFilter={clearFilter}
+        maxCardsCount={minMaxCards?.max ?? 100}
+        minMaxCards={[+minCardsCount, +maxCardsCount]}
         nameValue={name}
       />
-      <TableComponent setSort={setOrderBy} sort={orderBy} titles={titles} withOptions>
+      <TableComponent setSort={setOrderBy} sort={parsedOrderBy()} titles={titles} withOptions>
         {data && <TableDecks decks={data.items} />}
       </TableComponent>
       <Pagination
