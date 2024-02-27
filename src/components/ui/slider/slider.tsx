@@ -5,7 +5,7 @@ import { Range, Root, Thumb, Track } from '@radix-ui/react-slider'
 import s from './slider.module.scss'
 
 export type SliderComponentProps = {
-  label: string
+  label?: string
   maxValue?: number
   minValue?: number
   onValueChange: (values: number[]) => void
