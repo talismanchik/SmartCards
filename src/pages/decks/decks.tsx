@@ -62,7 +62,7 @@ export const Decks = () => {
     topRow: clsx(s.topRow),
   }
 
-  // @@@@@@@@@@@@@@@@@@@@@@@@@
+  // //////////////////////////////
 
   const [page, setPage] = useState(1)
   const [portionSize, setPortionSize] = useState('50')
@@ -73,7 +73,7 @@ export const Decks = () => {
     { title: '10', value: '10' },
   ]
 
-  //@@@@@@@@@@@@@@@@@@@@@@@@
+  // //////////////////////////////
   if (isLoading) {
     return <h1>Loading...</h1>
   }
