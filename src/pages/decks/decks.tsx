@@ -43,7 +43,7 @@ export const Decks = () => {
 
     setQueryParams({ ...query, orderBy: value ? `${value.key}-${value.direction}` : [] })
   }
-  const { data: minMaxCards } = useGetMinMaxCardsQuery()
+  const { data: minMaxCards, isLoading: minMaxCardsLoading } = useGetMinMaxCardsQuery()
 
   const getDeckArgs: GetDecksArgs = {
     maxCardsCount: +maxCardsCount || undefined,
@@ -86,7 +86,7 @@ export const Decks = () => {
   ]
 
   // ////////////////////////////////////////
-  if (isLoading) {
+  if (isLoading || minMaxCardsLoading) {
     return <h1>Loading...</h1>
   }
   if (error) {
