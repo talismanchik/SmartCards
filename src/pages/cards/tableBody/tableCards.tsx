@@ -7,65 +7,59 @@ import s from '../cards.module.scss'
 
 import defaultImage from '../../../assets/default.png'
 type Props = {
-  cards: DeckByIDItems[]
+  cards: DeckByIDItems
   isOwner: boolean
 }
 export const TableCards = ({ cards, isOwner }: Props) => {
   return (
-    <>
-      {cards.map((item: DeckByIDItems) => {
-        return (
-          <TableRow key={item.id}>
-            <TableDataCell>
-              <div className={s.imageWrapper}>
-                <div className={s.image}>
-                  {item.questionImg ? (
-                    <img alt={'question-image'} src={item.questionImg} />
-                  ) : (
-                    <img alt={'default-image'} src={defaultImage} />
-                  )}
-                </div>
-                <Typography variant={'body2'}>{item.question}</Typography>
-              </div>
-            </TableDataCell>
-            <TableDataCell>
-              <div className={s.imageWrapper}>
-                <div className={s.image}>
-                  {item.answerImg ? (
-                    <img alt={'answer-image'} src={item.answerImg} />
-                  ) : (
-                    <img alt={'answer-image'} src={defaultImage} />
-                  )}
-                </div>
-                <Typography variant={'body2'}>{item.answer}</Typography>
-              </div>
-            </TableDataCell>
-            <TableDataCell>
-              <Typography variant={'body2'}>
-                {new Date(item.updated).toLocaleDateString('ru-RU')}
-              </Typography>
-            </TableDataCell>
-            <TableDataCell>
-              <Typography variant={'body2'}>
-                <GradeStar grade={item.grade} />
-              </Typography>
-            </TableDataCell>
-            {isOwner && (
-              <TableDataCell>
-                <div className={s.iconsWrapper}>
-                  <div className={s.iconWrap}>
-                    <Icon className={s.editIcon} iconId={'edit'} />
-                  </div>
-                  <div className={s.iconWrap}>
-                    <Icon className={s.trashIcon} iconId={'trash_outline'} />
-                  </div>
-                </div>
-              </TableDataCell>
+    <TableRow key={cards.id}>
+      <TableDataCell>
+        <div className={s.imageWrapper}>
+          <div className={s.image}>
+            {cards.questionImg ? (
+              <img alt={'question-image'} src={cards.questionImg} />
+            ) : (
+              <img alt={'default-image'} src={defaultImage} />
             )}
-          </TableRow>
-        )
-      })}
-    </>
+          </div>
+          <Typography variant={'body2'}>{cards.question}</Typography>
+        </div>
+      </TableDataCell>
+      <TableDataCell>
+        <div className={s.imageWrapper}>
+          <div className={s.image}>
+            {cards.answerImg ? (
+              <img alt={'answer-image'} src={cards.answerImg} />
+            ) : (
+              <img alt={'answer-image'} src={defaultImage} />
+            )}
+          </div>
+          <Typography variant={'body2'}>{cards.answer}</Typography>
+        </div>
+      </TableDataCell>
+      <TableDataCell>
+        <Typography variant={'body2'}>
+          {new Date(cards.updated).toLocaleDateString('ru-RU')}
+        </Typography>
+      </TableDataCell>
+      <TableDataCell>
+        <Typography variant={'body2'}>
+          <GradeStar grade={cards.grade} />
+        </Typography>
+      </TableDataCell>
+      {isOwner && (
+        <TableDataCell>
+          <div className={s.iconsWrapper}>
+            <div className={s.iconWrap}>
+              <Icon className={s.editIcon} iconId={'edit'} />
+            </div>
+            <div className={s.iconWrap}>
+              <Icon className={s.trashIcon} iconId={'trash_outline'} />
+            </div>
+          </div>
+        </TableDataCell>
+      )}
+    </TableRow>
   )
 }
 

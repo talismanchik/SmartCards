@@ -36,6 +36,10 @@
   .pagination {
     margin: 24px 0 120px;
   }
+
+  .noContent {
+    text-align: center;
+  }
 }
 
 .imageWrapper {
@@ -62,31 +66,11 @@
   display: flex;
 
   .iconWrap {
-    position: relative;
     margin-right: 10px;
-
-    &:hover::before {
-      content: '';
-
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      width: 25px;
-      height: 25px;
-
-      background-color: #6cc2f8;
-      border-radius: 50%;
-
-      transition: 0.2s;
-    }
 
     .editIcon,
     .trashIcon {
       cursor: pointer;
-      z-index: 2;
     }
   }
 }

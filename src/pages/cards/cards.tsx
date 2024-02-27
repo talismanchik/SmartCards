@@ -31,6 +31,7 @@ export const Cards = () => {
     onChangePortionSize,
     onChangeSort,
     orderBy,
+    portionSize,
   } = useCardFilter()
 
   console.log(data)
@@ -60,7 +61,7 @@ export const Cards = () => {
         variant={'searchDecoration'}
       />
 
-      {data && (
+      {data && data.items.length > 0 ? (
         <>
           <TableComponent
             setSort={onChangeSort}
@@ -68,18 +69,22 @@ export const Cards = () => {
             titles={columns}
             withOptions={isOwner}
           >
-            <TableCards cards={data.items} isOwner={isOwner} />
+            {data.items.map(items => {
+              return <TableCards cards={items} isOwner={isOwner} key={items.id} />
+            })}
           </TableComponent>
           <Pagination
             className={s.pagination}
             currentPage={+currentPage}
             onPageChange={onChangeCurrentPage}
             onValueChange={onChangePortionSize}
-            pageSize={data.pagination.itemsPerPage}
+            pageSize={+portionSize}
             placeholder={data.pagination.itemsPerPage.toString()}
             totalCount={data.pagination.totalItems}
           />
         </>
+      ) : (
+        <div className={s.noContent}>No content with these terms...</div>
       )}
     </div>
   )

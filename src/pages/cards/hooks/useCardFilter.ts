@@ -18,20 +18,29 @@ export const useCardFilter = () => {
 
   const { data } = useGetDecksByIDQuery({
     currentPage: +currentPage,
-    id: 'cls3s7drs035wrr2ufg2v1ik1',
+    id: 'clm9uty590gf3vo2qo2u80y81',
     itemsPerPage: +portionSize,
     orderBy: orderByString,
     question: debounceSearch,
   })
 
+  const changeSearchParamsHandler = (field: string, params: string) => {
+    if (!params) {
+      searchParams.delete(field)
+    } else {
+      searchParams.set(field, params)
+    }
+    setSearchParams(searchParams, { replace: true })
+  }
+
   const onChangeSort = (value: Sort) => {
-    searchParams.set('orderBy', JSON.stringify(value))
-    setSearchParams(searchParams)
+    if (!value || value?.key) {
+      changeSearchParamsHandler('orderBy', JSON.stringify(value))
+    }
   }
 
   const onChangeInputValue = (value: string) => {
-    searchParams.set('question', value)
-    setSearchParams(searchParams)
+    changeSearchParamsHandler('question', value)
   }
   const onChangeCurrentPage = (page: number) => {
     searchParams.set('currentPage', page.toString())
@@ -52,5 +61,6 @@ export const useCardFilter = () => {
     onChangePortionSize,
     onChangeSort,
     orderBy,
+    portionSize,
   }
 }
