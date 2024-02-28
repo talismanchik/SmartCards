@@ -1,11 +1,21 @@
 import { baseApi } from '@/services/baseApi'
-import { GetDeckByIDRArgs, GetDeckByIDResponse } from '@/services/cards/cards.types'
+import {
+  GetDeckArgs,
+  GetDeckByIDCardsResponse,
+  GetDeckByIDRCardsArgs,
+  GetDeckResponse,
+} from '@/services/cards/cards.types'
 
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      // eslint-disable-next-line no-undef
-      getDecksByID: builder.query<GetDeckByIDResponse, GetDeckByIDRArgs>({
+      getDeck: builder.query<GetDeckResponse, GetDeckArgs>({
+        providesTags: ['Decks'],
+        query: args => ({
+          url: `v1/decks/${args.id}`,
+        }),
+      }),
+      getDecksByIDCards: builder.query<GetDeckByIDCardsResponse, GetDeckByIDRCardsArgs>({
         providesTags: ['Decks'],
         query: ({ id, ...args }) => ({
           params: args ?? undefined,
@@ -16,4 +26,4 @@ export const cardsService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDecksByIDQuery } = cardsService
+export const { useGetDeckQuery, useGetDecksByIDCardsQuery } = cardsService

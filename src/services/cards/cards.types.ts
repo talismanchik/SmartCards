@@ -1,4 +1,4 @@
-export type GetDeckByIDRArgs = {
+export type GetDeckByIDRCardsArgs = {
   answer?: string
   currentPage?: number
   id: string
@@ -7,17 +7,17 @@ export type GetDeckByIDRArgs = {
   question?: string
 }
 
-export type GetDeckByIDResponse = {
-  items: DeckByIDItems[]
-  pagination: GetDeckByIDPagination
+export type GetDeckByIDCardsResponse = {
+  items: DeckByIDCardsItems[]
+  pagination: GetDeckByIDCardsPagination
 }
-export type GetDeckByIDPagination = {
+export type GetDeckByIDCardsPagination = {
   currentPage: number
   itemsPerPage: number
   totalItems: number
   totalPages: number
 }
-export type DeckByIDItems = {
+export type DeckByIDCardsItems = {
   answer: string
   answerImg: string
   answerVideo: string
@@ -31,4 +31,24 @@ export type DeckByIDItems = {
   shots: number
   updated: string
   userId: string
+}
+
+export type GetDeckArgs = {
+  id: string
+}
+
+export type GetDeckResponse = {
+  author: GetDeckAuthorResponse
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+export type GetDeckAuthorResponse = {
+  id: string
+  name: string
 }

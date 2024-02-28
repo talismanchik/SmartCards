@@ -2,7 +2,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
 import { useParsedOrderBy } from '@/components/hooks/useParsedOrderBy'
-import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
+import { useGetDeckQuery, useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
 
 export const useCardFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams({})
@@ -16,13 +16,19 @@ export const useCardFilter = () => {
 
   const { deckId } = useParams()
 
-  const { data } = useGetDecksByIDQuery({
+  const { data, isLoading } = useGetDecksByIDCardsQuery({
     currentPage: +currentPage,
     id: deckId || '',
     itemsPerPage: +portionSize,
     orderBy: orderBy,
     question: debounceSearch,
   })
+
+  const { data: deckData } = useGetDeckQuery({
+    id: deckId || '',
+  })
+
+  console.log(deckData)
 
   const changeFiltersParam = (field: string, value: null | string) => {
     const query = Object.fromEntries(searchParams)
@@ -52,7 +58,9 @@ export const useCardFilter = () => {
   return {
     currentPage,
     data,
+    deckData,
     inputSearch,
+    isLoading,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,

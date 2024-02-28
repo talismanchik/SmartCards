@@ -26,7 +26,9 @@ export const Cards = () => {
   const {
     currentPage,
     data,
+    deckData,
     inputSearch,
+    isLoading,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
@@ -35,15 +37,19 @@ export const Cards = () => {
     sort,
   } = useCardFilter()
 
-  console.log(data)
+  // console.log(data)
   const [isOpen, setIsOpen] = useState(false)
+
+  if (isLoading) {
+    return <h1>Loading... </h1>
+  }
 
   return (
     <div className={s.wrapper}>
       <LinkBack />
       <div className={s.titleButtonWrapper}>
         <Typography className={s.title} variant={'h1'}>
-          Название deck
+          {deckData?.name}
         </Typography>
         {isOwner ? (
           <Button>Add New Card</Button>
@@ -56,7 +62,11 @@ export const Cards = () => {
       </div>
 
       <div className={s.deckImage}>
-        <img alt={'deck-image'} src={defaultImage} />
+        {deckData?.cover ? (
+          <img alt={'question-image'} src={deckData?.cover} />
+        ) : (
+          <img alt={'default-image'} src={defaultImage} />
+        )}
       </div>
       <Input
         className={s.input}

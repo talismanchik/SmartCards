@@ -2,13 +2,13 @@ import { GradeStar } from '@/components/ui/gradeStar'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
-import { DeckByIDItems } from '@/services/cards/cards.types'
+import { DeckByIDCardsItems } from '@/services/cards/cards.types'
 
 import s from '../cards.module.scss'
 
 import defaultImage from '../../../assets/default.png'
 type Props = {
-  cards: DeckByIDItems
+  cards: DeckByIDCardsItems
   isOwner: boolean
 }
 export const TableCards = ({ cards, isOwner }: Props) => {
