@@ -31,6 +31,14 @@ export const useDecksFilter = () => {
       skip: !minMaxCards,
     }
   )
+
+  const onChangeSort = (key: string) => {
+    if (sort && sort.key === key) {
+      changeFiltersParam('orderBy', sort.direction === 'asc' ? `${sort.key}-desc` : null)
+    } else {
+      changeFiltersParam('orderBy', `${key}-asc`)
+    }
+  }
   const changeFiltersParam = (field: string, value: null | string) => {
     const query = Object.fromEntries(queryParams)
 
@@ -53,6 +61,7 @@ export const useDecksFilter = () => {
     minCardsCount,
     minMaxCards,
     minMaxCardsLoading,
+    onChangeSort,
     orderBy,
     queryParams,
     setQueryParams,
