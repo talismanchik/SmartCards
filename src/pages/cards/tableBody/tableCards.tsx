@@ -54,9 +54,9 @@ export const TableCards = ({ cards, isOwner }: Props) => {
             <div className={s.iconWrap}>
               <Icon className={s.editIcon} iconId={'edit'} />
             </div>
-            <div className={s.iconWrap}>
+            <button className={s.iconWrap}>
               <Icon className={s.trashIcon} iconId={'trash_outline'} />
-            </div>
+            </button>
           </div>
         </TableDataCell>
       )}
