@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import defaultImage from '@/assets/default.png'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
@@ -13,6 +15,11 @@ type props = {
 }
 
 export const TableDecks = ({ decks }: props) => {
+  const navigate = useNavigate()
+  const onLinkToCards = (id: string) => {
+    navigate(`/cards/${id}`)
+  }
+
   const styles = {
     iconWrapper: clsx(s.iconWrapper),
     nameWrapper: clsx(s.nameWrapper),
@@ -28,9 +35,8 @@ export const TableDecks = ({ decks }: props) => {
 
         return (
           <TableRow key={deck.id}>
-            <TableDataCell>
+            <TableDataCell onClick={() => onLinkToCards(deck.id)}>
               <span className={styles.nameWrapper}>
-                {/* eslint-disable-next-line no-undef */}
                 <img alt={'deck photo'} className={s.tableImage} src={defaultImage} />
                 <Typography variant={'body2'}>{deck.name}</Typography>
               </span>
