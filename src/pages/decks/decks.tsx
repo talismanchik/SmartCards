@@ -52,7 +52,6 @@ export const Decks = () => {
           Create Deck
         </Button>
       </div>
-
       <>
         <Filters />
         <TableComponent titles={titles} withOptions>

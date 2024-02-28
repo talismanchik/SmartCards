@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 
-import { useParsedOrderBy } from '@/components/hooks/useparsedOrderBy'
+import { useParsedOrderBy } from '@/components/hooks/useParsedOrderBy'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksService'
 
 export const useDecksFilter = () => {
