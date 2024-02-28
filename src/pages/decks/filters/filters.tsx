@@ -7,50 +7,30 @@ import { Slider } from '@/components/ui/slider'
 import { TabSwitcher } from '@/components/ui/tabSwitcher'
 import { Typography } from '@/components/ui/typography'
 import { tabSwitcherItems } from '@/pages/decks/decks'
+import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import clsx from 'clsx'
 
 import s from '@/pages/decks/decks.module.scss'
 
-type Props = {
-  changeFiltersParam: (field: string, value: null | string) => void
-  clearFilter: () => void
-  maxCardsCount: number
-  minMaxCards: number[]
-  nameValue: string
-}
-
-export const Filters = ({
-  changeFiltersParam,
-  clearFilter,
-  maxCardsCount,
-  minMaxCards,
-  nameValue,
-}: Props) => {
-  const [search, setSearch] = useState(nameValue)
-  const [cardsCount, setCardsCount] = useState(
-    minMaxCards[1] == 0 ? [0, maxCardsCount] : minMaxCards
-  )
+export const Filters = () => {
+  const { changeFiltersParam, clearFilter, deckName, maxCardsCount, minCardsCount, minMaxCards } =
+    useDecksFilter()
 
   const onChangeSearchInput = (value: string) => {
-    setSearch(value)
     changeFiltersParam('name', value)
   }
   const clearSearchField = () => {
-    setSearch('')
     changeFiltersParam('name', null)
   }
   const clearFiltersHandler = () => {
     clearFilter()
-    setSearch('')
-    setCardsCount([0, maxCardsCount])
   }
 
   const onChangeNumberOfCards = (numberOfCards: number[]) => {
-    setCardsCount(numberOfCards)
-    if (numberOfCards[0] !== cardsCount[0]) {
+    if (numberOfCards[0] !== +minCardsCount) {
       changeFiltersParam('minCardsCount', numberOfCards[0] + '')
     }
-    if (numberOfCards[1] !== cardsCount[1]) {
+    if (numberOfCards[1] !== +maxCardsCount) {
       changeFiltersParam('maxCardsCount', numberOfCards[1] + '')
     }
   }
@@ -73,7 +53,7 @@ export const Filters = ({
         clearField={clearSearchField}
         onValueChange={onChangeSearchInput}
         placeholder={'Input search'}
-        value={search}
+        value={deckName}
         variant={'searchDecoration'}
       />
       <TabSwitcher
@@ -84,9 +64,9 @@ export const Filters = ({
       />
       <Slider
         label={'Number of cards'}
-        maxValue={maxCardsCount}
+        maxValue={minMaxCards?.max}
         onValueChange={onChangeNumberOfCards}
-        values={cardsCount}
+        values={[+minCardsCount, +maxCardsCount]}
       />
       <Button className={styles.filterButton} onClick={clearFiltersHandler} variant={'secondary'}>
         <Icon iconId={'trash_outline'} />
