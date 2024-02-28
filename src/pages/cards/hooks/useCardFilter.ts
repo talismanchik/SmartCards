@@ -1,55 +1,50 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
-import { useOrderByString } from '@/components/hooks/useOrderByString'
-import { Sort } from '@/components/ui/table/tableComponent'
+import { useParsedOrderBy } from '@/components/hooks/useParsedOrderBy'
 import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
 
 export const useCardFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams({})
-  const orderBy = JSON.parse(searchParams.get('orderBy') || '""')
+  const orderBy = searchParams.get('orderBy')
   const inputSearch = searchParams.get('question') || ''
   const currentPage = searchParams.get('currentPage') || '1'
   const portionSize = searchParams.get('itemsPerPage') || '5'
+  const sort = useParsedOrderBy(orderBy)
 
   const debounceSearch = useDebounce(inputSearch, 500)
-
-  const orderByString = useOrderByString(orderBy)
 
   const { data } = useGetDecksByIDQuery({
     currentPage: +currentPage,
     id: 'clm9uty590gf3vo2qo2u80y81',
     itemsPerPage: +portionSize,
-    orderBy: orderByString,
+    orderBy: orderBy,
     question: debounceSearch,
   })
 
-  const changeSearchParamsHandler = (field: string, params: string) => {
-    if (!params) {
-      searchParams.delete(field)
-    } else {
-      searchParams.set(field, params)
-    }
-    setSearchParams(searchParams, { replace: true })
+  const changeFiltersParam = (field: string, value: null | string) => {
+    const query = Object.fromEntries(searchParams)
+
+    setSearchParams({ ...query, [field]: value ?? [] })
   }
 
-  const onChangeSort = (value: Sort) => {
-    if (!value || value?.key) {
-      changeSearchParamsHandler('orderBy', JSON.stringify(value))
+  const onChangeSort = (key: string) => {
+    if (sort && sort.key === key) {
+      changeFiltersParam('orderBy', sort.direction === 'asc' ? `${sort.key}-desc` : null)
+    } else {
+      changeFiltersParam('orderBy', `${key}-asc`)
     }
   }
 
   const onChangeInputValue = (value: string) => {
-    changeSearchParamsHandler('question', value)
+    changeFiltersParam('question', value)
   }
   const onChangeCurrentPage = (page: number) => {
-    searchParams.set('currentPage', page.toString())
-    setSearchParams(searchParams)
+    changeFiltersParam('currentPage', page.toString())
   }
 
   const onChangePortionSize = (portion: string) => {
-    searchParams.set('itemsPerPage', portion)
-    setSearchParams(searchParams)
+    changeFiltersParam('itemsPerPage', portion)
   }
 
   return {
@@ -60,7 +55,7 @@ export const useCardFilter = () => {
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
-    orderBy,
     portionSize,
+    sort,
   }
 }

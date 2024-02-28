@@ -31,8 +31,8 @@ export const Cards = () => {
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
-    orderBy,
     portionSize,
+    sort,
   } = useCardFilter()
 
   console.log(data)
@@ -70,8 +70,8 @@ export const Cards = () => {
       {data && data.items.length > 0 ? (
         <>
           <TableComponent
-            setSort={onChangeSort}
-            sort={orderBy}
+            onChangeSort={onChangeSort}
+            sort={sort}
             titles={columns}
             withOptions={isOwner}
           >

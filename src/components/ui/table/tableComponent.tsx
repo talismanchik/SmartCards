@@ -2,19 +2,18 @@ import { ReactNode } from 'react'
 
 import { Table, TableBody } from '@/components/ui/table/tableConstructor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
-import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import clsx from 'clsx'
 
 import s from './table.module.scss'
 
 type Props = {
   children?: ReactNode
-  //setSort: (sort: Sort) => void
-  //sort: Sort
+  onChangeSort: (key: string) => void
+  sort: Sort
   titles: Column[]
   withOptions?: boolean
 }
-export const TableComponent = ({ children, titles, withOptions }: Props) => {
+export const TableComponent = ({ children, onChangeSort, sort, titles, withOptions }: Props) => {
   const classNames = {
     iconContainer: clsx(s.iconContainer),
     table: clsx(s.table),
@@ -22,30 +21,11 @@ export const TableComponent = ({ children, titles, withOptions }: Props) => {
     tableDataCell: clsx(s.tableDataCell),
     tableRow: clsx(s.tableRow),
   }
-  const { changeFiltersParam, sort } = useDecksFilter()
-
-  const handleSubmit = (key: string) => {
-    if (sort && sort.key === key) {
-      changeFiltersParam('orderBy', sort.direction === 'asc' ? `${sort.key}-desc` : null)
-    } else {
-      changeFiltersParam('orderBy', `${key}-asc`)
-    }
-  }
-  // const handleSubmit = (key: string) => {
-  //   if (sort && sort.key === key) {
-  //     setSort(sort.direction === 'asc' ? { direction: 'desc', key } : null)
-  //   } else {
-  //     setSort({
-  //       direction: 'asc',
-  //       key,
-  //     })
-  //   }
-  // }
 
   return (
     <Table className={classNames.table}>
       <TableHeader
-        onHandleSubmit={handleSubmit}
+        onHandleSubmit={onChangeSort}
         sort={sort}
         titles={titles}
         withOptions={withOptions}

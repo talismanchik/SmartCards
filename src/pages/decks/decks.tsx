@@ -20,6 +20,8 @@ export const Decks = () => {
     getDecksError,
     itemsPerPage,
     minMaxCardsLoading,
+    onChangeSort,
+    sort,
   } = useDecksFilter()
 
   const pagination = getDecksData?.pagination
@@ -54,7 +56,7 @@ export const Decks = () => {
       </div>
       <>
         <Filters />
-        <TableComponent titles={titles} withOptions>
+        <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
           {getDecksData && <TableDecks decks={getDecksData.items} />}
         </TableComponent>
         {pagination && (
