@@ -63,10 +63,10 @@ export const Filters = () => {
         value={tab}
       />
       <Slider
+        defaultValues={[+minCardsCount, +maxCardsCount]}
         label={'Number of cards'}
         maxValue={minMaxCards?.max}
-        onValueChange={onChangeNumberOfCards}
-        values={[+minCardsCount, +maxCardsCount]}
+        onValueCommit={onChangeNumberOfCards}
       />
       <Button className={styles.filterButton} onClick={clearFiltersHandler} variant={'secondary'}>
         <Icon iconId={'trash_outline'} />

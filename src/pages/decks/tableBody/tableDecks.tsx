@@ -36,10 +36,10 @@ export const TableDecks = ({ decks }: props) => {
         return (
           <TableRow key={deck.id}>
             <TableDataCell onClick={() => onLinkToCards(deck.id)}>
-              <span className={styles.nameWrapper}>
+              <div className={styles.nameWrapper}>
                 <img alt={'deck photo'} className={s.tableImage} src={defaultImage} />
                 <Typography variant={'body2'}>{deck.name}</Typography>
-              </span>
+              </div>
             </TableDataCell>
             <TableDataCell>
               <Typography variant={'body2'}>{deck.cardsCount}</Typography>
