@@ -14,6 +14,7 @@ type Props = {
   children: ReactNode
   className?: string
   onOpenChange: (value: boolean) => void
+  onSubmit: () => void
   open: boolean
   title: string
 }
