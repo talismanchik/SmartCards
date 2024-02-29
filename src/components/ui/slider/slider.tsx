@@ -1,4 +1,4 @@
-import { KeyboardEvent, RefObject, useRef, useState } from 'react'
+import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react'
 
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
@@ -11,6 +11,8 @@ export type SliderComponentProps = {
   label?: string
   maxValue?: number
   minValue?: number
+  onChangeLeftCardsCount?: (value: number) => void
+  onChangeRightCardsCount?: (value: number) => void
   onValueCommit: (values: number[]) => void
 }
 
@@ -22,21 +24,31 @@ export const Slider = ({
   onValueCommit,
 }: SliderComponentProps) => {
   const [values, setValues] = useState(defaultValues)
-  const [leftInput, setLeftInput] = useState(values[0])
+  const [leftInput, setLeftInput] = useState(defaultValues[0])
   const leftInputRef: RefObject<HTMLInputElement> = useRef(null)
-  const [rightInput, setRightInput] = useState(values[1])
-  const rightInputRef: RefObject<HTMLInputElement> = useRef(null)
-  const onChangeValues = (value: number, side: 'left' | 'right') => {
-    const arr = values.slice()
-    const index = side === 'left' ? 0 : 1
+  const [rightInput, setRightInput] = useState(defaultValues[1])
 
-    arr[index] = Math.min(value, maxValue ?? defaultValues[1])
-    arr.sort((a, b) => a - b)
-    setValues(arr)
-  }
+  useEffect(() => {
+    setValues(defaultValues)
+    setLeftInput(defaultValues[0])
+    setRightInput(defaultValues[1])
+  }, [defaultValues])
+
+  const rightInputRef: RefObject<HTMLInputElement> = useRef(null)
+
   const onValueCommitHandler = (value: number, side: 'left' | 'right') => {
-    onValueCommit(side === 'left' ? [value, values[1]] : [values[0], value])
-    onChangeValues(value, side)
+    //debugger
+    const correctValue = Math.min(value, maxValue ?? values[1])
+    const arr = side === 'left' ? [correctValue, rightInput] : [leftInput, correctValue]
+
+    arr.sort((a, b) => a - b)
+
+    setValues(arr)
+    setLeftInput(arr[0])
+    setRightInput(arr[1])
+    //arr[1] !== defaultValues[1] && onChangeRightCardsCount(arr[1])
+    //arr[0] !== defaultValues[0] && onChangeLeftCardsCount(arr[0])
+    onValueCommit(arr)
   }
 
   const onChangeSliderValues = (value: number[]) => {

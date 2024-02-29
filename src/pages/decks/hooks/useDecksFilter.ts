@@ -50,11 +50,17 @@ export const useDecksFilter = () => {
 
     setQueryParams({ ...query, [field]: value ?? [] })
   }
+  const change = (arr: number[]) => {
+    const query = Object.fromEntries(queryParams)
+
+    setQueryParams({ ...query, maxCardsCount: arr[1].toString(), minCardsCount: arr[0].toString() })
+  }
   const clearFilter = () => {
     setQueryParams({})
   }
 
   return {
+    change,
     changeFiltersParam,
     clearFilter,
     currentPage,

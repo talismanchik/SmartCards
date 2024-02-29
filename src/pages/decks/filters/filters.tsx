@@ -13,8 +13,15 @@ import clsx from 'clsx'
 import s from '@/pages/decks/decks.module.scss'
 
 export const Filters = () => {
-  const { changeFiltersParam, clearFilter, deckName, maxCardsCount, minCardsCount, minMaxCards } =
-    useDecksFilter()
+  const {
+    change,
+    changeFiltersParam,
+    clearFilter,
+    deckName,
+    maxCardsCount,
+    minCardsCount,
+    minMaxCards,
+  } = useDecksFilter()
 
   const onChangeSearchInput = (value: string) => {
     changeFiltersParam('name', value)
@@ -27,12 +34,13 @@ export const Filters = () => {
   }
 
   const onChangeNumberOfCards = (numberOfCards: number[]) => {
-    if (numberOfCards[0] !== +minCardsCount) {
+    change(numberOfCards)
+    /* if (numberOfCards[0] !== +minCardsCount) {
       changeFiltersParam('minCardsCount', numberOfCards[0] + '')
     }
     if (numberOfCards[1] !== +maxCardsCount) {
       changeFiltersParam('maxCardsCount', numberOfCards[1] + '')
-    }
+    }*/
   }
 
   // ........................................
