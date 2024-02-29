@@ -10,11 +10,11 @@ import clsx from 'clsx'
 import s from './Modal.module.scss'
 
 type Props = {
-  buttons: ModalButton[]
+  buttons?: ModalButton[]
   children: ReactNode
   className?: string
   onOpenChange: (value: boolean) => void
-  onSubmit: () => void
+  // onSubmit: () => void
   open: boolean
   title: string
 }
