@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -6,10 +7,13 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { AddNewDeck } from '@/features/deck/addNewDeck/addNewDeck'
+import { AddNewDeck } from '@/features/deck/addNewDeck'
+import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
+import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
+import { DeleteDeckArgs } from '@/services/decks/decks.types'
 
 import s from './cards.module.scss'
 
@@ -23,20 +27,35 @@ import defaultImage from '../../assets/default.png'
 export const Cards = () => {
   const isOwner = false
 
+  const { deckId } = useParams()
+
   const {
     currentPage,
-    data,
+    debounceSearch,
     inputSearch,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
+    orderBy,
     portionSize,
     sort,
   } = useCardFilter()
 
+  const { data } = useGetDecksByIDQuery({
+    currentPage: +currentPage,
+    id: deckId || '',
+    itemsPerPage: +portionSize,
+    orderBy: orderBy,
+    question: debounceSearch,
+  })
+
   console.log(data)
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const deleteId: DeleteDeckArgs = {
+    id: 'clt8pwit600bo2l2gau6x8nyp', //deckId
+  }
 
   return (
     <div className={s.wrapper}>
@@ -70,6 +89,15 @@ export const Cards = () => {
         value={inputSearch}
         variant={'searchDecoration'}
       />
+      <div>
+        <Button onClick={() => setIsOpenDelete(true)}>Delete Deck</Button>
+        <DeleteDeck
+          deckId={deleteId}
+          isOpen={isOpenDelete}
+          onOpenChange={value => setIsOpenDelete(value)}
+          title={'Delete Deck'}
+        />
+      </div>
 
       {data && data.items.length > 0 ? (
         <>

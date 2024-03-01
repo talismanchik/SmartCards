@@ -1,8 +1,7 @@
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
 import { useParsedOrderBy } from '@/components/hooks/useParsedOrderBy'
-import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
 
 export const useCardFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams({})
@@ -13,16 +12,6 @@ export const useCardFilter = () => {
   const sort = useParsedOrderBy(orderBy)
 
   const debounceSearch = useDebounce(inputSearch, 500)
-
-  const { deckId } = useParams()
-
-  const { data } = useGetDecksByIDQuery({
-    currentPage: +currentPage,
-    id: deckId || '',
-    itemsPerPage: +portionSize,
-    orderBy: orderBy,
-    question: debounceSearch,
-  })
 
   const changeFiltersParam = (field: string, value: null | string) => {
     const query = Object.fromEntries(searchParams)
@@ -51,12 +40,13 @@ export const useCardFilter = () => {
 
   return {
     currentPage,
-    data,
+    debounceSearch,
     inputSearch,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
+    orderBy,
     portionSize,
     sort,
   }

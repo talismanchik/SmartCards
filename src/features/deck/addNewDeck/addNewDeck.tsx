@@ -1,4 +1,4 @@
-import { DeckForm } from '@/features/deck/deckForm/deckForm'
+import { DeckForm } from '@/features/deck/deckForm'
 import { CreateDeckArgs } from '@/services/decks/decks.types'
 import { useCreateDeckMutation } from '@/services/decks/decksService'
 
