@@ -50,7 +50,7 @@ export const Cards = () => {
         ) : (
           <>
             <Button onClick={() => setIsOpen(true)}>Learn Cards</Button>
-            <AddNewDeck isOpen={isOpen} onOpenChange={() => setIsOpen(false)} />
+            <AddNewDeck isOpen={isOpen} onOpenChange={value => setIsOpen(value)} />
           </>
         )}
       </div>

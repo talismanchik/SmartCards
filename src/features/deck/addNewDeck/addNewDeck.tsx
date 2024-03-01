@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox'
@@ -14,12 +14,12 @@ import s from './addNewDeck.module.scss'
 
 type AddNewDeckProps = {
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: (value: boolean) => void
 }
 export type AddNewDeckFormValues = z.infer<typeof addNewDeckSchema>
 
 const addNewDeckSchema = z.object({
-  isPrivate: z.boolean(),
+  isPrivate: z.boolean().optional().default(false),
   name: z.string(),
 })
 
@@ -28,11 +28,8 @@ export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<AddNewDeckFormValues>({
-    defaultValues: {
-      isPrivate: false,
-      name: '',
-    },
     resolver: zodResolver(addNewDeckSchema),
   })
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -49,11 +46,14 @@ export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
 
   const imageUrl = cover ? URL.createObjectURL(cover as File) : undefined
   const onSubmit = (data: AddNewDeckFormValues) => {
+    onOpenChange(false)
     const formData = new FormData()
 
     formData.append('name', data.name)
     formData.append('isPrivate', data.isPrivate.toString())
     cover && formData.append('cover', cover || '')
+    setCover(null)
+    reset()
 
     formData.forEach((value, key) => {
       console.log(key, value)
@@ -70,13 +70,7 @@ export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
     <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={'Add New Deck'}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput className={s.input} control={control} label={'Name Deck'} name={'name'} />
-        {cover && (
-          <img
-            alt={'cover'}
-            src={imageUrl}
-            style={{ height: '200px', objectFit: 'cover', width: '100%' }}
-          />
-        )}
+        {cover && <img alt={'cover'} className={s.coverImage} src={imageUrl} />}
         <Button
           className={s.button}
           fullWidth
@@ -84,13 +78,28 @@ export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
           type={'button'}
           variant={'secondary'}
         >
-          <input onChange={handleFileChange} ref={fileInputRef} type={'file'} />
+          <InputFile handleFileChange={handleFileChange} ref={fileInputRef} />
           <Icon iconId={'image_outline'} />
           <Typography variant={'subtitle2'}>Upload Image</Typography>
         </Button>
         <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
-        <Button type={'submit'}>Submit</Button>
+        <div className={s.buttonWrapper}>
+          <Button onClick={() => onOpenChange(false)} type={'button'} variant={'secondary'}>
+            Cancel
+          </Button>
+          <Button type={'submit'}>Add New Deck</Button>
+        </div>
       </form>
     </Modal>
   )
 }
+
+type InputFileProps = {
+  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void
+} & ComponentPropsWithoutRef<'input'>
+
+export const InputFile = forwardRef<HTMLInputElement, InputFileProps>(
+  ({ handleFileChange }, ref) => {
+    return <input onChange={handleFileChange} ref={ref} style={{ display: 'none' }} type={'file'} />
+  }
+)
