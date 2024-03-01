@@ -33,7 +33,11 @@ export const useCardFilter = () => {
   const changeFiltersParam = (field: string, value: null | string) => {
     const query = Object.fromEntries(searchParams)
 
-    setSearchParams({ ...query, [field]: value ?? [] })
+    if (field !== 'currentPage') {
+      setSearchParams({ ...query, currentPage: '1', [field]: value ?? [] })
+    } else {
+      setSearchParams({ ...query, [field]: value ?? [] })
+    }
   }
 
   const onChangeSort = (key: string) => {
