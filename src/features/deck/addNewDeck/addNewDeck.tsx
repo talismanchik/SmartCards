@@ -1,10 +1,11 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox'
 import { ControlledInput } from '@/components/controlled/controlledInput'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/Icon'
+import { InputFile } from '@/components/ui/inputFile'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -93,13 +94,3 @@ export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
     </Modal>
   )
 }
-
-type InputFileProps = {
-  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void
-} & ComponentPropsWithoutRef<'input'>
-
-export const InputFile = forwardRef<HTMLInputElement, InputFileProps>(
-  ({ handleFileChange }, ref) => {
-    return <input onChange={handleFileChange} ref={ref} style={{ display: 'none' }} type={'file'} />
-  }
-)
