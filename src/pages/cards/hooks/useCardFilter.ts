@@ -62,6 +62,7 @@ export const useCardFilter = () => {
   return {
     currentPage,
     data,
+    debounceSearch,
     deckData,
     inputSearch,
     isLoading,
@@ -69,6 +70,7 @@ export const useCardFilter = () => {
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
+    orderBy,
     portionSize,
     sort,
   }

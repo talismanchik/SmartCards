@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
-import { DeleteDeckArgs } from '@/services/decks/decks.types'
+import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 import { useDeleteDeckMutation } from '@/services/decks/decksService'
 
 import s from './deleteDeck.module.scss'
 
 type DeleteDeckProps = {
-  deckId: DeleteDeckArgs
+  deckId: UpdateDeleteDeckArgs
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   title: string
