@@ -9,7 +9,7 @@ type AddNewDeckProps = {
 }
 
 export const AddNewDeck = ({ isOpen, onOpenChange, title }: AddNewDeckProps) => {
-  const [createDeck] = useCreateDeckMutation({})
+  const [createDeck] = useCreateDeckMutation()
   const onSubmitForm = (data: CreateDeckArgs) => {
     createDeck(data)
     console.log(data)

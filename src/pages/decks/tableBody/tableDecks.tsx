@@ -37,7 +37,11 @@ export const TableDecks = ({ decks }: props) => {
           <TableRow key={deck.id}>
             <TableDataCell onClick={() => onLinkToCards(deck.id)}>
               <div className={styles.nameWrapper}>
-                <img alt={'deck photo'} className={s.tableImage} src={defaultImage} />
+                {deck.cover ? (
+                  <img alt={'question-image'} className={s.tableImage} src={deck.cover} />
+                ) : (
+                  <img alt={'default-image'} className={s.tableImage} src={defaultImage} />
+                )}
                 <Typography variant={'body2'}>{deck.name}</Typography>
               </div>
             </TableDataCell>

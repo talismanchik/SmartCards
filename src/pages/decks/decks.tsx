@@ -1,12 +1,14 @@
+import { useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
 import { TabItem } from '@/components/ui/tabSwitcher'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
+import { AddNewDeck } from '@/features/deck/addNewDeck'
 import { Filters } from '@/pages/decks/filters/filters'
 import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import { TableDecks } from '@/pages/decks/tableBody/tableDecks'
-import { useCreateDeckMutation } from '@/services/decks/decksService'
 import clsx from 'clsx'
 
 import s from './decks.module.scss'
@@ -24,8 +26,8 @@ export const Decks = () => {
     sort,
   } = useDecksFilter()
 
+  const [isOpen, setIsOpen] = useState(false)
   const pagination = getDecksData?.pagination
-  const [createDeck, { isLoading: isDeckBingCreated }] = useCreateDeckMutation()
 
   const styles = {
     filterButton: clsx(s.filterButton),
@@ -45,14 +47,14 @@ export const Decks = () => {
     <>
       <div className={styles.topRow}>
         <Typography variant={'h1'}>Decks list</Typography>
-        <Button
-          disabled={isDeckBingCreated}
-          onClick={() => {
-            createDeck({ name: '🚀 newDeck!' })
-          }}
-        >
-          Create Deck
-        </Button>
+        <>
+          <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>
+          <AddNewDeck
+            isOpen={isOpen}
+            onOpenChange={value => setIsOpen(value)}
+            title={'Add New Deck'}
+          />
+        </>
       </div>
       <>
         <Filters />
