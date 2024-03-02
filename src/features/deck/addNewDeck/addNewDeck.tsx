@@ -1,5 +1,4 @@
 import { DeckForm } from '@/features/deck/deckForm'
-import { CreateDeckArgs } from '@/services/decks/decks.types'
 import { useCreateDeckMutation } from '@/services/decks/decksService'
 
 type AddNewDeckProps = {
@@ -10,9 +9,8 @@ type AddNewDeckProps = {
 
 export const AddNewDeck = ({ isOpen, onOpenChange, title }: AddNewDeckProps) => {
   const [createDeck] = useCreateDeckMutation()
-  const onSubmitForm = (data: CreateDeckArgs) => {
+  const onSubmitForm = (data: FormData) => {
     createDeck(data)
-    console.log(data)
   }
 
   return (

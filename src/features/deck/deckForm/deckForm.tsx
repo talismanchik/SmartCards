@@ -23,7 +23,7 @@ type AddNewDeckFormProps = {
   deck?: ChangeDeckProps
   isOpen: boolean
   onOpenChange: (value: boolean) => void
-  onSubmitForm: (data: CreateDeckArgs) => void
+  onSubmitForm: (data: FormData) => void
   title: string
 }
 export type AddNewDeckFormValues = z.infer<typeof addNewDeckFormSchema>
@@ -45,6 +45,8 @@ export const DeckForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewDe
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [cover, setCover] = useState<File | null | string>(null)
 
+  console.log(cover)
+
   console.log(errors)
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,28 +56,28 @@ export const DeckForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewDe
     console.log(selectedFile)
   }
 
-  const imageUrl = cover ? URL.createObjectURL(cover as File) : undefined
-  const onSubmit = (data: CreateDeckArgs) => {
-    onOpenChange(false)
-    const formData = new FormData()
-
-    cover && formData.append('cover', cover || '')
-    const newData = {
-      cover: formData,
-      isPrivate: data.isPrivate,
-      name: data.name,
-    }
-
-    setCover(null)
-    reset()
-
-    onSubmitForm(newData)
-  }
-
   const openFileInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
     }
+  }
+
+  const imageUrl = cover ? URL.createObjectURL(cover as File) : undefined
+
+  const onSubmit = (data: CreateDeckArgs) => {
+    onOpenChange(false)
+    const formData = new FormData()
+
+    if (cover instanceof File) {
+      formData.append('cover', cover)
+    }
+    formData.append('name', data.name)
+    formData.append('isPrivate', data.isPrivate + '')
+
+    setCover(null)
+    reset()
+
+    onSubmitForm(formData)
   }
 
   const onClose = () => {
