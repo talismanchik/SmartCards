@@ -7,7 +7,6 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { AddNewDeck } from '@/features/deck/addNewDeck'
 import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
@@ -53,7 +52,6 @@ export const Cards = () => {
   })
 
   console.log(data)
-  const [isOpen, setIsOpen] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const deleteId: UpdateDeleteDeckArgs = {
@@ -68,15 +66,6 @@ export const Cards = () => {
           {deckData?.name}
         </Typography>
         {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
-
-        <>
-          <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>
-          <AddNewDeck
-            isOpen={isOpen}
-            onOpenChange={value => setIsOpen(value)}
-            title={'Add New Deck'}
-          />
-        </>
       </div>
 
       <div className={s.deckImage}>

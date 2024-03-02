@@ -13,7 +13,7 @@ type DeleteDeckProps = {
   title: string
 }
 export const DeleteDeck = ({ deckId, isOpen, onOpenChange, title }: DeleteDeckProps) => {
-  const [deleteDeckById] = useDeleteDeckMutation({})
+  const [deleteDeckById] = useDeleteDeckMutation()
   const onSubmitDeleteDeck = () => {
     deleteDeckById(deckId)
     onOpenChange(false)
