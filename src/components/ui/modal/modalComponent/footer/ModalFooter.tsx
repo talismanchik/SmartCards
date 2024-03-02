@@ -5,14 +5,14 @@ import clsx from 'clsx'
 import s from './ModalFooter.module.scss'
 
 type Props = {
-  buttons: ModalButton[]
+  buttons?: ModalButton[]
 }
 export const ModalFooter = ({ buttons }: Props) => {
   const classNames = {
     root: clsx(s.root),
   }
 
-  const buttonMarkup = buttons.map((button, index) => {
+  const buttonMarkup = buttons?.map((button, index) => {
     return (
       <Button fullWidth={button.fullWidth} key={index} variant={button.variant}>
         {button.title}

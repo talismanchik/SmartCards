@@ -35,11 +35,11 @@ export type GetMinMaxCards = {
 }
 
 export type CreateDeckArgs = {
-  cover?: File | null
+  cover?: FormData | null
   isPrivate?: boolean
   name: string
 }
 
-export type DeleteDeckArgs = {
+export type UpdateDeleteDeckArgs = {
   id: string
 }
