@@ -33,6 +33,7 @@ export const Cards = () => {
   const {
     currentPage,
     debounceSearch,
+    deckData,
     inputSearch,
     onChangeCurrentPage,
     onChangeInputValue,
@@ -64,7 +65,7 @@ export const Cards = () => {
       <LinkBack />
       <div className={s.titleButtonWrapper}>
         <Typography className={s.title} variant={'h1'}>
-          Название deck
+          {deckData?.name}
         </Typography>
         {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
 
@@ -79,7 +80,11 @@ export const Cards = () => {
       </div>
 
       <div className={s.deckImage}>
-        <img alt={'deck-image'} src={defaultImage} />
+        {deckData?.cover ? (
+          <img alt={'question-image'} src={deckData?.cover} />
+        ) : (
+          <img alt={'default-image'} src={defaultImage} />
+        )}
       </div>
       <Input
         className={s.input}
