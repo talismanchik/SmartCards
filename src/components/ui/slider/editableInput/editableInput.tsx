@@ -1,12 +1,21 @@
-import { ChangeEvent, KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentProps,
+  KeyboardEvent,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import { Input } from '@/components/ui/input'
+
 type Props = {
   className?: string
-  onChange: (title: string) => void
+  onValueChange: (title: string) => void
   value: string
-}
-export const EditableInput = ({ className, onChange, value }: Props) => {
+} & ComponentProps<'input'>
+export const EditableInput = ({ className, onValueChange, value }: Props) => {
   const [inputValue, setInputValue] = useState(value)
   const inputRef: RefObject<HTMLInputElement> = useRef(null)
 
@@ -19,7 +28,7 @@ export const EditableInput = ({ className, onChange, value }: Props) => {
   }
 
   const onBlurInput = () => {
-    onChange(inputValue)
+    onValueChange(inputValue)
   }
   const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key == 'Enter' && inputRef.current) {

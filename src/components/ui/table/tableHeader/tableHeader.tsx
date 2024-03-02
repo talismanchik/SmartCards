@@ -17,14 +17,14 @@ export const TableHeader = ({ onHandleSubmit, sort, titles, withOptions }: Props
     rotateIcon: clsx(sort?.direction === 'desc' ? s.rotateIcon : ''),
     sortIconContainer: clsx(s.sortIconContainer),
     tableCell: clsx(s.tableCell),
-    tableCellForOptions: clsx(s.tableCell, s.notActive),
+    tableCellForOptions: clsx(s.tableCell, s.notActive, s.rightAlign, s.optionsStyle),
     tableHead: clsx(s.tableHead),
     tableRow: clsx(s.tableRow),
   }
   const titleMarkup = titles.map(item => {
     return (
       <TableCell
-        className={classNames.tableCell}
+        className={clsx(classNames.tableCell, [item.style])}
         key={item.key}
         onClick={() => onHandleSubmit(item.key)}
       >

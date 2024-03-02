@@ -1,24 +1,26 @@
-import { Modal } from '@/components/ui/modal/Modal'
-import { ModalButton } from '@/components/ui/modal/modalComponent/footer/ModalFooter'
+import { DeckForm } from '@/features/deck/deckForm'
+import { CreateDeckArgs } from '@/services/decks/decks.types'
+import { useCreateDeckMutation } from '@/services/decks/decksService'
 
 type AddNewDeckProps = {
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: (value: boolean) => void
+  title: string
 }
-export const AddNewDeck = ({ isOpen, onOpenChange }: AddNewDeckProps) => {
-  const buttons: ModalButton[] = [
-    {
-      title: 'Add New Pack',
-    },
-    {
-      title: 'Cancel',
-      variant: 'secondary',
-    },
-  ]
+
+export const AddNewDeck = ({ isOpen, onOpenChange, title }: AddNewDeckProps) => {
+  const [createDeck] = useCreateDeckMutation({})
+  const onSubmitForm = (data: CreateDeckArgs) => {
+    createDeck(data)
+    console.log(data)
+  }
 
   return (
-    <Modal buttons={buttons} onOpenChange={onOpenChange} open={isOpen} title={'Add New Deck'}>
-      Modal
-    </Modal>
+    <DeckForm
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      onSubmitForm={onSubmitForm}
+      title={title}
+    />
   )
 }

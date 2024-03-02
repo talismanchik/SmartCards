@@ -37,6 +37,7 @@ export const TableComponent = ({ children, onChangeSort, sort, titles, withOptio
 
 export type Column = {
   key: string
+  style?: string
   title: string
 }
 export type Deck = {

@@ -78,18 +78,22 @@ export const Decks = () => {
 const titles: Column[] = [
   {
     key: 'name',
+    style: s.nameStyle,
     title: 'Name',
   },
   {
     key: 'cardsCount',
+    style: s.cardsCountStyle,
     title: 'Cards',
   },
   {
     key: 'updated',
+    style: s.updatedStyle,
     title: 'Last Updated',
   },
   {
     key: 'created',
+    style: s.createdStyle,
     title: 'Created by',
   },
 ]
