@@ -16,6 +16,6 @@ export const Default = {
   render() {
     const [value, setValue] = useState([0, 100])
 
-    return <Slider label={'slider'} onValueChange={setValue} values={value} />
+    return <Slider defaultValues={value} label={'slider'} onValueCommit={setValue} />
   },
 }
