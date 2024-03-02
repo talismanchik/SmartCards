@@ -14,7 +14,7 @@ import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetDecksByIDQuery } from '@/services/cards/cardsService'
-import { DeleteDeckArgs } from '@/services/decks/decks.types'
+import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 
 import s from './cards.module.scss'
 
@@ -55,7 +55,7 @@ export const Cards = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
-  const deleteId: DeleteDeckArgs = {
+  const deleteId: UpdateDeleteDeckArgs = {
     id: 'clt9mxg8u00pd2l2gi9mlnei3', //deckId
   }
 

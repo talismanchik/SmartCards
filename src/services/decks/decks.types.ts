@@ -40,6 +40,6 @@ export type CreateDeckArgs = {
   name: string
 }
 
-export type DeleteDeckArgs = {
+export type UpdateDeleteDeckArgs = {
   id: string
 }

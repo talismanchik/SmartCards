@@ -14,7 +14,13 @@ import { z } from 'zod'
 
 import s from './deckForm.module.scss'
 
+type ChangeDeckProps = {
+  cover: null | string
+  isPrivate: boolean
+  name: string
+}
 type AddNewDeckFormProps = {
+  deck?: ChangeDeckProps
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onSubmitForm: (data: CreateDeckArgs) => void
