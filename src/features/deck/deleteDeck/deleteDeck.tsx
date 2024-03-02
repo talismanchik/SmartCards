@@ -14,8 +14,9 @@ type DeleteDeckProps = {
 }
 export const DeleteDeck = ({ deckId, isOpen, onOpenChange, title }: DeleteDeckProps) => {
   const [deleteDeckById] = useDeleteDeckMutation({})
-  const deleteDeckHandler = () => {
+  const onSubmitDeleteDeck = () => {
     deleteDeckById(deckId)
+    onOpenChange(false)
   }
   const onClose = () => {
     onOpenChange(false)
@@ -30,7 +31,7 @@ export const DeleteDeck = ({ deckId, isOpen, onOpenChange, title }: DeleteDeckPr
         <Button onClick={onClose} variant={'secondary'}>
           Cancel
         </Button>
-        <Button onClick={deleteDeckHandler}>{title}</Button>
+        <Button onClick={onSubmitDeleteDeck}>{title}</Button>
       </div>
     </Modal>
   )
