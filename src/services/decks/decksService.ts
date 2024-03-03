@@ -39,9 +39,10 @@ export const decksService = baseApi.injectEndpoints({
           url: `v2/decks/min-max-cards`,
         }),
       }),
-      updateDeck: builder.mutation<Deck, UpdateDeleteDeckArgs>({
+      updateDeck: builder.mutation<Deck, { body: FormData; id: string }>({
         invalidatesTags: ['Decks'],
         query: args => ({
+          body: args.body,
           method: 'PATCH',
           url: `v1/decks/${args.id}`,
         }),
