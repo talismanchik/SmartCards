@@ -6,6 +6,7 @@ import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import { DeleteDeck } from '@/features/deck/deleteDeck'
+import { UpdateDeck } from '@/features/deck/updateDeck'
 import { Deck } from '@/services/decks/decks.types'
 import clsx from 'clsx'
 
@@ -17,6 +18,7 @@ type props = {
 
 export const TableDecks = ({ deck }: props) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const navigate = useNavigate()
   const onLinkToCards = (id: string) => {
     navigate(`/cards/${id}`)
@@ -52,9 +54,21 @@ export const TableDecks = ({ deck }: props) => {
       </TableDataCell>
       <TableDataCell>
         <div className={s.iconContainer}>
-          <button className={styles.iconWrapper}>
-            <Icon iconId={'edit_outline'} />
-          </button>
+          <div>
+            <button className={styles.iconWrapper} onClick={() => setIsOpenUpdate(true)}>
+              <Icon iconId={'edit_outline'} />
+            </button>
+            <UpdateDeck
+              cover={deck.cover}
+              id={deck.id}
+              isOpen={isOpenUpdate}
+              isPrivate={deck.isPrivate}
+              name={deck.name}
+              onOpenChange={value => setIsOpenUpdate(value)}
+              title={'Update Deck'}
+            />
+          </div>
+
           <a className={styles.iconWrapper}>
             <Icon iconId={'play_circle_outline'} />
           </a>

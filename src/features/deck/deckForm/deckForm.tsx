@@ -8,19 +8,15 @@ import { Icon } from '@/components/ui/icon/Icon'
 import { InputFile } from '@/components/ui/inputFile'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
+import { EditValues } from '@/features/deck/updateDeck'
 import { CreateDeckArgs } from '@/services/decks/decks.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './deckForm.module.scss'
 
-type ChangeDeckProps = {
-  cover: null | string
-  isPrivate: boolean
-  name: string
-}
 type AddNewDeckFormProps = {
-  deck?: ChangeDeckProps
+  editValues?: EditValues
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onSubmitForm: (data: FormData) => void
@@ -33,21 +29,22 @@ const addNewDeckFormSchema = z.object({
   name: z.string(),
 })
 
-export const DeckForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewDeckFormProps) => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm<AddNewDeckFormValues>({
+export const DeckForm = ({
+  editValues,
+  isOpen,
+  onOpenChange,
+  onSubmitForm,
+  title,
+}: AddNewDeckFormProps) => {
+  const { control, handleSubmit, reset } = useForm<AddNewDeckFormValues>({
+    defaultValues: {
+      isPrivate: editValues?.isPrivate || false,
+      name: editValues?.name || '',
+    },
     resolver: zodResolver(addNewDeckFormSchema),
   })
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [cover, setCover] = useState<File | null | string>(null)
-
-  console.log(cover)
-
-  console.log(errors)
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
@@ -62,7 +59,7 @@ export const DeckForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewDe
     }
   }
 
-  const imageUrl = cover ? URL.createObjectURL(cover as File) : undefined
+  const imageUrl = cover ? URL.createObjectURL(cover as File) : editValues?.cover
 
   const onSubmit = (data: CreateDeckArgs) => {
     onOpenChange(false)
@@ -88,7 +85,7 @@ export const DeckForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewDe
     <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput className={s.input} control={control} label={'Name Deck'} name={'name'} />
-        {cover && <img alt={'cover'} className={s.coverImage} src={imageUrl} />}
+        {imageUrl && <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />}
         <Button
           className={s.button}
           fullWidth

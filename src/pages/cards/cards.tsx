@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -7,7 +6,6 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { UpdateDeck } from '@/features/deck/updateDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
@@ -51,7 +49,6 @@ export const Cards = () => {
   })
 
   console.log(data)
-  const [isOpenUpdate, setIsOpenUpdate] = useState(false)
 
   return (
     <div className={s.wrapper}>
@@ -78,15 +75,6 @@ export const Cards = () => {
         value={inputSearch}
         variant={'searchDecoration'}
       />
-      <div>
-        <Button onClick={() => setIsOpenUpdate(true)}>Update Deck</Button>
-        <UpdateDeck
-          isOpen={isOpenUpdate}
-          onOpenChange={value => setIsOpenUpdate(value)}
-          title={'Update Deck'}
-        />
-      </div>
-
       {data && data.items.length > 0 ? (
         <>
           <TableComponent
