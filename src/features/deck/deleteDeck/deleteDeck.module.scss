@@ -1,5 +1,13 @@
-.buttonWrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+.wrapper {
+  width: 520px;
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 10px;
+  }
+
+  .text {
+    max-width: 400px;
+  }
 }

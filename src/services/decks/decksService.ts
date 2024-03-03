@@ -11,7 +11,7 @@ import {
 export const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createDeck: builder.mutation<Deck, CreateDeckArgs>({
+      createDeck: builder.mutation<Deck, CreateDeckArgs | FormData>({
         invalidatesTags: ['Decks'],
         query: body => ({
           body,

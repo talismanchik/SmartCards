@@ -7,14 +7,11 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { AddNewDeck } from '@/features/deck/addNewDeck'
-import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
-import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 
 import s from './cards.module.scss'
 
@@ -25,6 +22,7 @@ import defaultImage from '../../assets/default.png'
 //   isOwner: boolean
 //   title: string
 // }
+
 export const Cards = () => {
   const isOwner = false
 
@@ -53,12 +51,7 @@ export const Cards = () => {
   })
 
   console.log(data)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
-  const deleteId: UpdateDeleteDeckArgs = {
-    id: 'clt9mxg8u00pd2l2gi9mlnei3', //deckId
-  }
 
   return (
     <div className={s.wrapper}>
@@ -68,15 +61,6 @@ export const Cards = () => {
           {deckData?.name}
         </Typography>
         {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
-
-        <>
-          <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>
-          <AddNewDeck
-            isOpen={isOpen}
-            onOpenChange={value => setIsOpen(value)}
-            title={'Add New Deck'}
-          />
-        </>
       </div>
 
       <div className={s.deckImage}>
@@ -94,17 +78,6 @@ export const Cards = () => {
         value={inputSearch}
         variant={'searchDecoration'}
       />
-      <div>
-        <Button onClick={() => setIsOpenDelete(true)} variant={'secondary'}>
-          Delete Deck
-        </Button>
-        <DeleteDeck
-          deckId={deleteId}
-          isOpen={isOpenDelete}
-          onOpenChange={value => setIsOpenDelete(value)}
-          title={'Delete Deck'}
-        />
-      </div>
       <div>
         <Button onClick={() => setIsOpenUpdate(true)}>Update Deck</Button>
         <UpdateDeck
