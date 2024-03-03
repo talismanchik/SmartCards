@@ -7,13 +7,11 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
-import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 
 import s from './cards.module.scss'
 
@@ -52,11 +50,7 @@ export const Cards = () => {
   })
 
   console.log(data)
-  const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
-  const deleteId: UpdateDeleteDeckArgs = {
-    id: 'clt9mxg8u00pd2l2gi9mlnei3', //deckId
-  }
 
   return (
     <div className={s.wrapper}>
@@ -83,17 +77,6 @@ export const Cards = () => {
         value={inputSearch}
         variant={'searchDecoration'}
       />
-      <div>
-        <Button onClick={() => setIsOpenDelete(true)} variant={'secondary'}>
-          Delete Deck
-        </Button>
-        <DeleteDeck
-          deckId={deleteId}
-          isOpen={isOpenDelete}
-          onOpenChange={value => setIsOpenDelete(value)}
-          title={'Delete Deck'}
-        />
-      </div>
       <div>
         <Button onClick={() => setIsOpenUpdate(true)}>Update Deck</Button>
         <UpdateDeck

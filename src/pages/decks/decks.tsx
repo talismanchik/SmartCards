@@ -59,7 +59,9 @@ export const Decks = () => {
       <>
         <Filters />
         <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
-          {getDecksData && <TableDecks decks={getDecksData.items} />}
+          {getDecksData?.items.map(item => {
+            return <TableDecks deck={item} key={item.id} />
+          })}
         </TableComponent>
         {pagination && (
           <Pagination
