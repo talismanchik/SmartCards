@@ -19,6 +19,7 @@ import defaultImage from '../../assets/default.png'
 //   isOwner: boolean
 //   title: string
 // }
+
 export const Cards = () => {
   const isOwner = false
 
