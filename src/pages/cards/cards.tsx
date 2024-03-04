@@ -4,9 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
-import { TableComponent } from '@/components/ui/table/tableComponent'
+import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
-import { columns } from '@/pages/cards/cardsData/columnsData'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
@@ -46,8 +45,6 @@ export const Cards = () => {
     orderBy: orderBy,
     question: debounceSearch,
   })
-
-  console.log(data)
 
   return (
     <div className={s.wrapper}>
@@ -102,3 +99,26 @@ export const Cards = () => {
     </div>
   )
 }
+
+const columns: Column[] = [
+  {
+    key: 'question',
+    style: s.questionStyle,
+    title: 'Question',
+  },
+  {
+    key: 'answer',
+    style: s.answerStyle,
+    title: 'Answer',
+  },
+  {
+    key: 'updated',
+    style: s.updatedStyle,
+    title: 'Last Updated',
+  },
+  {
+    key: 'grade',
+    style: s.gradeStyle,
+    title: 'Grade',
+  },
+]
