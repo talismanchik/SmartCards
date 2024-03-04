@@ -10,7 +10,6 @@
     .tableRow {
       background-color: var(--color-dark-500);
 
-
       .tableCell {
         overflow: hidden;
 
@@ -20,13 +19,11 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
-
         .sortIconContainer {
           display: inline-flex;
           align-items: center;
           justify-content: center;
           padding-left: 4px;
-
 
           .rotateIcon {
             transform: rotate(-180deg);
@@ -34,20 +31,19 @@
           }
         }
 
-
         &:hover:not(.notActive) {
           cursor: pointer;
           background-color: var(--color-dark-300);
-          transition: background-color .3s;
+          transition: background-color 0.3s;
         }
       }
 
       .optionsStyle {
-        width: 15%;
+        width: 10%;
       }
 
       .rightAlign {
-        text-align: right;
+        text-align: center;
       }
 
       .notActive {
@@ -62,7 +58,6 @@
     .tableRow {
       box-sizing: border-box;
       max-height: 63px;
-
 
       .tableDataCell {
         position: relative;
@@ -95,7 +90,6 @@
           }
         }
 
-
         .iconContainer {
           display: flex;
           gap: 10px;
@@ -105,20 +99,17 @@
           .iconWrapper {
             all: unset;
             cursor: pointer;
-
           }
         }
 
-        &:first-child{
+        &:first-child {
           cursor: pointer;
         }
       }
 
-
-
       &:hover {
         background-color: var(--color-dark-700);
-        transition: background-color .3s;
+        transition: background-color 0.3s;
       }
     }
   }
