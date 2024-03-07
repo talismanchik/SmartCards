@@ -29,6 +29,15 @@ export type GetDecksArgs = {
   name?: string
   orderBy?: null | string
 }
+export type fieldGetDecksArgs =
+  | 'authorId'
+  | 'currentPage'
+  | 'itemsPerPage'
+  | 'maxCardsCount'
+  | 'minCardsCount'
+  | 'name'
+  | 'orderBy'
+
 export type GetMinMaxCards = {
   max: number
   min: number

@@ -47,14 +47,12 @@ export const Decks = () => {
     <>
       <div className={styles.topRow}>
         <Typography variant={'h1'}>Decks list</Typography>
-        <>
-          <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>
-          <AddNewDeck
-            isOpen={isOpen}
-            onOpenChange={value => setIsOpen(value)}
-            title={'Add New Deck'}
-          />
-        </>
+        <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>
+        <AddNewDeck
+          isOpen={isOpen}
+          onOpenChange={value => setIsOpen(value)}
+          title={'Add New Deck'}
+        />
       </div>
       <>
         <Filters />
