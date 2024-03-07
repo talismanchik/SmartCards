@@ -34,9 +34,9 @@ export const useCardFilter = () => {
     const query = Object.fromEntries(searchParams)
 
     if (field !== 'currentPage') {
-      setSearchParams({ ...query, currentPage: '1', [field]: value ?? [] })
+      setSearchParams({ ...query, currentPage: '1', [field]: value ?? [] }, { replace: true })
     } else {
-      setSearchParams({ ...query, [field]: value ?? [] })
+      setSearchParams({ ...query, [field]: value ?? [] }, { replace: true })
     }
   }
 
