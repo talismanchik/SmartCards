@@ -8,11 +8,16 @@ import {
 
 import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks/decks'
+import { ErrorPage } from '@/pages/error/errorPage'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <div>login</div>,
     path: '/login',
+  },
+  {
+    element: <ErrorPage />,
+    path: '*',
   },
 ]
 const privateRoutes: RouteObject[] = [
