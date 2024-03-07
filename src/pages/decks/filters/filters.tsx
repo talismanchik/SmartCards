@@ -14,6 +14,7 @@ import s from '@/pages/decks/decks.module.scss'
 
 export const Filters = () => {
   const {
+    authorId,
     change,
     changeFiltersParam,
     clearFilter,
@@ -44,9 +45,13 @@ export const Filters = () => {
   }
 
   // ........................................
-  const [tab, setTab] = useState('allCards')
+  const [tab, setTab] = useState(authorId ? 'myCards' : 'allCards')
   const zaglushka = (value: string) => {
     setTab(value)
+    changeFiltersParam(
+      'authorId',
+      value === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : null
+    )
   }
   // ..........................................
 

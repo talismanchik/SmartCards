@@ -9,7 +9,7 @@ type Props = {
   items: TabItem[]
   label?: string
   onValueChange: (value: string) => void
-  value: string
+  value: null | string
 }
 
 export const TabSwitcher = ({ className, items, label, onValueChange, value }: Props) => {
@@ -29,7 +29,7 @@ export const TabSwitcher = ({ className, items, label, onValueChange, value }: P
   return (
     <Typography as={'div'} className={classNames.container} variant={'body2'}>
       {label}
-      <Root defaultValue={'0'} onValueChange={onValueChange} value={value}>
+      <Root defaultValue={'0'} onValueChange={onValueChange} value={value ?? items[1].value}>
         <List className={classNames.list}>{itemMarkup}</List>
       </Root>
     </Typography>

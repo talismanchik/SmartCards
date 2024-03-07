@@ -10,6 +10,8 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  scrollbar-color: var(--color-accent-500) var(--color-dark-900);
+  scrollbar-width: thin;
 }
 
 input,
@@ -27,6 +29,7 @@ option {
 a:visited {
   color: inherit;
 }
+
 
 body {
   margin: 0;

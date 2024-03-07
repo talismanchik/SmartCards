@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
 import { useParsedOrderBy } from '@/components/hooks/useParsedOrderBy'
+import { fieldGetDecksArgs } from '@/services/decks/decks.types'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksService'
 
 export const useDecksFilter = () => {
@@ -10,6 +11,7 @@ export const useDecksFilter = () => {
   const [queryParams, setQueryParams] = useSearchParams({})
   const deckName = queryParams.get('name') || ''
   const orderBy = queryParams.get('orderBy')
+  const authorId = queryParams.get('authorId')
   const minCardsCount = queryParams.get('minCardsCount') || minMaxCards?.min || ''
   const maxCardsCount = queryParams.get('maxCardsCount') || minMaxCards?.max || ''
   const currentPage = queryParams.get('currentPage') || '1'
@@ -26,6 +28,7 @@ export const useDecksFilter = () => {
     isLoading: decksIsLoading,
   } = useGetDecksQuery(
     {
+      authorId: authorId || undefined,
       currentPage: +currentPage,
       itemsPerPage: +itemsPerPage,
       maxCardsCount: +maxCardsCount || undefined,
@@ -45,21 +48,32 @@ export const useDecksFilter = () => {
       changeFiltersParam('orderBy', `${key}-asc`)
     }
   }
-  const changeFiltersParam = (field: string, value: null | string) => {
+  const changeFiltersParam = (field: fieldGetDecksArgs, value: null | string) => {
     const query = Object.fromEntries(queryParams)
 
-    setQueryParams({ ...query, [field]: value ?? [] })
+    //setQueryParams({ ...query, [field]: value ?? [] })
+    if (field !== 'currentPage') {
+      setQueryParams({ ...query, currentPage: [], [field]: value ?? [] })
+    } else {
+      setQueryParams({ ...query, [field]: value ?? [] })
+    }
   }
   const change = (arr: number[]) => {
     const query = Object.fromEntries(queryParams)
 
-    setQueryParams({ ...query, maxCardsCount: arr[1].toString(), minCardsCount: arr[0].toString() })
+    setQueryParams({
+      ...query,
+      currentPage: [],
+      maxCardsCount: arr[1].toString(),
+      minCardsCount: arr[0].toString(),
+    })
   }
   const clearFilter = () => {
     setQueryParams({})
   }
 
   return {
+    authorId,
     change,
     changeFiltersParam,
     clearFilter,
