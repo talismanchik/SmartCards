@@ -1,15 +1,10 @@
-import { Header } from '@/components/header/header'
+import { Layout } from '@/components/layout/layout'
 import { Router } from '@/utils/router'
-
-import s from './app.module.scss'
 
 export function App() {
   return (
     <>
-      <Header isAuth />
-      <div className={s.container}>
-        <Router />
-      </div>
+      <Router />
     </>
   )
 }

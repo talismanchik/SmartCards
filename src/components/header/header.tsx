@@ -1,18 +1,19 @@
 import { animateScroll as scroll } from 'react-scroll'
 
-import { AvatarDefault } from '@/assets/avatar/avatarDefoult'
 import { Logo } from '@/assets/logo/logo'
+import defaultAvatar from '@/assets/user.png'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { MeResponse } from '@/services/auth/auth.types'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
 
 type Props = {
-  isAuth: boolean
+  meData?: MeResponse
 }
 
-export const Header = ({ isAuth }: Props) => {
+export const Header = ({ meData }: Props) => {
   const classNames = {
     container: clsx(s.container),
     header: clsx(s.header),
@@ -33,12 +34,16 @@ export const Header = ({ isAuth }: Props) => {
         >
           <Logo />
         </a>
-        {isAuth ? (
+        {meData ? (
           <div className={classNames.userInfo}>
             <Typography className={classNames.userName} variant={'subtitle1'}>
-              User Name
+              {meData.name}
             </Typography>
-            <AvatarDefault className={classNames.userAvatar} />
+            <img
+              alt={'User avatar'}
+              className={classNames.userAvatar}
+              src={meData.avatar ?? defaultAvatar}
+            ></img>
           </div>
         ) : (
           <Button variant={'secondary'}>Sign in</Button>

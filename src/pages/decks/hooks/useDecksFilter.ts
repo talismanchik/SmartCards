@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
@@ -6,6 +7,7 @@ import { fieldGetDecksArgs } from '@/services/decks/decks.types'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksService'
 
 export const useDecksFilter = () => {
+  //debugger
   const { data: minMaxCards, isLoading: minMaxCardsLoading } = useGetMinMaxCardsQuery()
 
   const [queryParams, setQueryParams] = useSearchParams({})
@@ -19,8 +21,6 @@ export const useDecksFilter = () => {
   const sort = useParsedOrderBy(orderBy)
 
   const debounceDeckName = useDebounce(deckName, 500)
-  //const debounceMinCardsCount = useDebounce(minCardsCount, 500)
-  //const debounceMaxCardsCount = useDebounce(maxCardsCount, 500)
 
   const {
     data: getDecksData,
@@ -40,6 +40,10 @@ export const useDecksFilter = () => {
       skip: !minMaxCards,
     }
   )
+
+  useEffect(() => {
+    console.log(minMaxCards)
+  }, [minMaxCards])
 
   const onChangeSort = (key: string) => {
     if (sort && sort.key === key) {
