@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/components/hooks/useDebounce'
@@ -7,7 +6,6 @@ import { fieldGetDecksArgs } from '@/services/decks/decks.types'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksService'
 
 export const useDecksFilter = () => {
-  //debugger
   const { data: minMaxCards, isLoading: minMaxCardsLoading } = useGetMinMaxCardsQuery()
 
   const [queryParams, setQueryParams] = useSearchParams({})
@@ -41,10 +39,6 @@ export const useDecksFilter = () => {
     }
   )
 
-  useEffect(() => {
-    console.log(minMaxCards)
-  }, [minMaxCards])
-
   const onChangeSort = (key: string) => {
     if (sort && sort.key === key) {
       changeFiltersParam('orderBy', sort.direction === 'asc' ? `${sort.key}-desc` : null)
@@ -55,7 +49,6 @@ export const useDecksFilter = () => {
   const changeFiltersParam = (field: fieldGetDecksArgs, value: null | string) => {
     const query = Object.fromEntries(queryParams)
 
-    //setQueryParams({ ...query, [field]: value ?? [] })
     if (field !== 'currentPage') {
       setQueryParams({ ...query, currentPage: [], [field]: value ?? [] })
     } else {
