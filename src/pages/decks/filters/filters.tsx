@@ -8,6 +8,7 @@ import { TabSwitcher } from '@/components/ui/tabSwitcher'
 import { Typography } from '@/components/ui/typography'
 import { tabSwitcherItems } from '@/pages/decks/decks'
 import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
+import { useGetMeQuery } from '@/services/auth/auth.service'
 import clsx from 'clsx'
 
 import s from '@/pages/decks/decks.module.scss'
@@ -23,6 +24,7 @@ export const Filters = () => {
     minCardsCount,
     minMaxCards,
   } = useDecksFilter()
+  const { data: meData } = useGetMeQuery()
 
   const onChangeSearchInput = (value: string) => {
     changeFiltersParam('name', value)
@@ -48,10 +50,7 @@ export const Filters = () => {
   const [tab, setTab] = useState(authorId ? 'myCards' : 'allCards')
   const zaglushka = (value: string) => {
     setTab(value)
-    changeFiltersParam(
-      'authorId',
-      value === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : null
-    )
+    meData && changeFiltersParam('authorId', value === 'myCards' ? meData.id : null)
   }
   // ..........................................
 
