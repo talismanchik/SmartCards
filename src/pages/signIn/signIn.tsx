@@ -2,12 +2,14 @@ import { SignInForm } from '@/components/forms/signInForm'
 import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useLogInMutation } from '@/services/auth/auth.service'
 
 import s from './signIn.module.scss'
 
 export const SignIn = () => {
-  const submitForm = (data: SignInFormValues) => {
-    console.log(data)
+  const [login] = useLogInMutation()
+  const submitLoginForm = (data: SignInFormValues) => {
+    login(data)
   }
 
   return (
@@ -15,7 +17,7 @@ export const SignIn = () => {
       <Typography className={s.title} variant={'h1'}>
         Sign In
       </Typography>
-      <SignInForm onSubmitForm={submitForm}>
+      <SignInForm onSubmitForm={submitLoginForm}>
         <div className={s.forgotPassword}>
           <Typography as={'a'} href={''} variant={'body2'}>
             Forgot Password?

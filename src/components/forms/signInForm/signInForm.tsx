@@ -16,7 +16,6 @@ export const SignInForm = ({ children, className, onSubmitForm }: Props) => {
   const { control, handleSubmit } = useSignInForm()
 
   const onSubmit = handleSubmit(data => {
-    debugger
     onSubmitForm(data)
   })
 

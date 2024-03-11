@@ -19,8 +19,6 @@ export const useDecksFilter = () => {
   const sort = useParsedOrderBy(orderBy)
 
   const debounceDeckName = useDebounce(deckName, 500)
-  //const debounceMinCardsCount = useDebounce(minCardsCount, 500)
-  //const debounceMaxCardsCount = useDebounce(maxCardsCount, 500)
 
   const {
     data: getDecksData,
@@ -51,7 +49,6 @@ export const useDecksFilter = () => {
   const changeFiltersParam = (field: fieldGetDecksArgs, value: null | string) => {
     const query = Object.fromEntries(queryParams)
 
-    //setQueryParams({ ...query, [field]: value ?? [] })
     if (field !== 'currentPage') {
       setQueryParams({ ...query, currentPage: [], [field]: value ?? [] })
     } else {
