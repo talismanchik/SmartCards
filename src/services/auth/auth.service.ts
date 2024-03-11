@@ -14,7 +14,6 @@ export const authService = baseApi.injectEndpoints({
         invalidatesTags: ['Me'],
         query: body => ({
           body,
-
           method: 'POST',
           url: 'v1/auth/login',
         }),

@@ -8,6 +8,7 @@ import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
+import { useGetMeQuery } from '@/services/auth/auth.service'
 import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
 
 import s from './cards.module.scss'
@@ -21,8 +22,6 @@ import defaultImage from '../../assets/default.png'
 // }
 
 export const Cards = () => {
-  const isOwner = false
-
   const { deckId } = useParams()
 
   const {
@@ -38,6 +37,9 @@ export const Cards = () => {
     portionSize,
     sort,
   } = useCardFilter()
+
+  const { data: meData } = useGetMeQuery()
+  const isOwner = deckData?.userId === meData?.id
 
   const { data } = useGetDecksByIDCardsQuery({
     currentPage: +currentPage,
