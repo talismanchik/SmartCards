@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { animateScroll as scroll } from 'react-scroll'
 
 import { Logo } from '@/assets/logo/logo'
@@ -22,6 +23,7 @@ export const Header = ({ meData }: Props) => {
     userInfo: clsx(s.userInfo),
     userName: clsx(s.userName),
   }
+  const navigate = useNavigate()
 
   return (
     <header className={classNames.header}>
@@ -36,6 +38,7 @@ export const Header = ({ meData }: Props) => {
         </a>
         {meData ? (
           <div className={classNames.userInfo}>
+            <button onClick={() => navigate('/profile')}>edit profile</button>
             <Typography className={classNames.userName} variant={'subtitle1'}>
               {meData.name}
             </Typography>
