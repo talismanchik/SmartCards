@@ -9,8 +9,8 @@ import {
 import { Layout, useAuthContext } from '@/components/layout/layout'
 import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks/decks'
-import { Profile } from '@/pages/editProfile/profile'
 import { ErrorPage } from '@/pages/error/errorPage'
+import { Profile } from '@/pages/profile/profile'
 import { SignIn } from '@/pages/signIn/signIn'
 import { SignUp } from '@/pages/signUp'
 

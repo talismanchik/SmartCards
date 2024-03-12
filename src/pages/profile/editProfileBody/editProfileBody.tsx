@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui/typography'
 import {
   ChangeNameValues,
   ChangeNickNameForm,
-} from '@/pages/editProfile/editProfileBody/form/changeNickNameForm'
+} from '@/pages/profile/editProfileBody/form/changeNickNameForm'
 import { useLogOutMutation, useUpdateProfileMutation } from '@/services/auth/auth.service'
 
 import s from '../profile.module.scss'

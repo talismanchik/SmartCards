@@ -1,8 +1,8 @@
 import { Card } from '@/components/ui/card'
 import { LinkBack } from '@/components/ui/linkBack'
 import { Typography } from '@/components/ui/typography'
-import { EditProfileAvatar } from '@/pages/editProfile/editProfileAvatar/editProfileAvatar'
-import { EditProfileBody } from '@/pages/editProfile/editProfileBody/editProfileBody'
+import { EditProfileAvatar } from '@/pages/profile/editProfileAvatar/editProfileAvatar'
+import { EditProfileBody } from '@/pages/profile/editProfileBody/editProfileBody'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 
 import s from './profile.module.scss'
