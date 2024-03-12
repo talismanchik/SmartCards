@@ -1,0 +1,42 @@
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 25px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-top: 7px;
+  margin-bottom: 36px;
+
+  .filterButton {
+    height: auto;
+  }
+}
+
+.pagination {
+  margin-top: 25px;
+  margin-inline: auto;
+  padding-bottom: 120px;
+}
+
+.nameStyle {
+  width: 40%;
+}
+
+.cardsCountStyle {
+  width: 10%;
+}
+
+.updatedStyle {
+  width: 15%;
+}
+
+.createdStyle {
+  width: 25%;
+}

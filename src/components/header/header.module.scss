@@ -1,5 +1,6 @@
 .header {
   position: fixed;
+  z-index: 999;
 
   display: flex;
   align-items: center;
@@ -17,7 +18,7 @@
     justify-content: space-between;
 
     width: 100%;
-    max-width: 1370px;
+    max-width: 1120px;
 
     .logo {
       cursor: pointer;
@@ -39,6 +40,9 @@
 
       .userAvatar {
         cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
       }
     }
   }

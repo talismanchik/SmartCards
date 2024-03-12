@@ -17,6 +17,7 @@ type PaginationProps = {
 } & ComponentPropsWithoutRef<typeof Select>
 
 export const Pagination = ({
+  className,
   currentPage,
   onPageChange,
   pageSize,
@@ -25,9 +26,11 @@ export const Pagination = ({
   ...restProps
 }: PaginationProps) => {
   const classNames = {
+    iconWrapper: clsx(s.iconWrapper),
     item(currentItem: number) {
       return clsx(s.button, currentItem === currentPage && s.activeItem)
     },
+    paginationContainer: clsx(s.root, className),
   }
   const totalPageCount = Math.ceil(totalCount / pageSize)
   const paginationItems = usePagination({
@@ -57,9 +60,14 @@ export const Pagination = ({
   }
 
   return (
-    <div className={s.root}>
+    <div className={classNames.paginationContainer}>
       <div className={s.paginationContainer}>
-        <button className={s.iconWrapper} onClick={onPrevPage} tabIndex={0}>
+        <button
+          className={classNames.iconWrapper}
+          disabled={currentPage === 1}
+          onClick={onPrevPage}
+          tabIndex={0}
+        >
           <Icon iconId={'arrow_back'} />
         </button>
 
@@ -92,7 +100,12 @@ export const Pagination = ({
           }
         })}
 
-        <button className={s.iconWrapper} onClick={onNextPage} tabIndex={0}>
+        <button
+          className={s.iconWrapper}
+          disabled={currentPage === totalPageCount}
+          onClick={onNextPage}
+          tabIndex={0}
+        >
           <Icon iconId={'arrow_forward'} />
         </button>
       </div>

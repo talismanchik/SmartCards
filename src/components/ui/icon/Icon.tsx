@@ -46,7 +46,7 @@ type Props = {
 export const Icon = ({ className, height, iconId, viewBox, width }: Props) => {
   return (
     <svg
-      className={`${className}`}
+      className={className}
       height={height || '16'}
       viewBox={viewBox || '2 2 20 20'}
       width={width || '16'}

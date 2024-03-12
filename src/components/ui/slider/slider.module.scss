@@ -1,16 +1,21 @@
 .SliderComponent {
   display: flex;
   flex-direction: row;
+  gap: 12px;
   align-items: center;
 
   .SliderValueInput {
     width: 36px;
     height: 36px;
-    margin: 12px;
     text-align: center;
 
-    input{
-      padding: 5px;
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+      appearance: none;
+    }
+
+    & input {
+      padding: 4px;
     }
   }
 
@@ -23,7 +28,6 @@
 
     min-width: 36px;
     min-height: 36px;
-    margin: 12px;
 
     font-size: 16px;
     color: var(--color-light-100);

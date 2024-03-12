@@ -12,12 +12,12 @@ export default meta
 
 export const AuthFalse = {
   render() {
-    return <Header isAuth={false} />
+    return <Header />
   },
 }
 
 export const AuthTrue = {
   render() {
-    return <Header isAuth />
+    return <Header />
   },
 }

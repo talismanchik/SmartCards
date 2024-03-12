@@ -1,18 +1,20 @@
+import { useNavigate } from 'react-router-dom'
 import { animateScroll as scroll } from 'react-scroll'
 
-import { AvatarDefault } from '@/assets/avatar/avatarDefoult'
 import { Logo } from '@/assets/logo/logo'
+import defaultAvatar from '@/assets/user.png'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { MeResponse } from '@/services/auth/auth.types'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
 
 type Props = {
-  isAuth: boolean
+  meData?: MeResponse
 }
 
-export const Header = ({ isAuth }: Props) => {
+export const Header = ({ meData }: Props) => {
   const classNames = {
     container: clsx(s.container),
     header: clsx(s.header),
@@ -21,6 +23,7 @@ export const Header = ({ isAuth }: Props) => {
     userInfo: clsx(s.userInfo),
     userName: clsx(s.userName),
   }
+  const navigate = useNavigate()
 
   return (
     <header className={classNames.header}>
@@ -33,12 +36,17 @@ export const Header = ({ isAuth }: Props) => {
         >
           <Logo />
         </a>
-        {isAuth ? (
+        {meData ? (
           <div className={classNames.userInfo}>
+            <button onClick={() => navigate('/profile')}>edit profile</button>
             <Typography className={classNames.userName} variant={'subtitle1'}>
-              User Name
+              {meData.name}
             </Typography>
-            <AvatarDefault className={classNames.userAvatar} />
+            <img
+              alt={'User avatar'}
+              className={classNames.userAvatar}
+              src={meData.avatar ?? defaultAvatar}
+            ></img>
           </div>
         ) : (
           <Button variant={'secondary'}>Sign in</Button>

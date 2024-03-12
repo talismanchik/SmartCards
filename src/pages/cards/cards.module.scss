@@ -1,0 +1,71 @@
+.wrapper {
+  .titleButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .deckImage {
+    img {
+      width: 170px;
+      height: 107px;
+      margin-top: 15px;
+      object-fit: cover;
+    }
+  }
+
+  .input {
+    margin: 24px 0;
+  }
+
+  .pagination {
+    margin: 24px 0 120px;
+  }
+
+  .noContent {
+    text-align: center;
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .image {
+    img {
+      width: 70px;
+      height: 50px;
+      object-fit: cover;
+    }
+  }
+}
+
+.iconsWrapper {
+  display: flex;
+
+  .iconWrap {
+    margin-right: 10px;
+
+    .editIcon,
+    .trashIcon {
+      cursor: pointer;
+    }
+  }
+}
+
+.questionStyle {
+  width: 30%;
+}
+
+.answerStyle {
+  width: 30%;
+}
+
+.updatedStyle {
+  width: 15%;
+}
+
+.gradeStyle {
+  width: 15%;
+}
