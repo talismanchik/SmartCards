@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>
 export const WithoutIcon: Story = {
   render() {
     const [open, setOpen] = useState(false)
+    const children = ['Изменить', 'Удалить']
 
     return (
       <>
@@ -24,7 +25,11 @@ export const WithoutIcon: Story = {
           open={open}
           trigger={<Icon iconId={'arrow_down'} />}
         >
-          <DropdownItem children={['Изменить', 'Удалить']} />
+          <DropdownItem>
+            {children.map((child, index) => (
+              <span key={index}>{child}</span>
+            ))}
+          </DropdownItem>
         </Dropdown>
       </>
     )
