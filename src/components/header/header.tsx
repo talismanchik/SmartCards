@@ -38,8 +38,15 @@ export const Header = ({ meData }: Props) => {
         </a>
         {meData ? (
           <div className={classNames.userInfo}>
-            <button onClick={() => navigate('/profile')}>edit profile</button>
-            <Typography className={classNames.userName} variant={'subtitle1'}>
+            <Typography
+              className={classNames.userName}
+              onClick={() => {
+                navigate('/profile', {
+                  replace: true,
+                })
+              }}
+              variant={'subtitle1'}
+            >
               {meData.name}
             </Typography>
             <img

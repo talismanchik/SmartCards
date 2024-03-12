@@ -36,6 +36,16 @@
       .userName {
         cursor: pointer;
         border-bottom: 2px dashed var(--color-light-100);
+        transition: 0.1s;
+
+        &:hover{
+          color: var( --color-accent-700);
+          border-bottom: 2px dashed var(--color-accent-700);
+        }
+
+        &:active{
+          scale: 0.95;
+        }
       }
 
       .userAvatar {
