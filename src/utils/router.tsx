@@ -9,13 +9,19 @@ import {
 import { Layout, useAuthContext } from '@/components/layout/layout'
 import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks/decks'
+import { Profile } from '@/pages/editProfile/profile'
 import { ErrorPage } from '@/pages/error/errorPage'
 import { SignIn } from '@/pages/signIn/signIn'
+import { SignUp } from '@/pages/signUp'
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignIn />,
     path: '/login',
+  },
+  {
+    element: <SignUp />,
+    path: '/logout',
   },
   {
     element: <ErrorPage />,
@@ -30,6 +36,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Cards />,
     path: '/cards/:deckId',
+  },
+  {
+    element: <Profile />,
+    path: '/profile',
   },
 ]
 

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { SignInForm } from '@/components/forms/signInForm'
 import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
 import { Card } from '@/components/ui/card'
@@ -8,6 +10,7 @@ import s from './signIn.module.scss'
 
 export const SignIn = () => {
   const [login] = useLogInMutation()
+  const navigate = useNavigate()
 
   const submitLoginForm = (data: SignInFormValues) => {
     login(data)
@@ -29,7 +32,13 @@ export const SignIn = () => {
         <Typography className={s.footerTitle} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Typography as={'a'} className={s.signUp} href={''} variant={'subtitle1'}>
+        <Typography
+          as={'a'}
+          className={s.signUp}
+          href={''}
+          onClick={() => navigate('/logout')}
+          variant={'subtitle1'}
+        >
           Sign Up
         </Typography>
       </div>

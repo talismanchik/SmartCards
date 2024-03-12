@@ -50,7 +50,6 @@ export const DeckForm = ({
     const selectedFile = e.target.files?.[0]
 
     setCover(selectedFile || null)
-    console.log(selectedFile)
   }
 
   const openFileInput = () => {
