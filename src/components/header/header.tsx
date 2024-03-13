@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { animateScroll as scroll } from 'react-scroll'
 
 import { Logo } from '@/assets/logo/logo'
@@ -24,6 +24,11 @@ export const Header = ({ meData }: Props) => {
     userName: clsx(s.userName),
   }
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const navigateToProfile = () => {
+    location.pathname != '/profile' && navigate('/profile')
+  }
 
   return (
     <header className={classNames.header}>
@@ -40,11 +45,7 @@ export const Header = ({ meData }: Props) => {
           <div className={classNames.userInfo}>
             <Typography
               className={classNames.userName}
-              onClick={() => {
-                navigate('/profile', {
-                  replace: true,
-                })
-              }}
+              onClick={navigateToProfile}
               variant={'subtitle1'}
             >
               {meData.name}
