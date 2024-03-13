@@ -11,17 +11,17 @@ import { z } from 'zod'
 
 import s from './learn.module.scss'
 
-export type RateYourselfFormValues = z.infer<typeof rateYourselfSchema>
-const rateYourselfSchema = z.object({
-  rateYourself: z.string(),
+export type GradeFormValues = z.infer<typeof gradeSchema>
+const gradeSchema = z.object({
+  grade: z.string(),
 })
 
 export const Learn = () => {
   const [show, setShow] = useState(false)
 
-  const { control, handleSubmit } = useForm<RateYourselfFormValues>()
+  const { control, handleSubmit } = useForm<GradeFormValues>()
 
-  const rateYourself: ValueType[] = [
+  const grade: ValueType[] = [
     { id: '1', title: 'Did not know', value: '1' },
     { id: '2', title: 'Forgot', value: '2' },
     { id: '3', title: 'A lot of thought', value: '3' },
@@ -31,6 +31,7 @@ export const Learn = () => {
 
   const onSubmit = handleSubmit(data => {
     console.log(data)
+    setShow(false)
   })
 
   return (
@@ -50,11 +51,13 @@ export const Learn = () => {
         <Typography className={s.count} variant={'subtitle2'}>
           Count of attempts: 10
         </Typography>
-        <Button fullWidth onClick={() => setShow(true)}>
-          Show Answer
-        </Button>
+        {!show && (
+          <Button fullWidth onClick={() => setShow(true)}>
+            Show Answer
+          </Button>
+        )}
         {show && (
-          <div>
+          <>
             <Typography className={s.answer} variant={'subtitle1'}>
               Answer: Answer
             </Typography>
@@ -62,13 +65,16 @@ export const Learn = () => {
               PHOTO
               <img alt={'answer'} src={''} />
             </div>
-            <form onSubmit={onSubmit}>
-              <ControlledRadioGroup control={control} name={'rateYourself'} values={rateYourself} />
-              <Button fullWidth type={'submit'}>
+            <form className={s.gradeForm} onSubmit={onSubmit}>
+              <Typography className={s.gradeTitle} variant={'subtitle1'}>
+                Rate yourself:
+              </Typography>
+              <ControlledRadioGroup control={control} name={'grade'} values={grade} />
+              <Button className={s.submit} fullWidth type={'submit'}>
                 Next Question
               </Button>
             </form>
-          </div>
+          </>
         )}
       </Card>
     </div>
