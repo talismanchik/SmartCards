@@ -22,11 +22,11 @@ export const Learn = () => {
   const { control, handleSubmit } = useForm<RateYourselfFormValues>()
 
   const rateYourself: ValueType[] = [
-    { id: '1', value: 'Did not know' },
-    { id: '2', value: 'Forgot' },
-    { id: '3', value: 'A lot of thought' },
-    { id: '4', value: 'Confused' },
-    { id: '5', value: 'Knew the answer' },
+    { id: '1', title: 'Did not know', value: '1' },
+    { id: '2', title: 'Forgot', value: '2' },
+    { id: '3', title: 'A lot of thought', value: '3' },
+    { id: '4', title: 'Confused', value: '4' },
+    { id: '5', title: 'Knew the answer', value: '5' },
   ]
 
   const onSubmit = handleSubmit(data => {

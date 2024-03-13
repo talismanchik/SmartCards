@@ -9,6 +9,7 @@ import s from './radioGroup.module.scss'
 
 export type ValueType = {
   id: string
+  title: string
   value: string
 }
 
@@ -55,7 +56,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
                   htmlFor={el.id}
                   variant={'body2'}
                 >
-                  {el.value}
+                  {el.title}
                 </Typography>
               </div>
             )
