@@ -1,34 +1,32 @@
-.wrapper {
-  .learnWrapper {
-    padding: 33px 36px 48px;
+.learnWrapper {
+  padding: 33px 36px 48px;
 
-    .titleLearn {
-      margin-bottom: 48px;
-      text-align: center;
+  .titleLearn {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .question {
+    margin-bottom: 18px;
+  }
+
+  .count {
+    margin: 18px 0;
+  }
+
+  .answer {
+    margin: 11px 0 18px;
+  }
+
+  .gradeForm {
+    margin-top: 30px;
+
+    .gradeTitle {
+      margin-bottom: 13px;
     }
 
-    .question {
-      margin-bottom: 18px;
-    }
-
-    .count {
-      margin: 18px 0;
-    }
-
-    .answer {
-      margin: 11px 0 18px;
-    }
-
-    .gradeForm {
+    .submit {
       margin-top: 30px;
-
-      .gradeTitle {
-        margin-bottom: 13px;
-      }
-
-      .submit {
-        margin-top: 30px;
-      }
     }
   }
 }

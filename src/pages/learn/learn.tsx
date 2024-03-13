@@ -7,9 +7,12 @@ import { Card } from '@/components/ui/card'
 import { LinkBack } from '@/components/ui/linkBack'
 import { ValueType } from '@/components/ui/radioGroup'
 import { Typography } from '@/components/ui/typography'
+import { LearnImage } from '@/pages/learn/learnImage/learnImage'
 import { z } from 'zod'
 
 import s from './learn.module.scss'
+
+import image from '../../assets/defaultImg.png'
 
 export type GradeFormValues = z.infer<typeof gradeSchema>
 const gradeSchema = z.object({
@@ -35,19 +38,13 @@ export const Learn = () => {
   })
 
   return (
-    <div className={s.wrapper}>
+    <>
       <LinkBack />
       <Card className={s.learnWrapper}>
         <Typography className={s.titleLearn} variant={'h1'}>
           Learn Deck Name
         </Typography>
-        <Typography className={s.question} variant={'subtitle1'}>
-          Question: Question{' '}
-        </Typography>
-        <div>
-          PHOTO
-          <img alt={'question'} src={''} />
-        </div>
+        <LearnImage image={image} subtitle={'Question - qqq'} title={'Question'} />
         <Typography className={s.count} variant={'subtitle2'}>
           Count of attempts: 10
         </Typography>
@@ -58,13 +55,7 @@ export const Learn = () => {
         )}
         {show && (
           <>
-            <Typography className={s.answer} variant={'subtitle1'}>
-              Answer: Answer
-            </Typography>
-            <div>
-              PHOTO
-              <img alt={'answer'} src={''} />
-            </div>
+            <LearnImage subtitle={'Answer - aaa'} title={'Answer'} />
             <form className={s.gradeForm} onSubmit={onSubmit}>
               <Typography className={s.gradeTitle} variant={'subtitle1'}>
                 Rate yourself:
@@ -77,6 +68,6 @@ export const Learn = () => {
           </>
         )}
       </Card>
-    </div>
+    </>
   )
 }
