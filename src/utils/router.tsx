@@ -10,6 +10,7 @@ import { Layout, useAuthContext } from '@/components/layout/layout'
 import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks/decks'
 import { ErrorPage } from '@/pages/error/errorPage'
+import { Learn } from '@/pages/learn'
 import { Profile } from '@/pages/profile/profile'
 import { SignIn } from '@/pages/signIn/signIn'
 import { SignUp } from '@/pages/signUp'
@@ -40,6 +41,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Profile />,
     path: '/profile',
+  },
+  {
+    element: <Learn />,
+    path: '/learn',
   },
 ]
 

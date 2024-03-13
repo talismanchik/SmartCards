@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -23,6 +23,7 @@ import defaultImage from '../../assets/default.png'
 
 export const Cards = () => {
   const { deckId } = useParams()
+  const navigate = useNavigate()
 
   const {
     currentPage,
@@ -49,6 +50,10 @@ export const Cards = () => {
     question: debounceSearch,
   })
 
+  const learnCardsHandler = () => {
+    navigate('/learn')
+  }
+
   return (
     <div className={s.wrapper}>
       <LinkBack />
@@ -56,7 +61,11 @@ export const Cards = () => {
         <Typography className={s.title} variant={'h1'}>
           {deckData?.name}
         </Typography>
-        {isOwner ? <Button>Add New Card</Button> : <Button>Learn Cards</Button>}
+        {isOwner ? (
+          <Button>Add New Card</Button>
+        ) : (
+          <Button onClick={learnCardsHandler}>Learn Cards</Button>
+        )}
       </div>
 
       <div className={s.deckImage}>
