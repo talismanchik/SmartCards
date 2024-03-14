@@ -9,6 +9,7 @@ import s from './radioGroup.module.scss'
 
 export type ValueType = {
   id: string
+  title: string
   value: string
 }
 
@@ -17,7 +18,7 @@ export type InitialStateType = ValueType[]
 export type RadioGroupProps = {
   disabled?: boolean
   onValueChange?: (newValue: string) => void
-  value?: string
+  value: string
   values?: InitialStateType
 } & ComponentPropsWithoutRef<typeof Root>
 
@@ -36,32 +37,30 @@ export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
     }
 
     return (
-      <form>
-        <Root
-          aria-label={'View density'}
-          className={classNames.root}
-          onValueChange={(newValue: string) => onValueChangeHandler(newValue)}
-          ref={ref}
-          value={value}
-          {...restProps}
-        >
-          {values?.map((el: ValueType) => {
-            return (
-              <div className={classNames.variantWrap} key={el.id}>
-                <RadioGroupItem disabled={disabled} itemValue={el} value={value} />
-                <Typography
-                  as={'label'}
-                  className={classNames.label}
-                  htmlFor={el.id}
-                  variant={'body2'}
-                >
-                  {el.value}
-                </Typography>
-              </div>
-            )
-          })}
-        </Root>
-      </form>
+      <Root
+        aria-label={'View density'}
+        className={classNames.root}
+        onValueChange={(newValue: string) => onValueChangeHandler(newValue)}
+        ref={ref}
+        value={value}
+        {...restProps}
+      >
+        {values?.map((el: ValueType) => {
+          return (
+            <div className={classNames.variantWrap} key={el.id}>
+              <RadioGroupItem disabled={disabled} itemValue={el} value={value} />
+              <Typography
+                as={'label'}
+                className={classNames.label}
+                htmlFor={el.id}
+                variant={'body2'}
+              >
+                {el.title}
+              </Typography>
+            </div>
+          )
+        })}
+      </Root>
     )
   }
 )
