@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import defaultAvatar from '@/assets/user.png'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropdown/dropdown'
 import { Icon } from '@/components/ui/icon/Icon'
 import { Meta, StoryObj } from '@storybook/react'
@@ -40,7 +41,7 @@ export const WithIcon: Story = {
         <Dropdown
           onOpenChange={() => setOpen(!open)}
           open={open}
-          trigger={<Icon iconId={'arrow_down'} />}
+          trigger={<img alt={'User avatar'} src={defaultAvatar}></img>}
         >
           <DropdownItemWithIcon
             items={[

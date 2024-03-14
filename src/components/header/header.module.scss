@@ -2,6 +2,7 @@
   position: fixed;
   z-index: 999;
 
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +49,47 @@
         }
       }
 
-      .userAvatar {
-        cursor: pointer;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-      }
+
     }
   }
+}
+
+.userAvatar {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.dropdownLabel {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+
+  .dropdownUserInfo{
+    display: flex;
+    flex-direction: column;
+
+    .dropdownUserEmail{
+      color: var(--color-dark-100);
+    }
+  }
+}
+
+.dropdownItem{
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+
+  &[data-highlighted]{
+    background-color: var(--color-dark-500);
+    border-radius: 4px;
+    outline: none;
+  }
+
+
 }
