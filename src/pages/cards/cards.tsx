@@ -58,7 +58,7 @@ export const Cards = () => {
         {isOwner ? (
           <Button>Add New Card</Button>
         ) : (
-          <Button onClick={learnCardsHandler}>Learn Cards</Button>
+          data && data.items.length > 0 && <Button onClick={learnCardsHandler}>Learn Cards</Button>
         )}
       </div>
 
