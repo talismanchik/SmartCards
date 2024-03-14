@@ -56,19 +56,6 @@ export const Header = ({ meData }: Props) => {
               {meData.name}
             </Typography>
             <DropdownNew
-              children={
-                <>
-                  <Item className={s.dropdownItem} onClick={navigateToProfile}>
-                    <Icon iconId={'person_outline'} />
-                    <Typography variant={'caption'}>My Profile</Typography>
-                  </Item>
-                  <CustomSeparator />
-                  <Item className={s.dropdownItem} onClick={() => logOut()}>
-                    <Icon iconId={'log_out'} />
-                    <Typography variant={'caption'}>Logout</Typography>
-                  </Item>
-                </>
-              }
               label={
                 <div className={s.dropdownLabel}>
                   <img
@@ -91,7 +78,17 @@ export const Header = ({ meData }: Props) => {
                   src={meData.avatar ?? defaultAvatar}
                 />
               }
-            />
+            >
+              <Item className={s.dropdownItem} onClick={navigateToProfile}>
+                <Icon iconId={'person_outline'} />
+                <Typography variant={'caption'}>My Profile</Typography>
+              </Item>
+              <CustomSeparator />
+              <Item className={s.dropdownItem} onClick={() => logOut()}>
+                <Icon iconId={'log_out'} />
+                <Typography variant={'caption'}>Logout</Typography>
+              </Item>
+            </DropdownNew>
           </div>
         ) : (
           <Button variant={'secondary'}>Sign in</Button>
