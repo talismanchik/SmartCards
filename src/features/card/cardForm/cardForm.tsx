@@ -10,7 +10,7 @@ import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import s from './addNewCard.module.scss'
+import s from './cardForm.module.scss'
 
 type AddNewCardFormProps = {
   isOpen: boolean
@@ -18,6 +18,7 @@ type AddNewCardFormProps = {
   onSubmitForm: (data: FormData) => void
   title: string
 }
+
 export type AddNewCardFormValues = z.infer<typeof addNewCardFormSchema>
 
 type AddNewCardArgs = {
@@ -39,34 +40,53 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
     },
     resolver: zodResolver(addNewCardFormSchema),
   })
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [cover, setCover] = useState<File | null | string>(null)
+  const fileInputRefQuestion = useRef<HTMLInputElement | null>(null)
+  const fileInputRefAnswer = useRef<HTMLInputElement | null>(null)
+  const [coverQuestion, setCoverQuestion] = useState<File | null | string>(null)
+  const [coverAnswer, setCoverAnswer] = useState<File | null | string>(null)
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChangeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
 
-    setCover(selectedFile || null)
+    setCoverQuestion(selectedFile || null)
   }
 
-  const openFileInput = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
+  const openFileInputQuestion = () => {
+    if (fileInputRefQuestion.current) {
+      fileInputRefQuestion.current.click()
+    }
+  }
+  const handleFileChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0]
+
+    setCoverAnswer(selectedFile || null)
+  }
+
+  const openFileInputAnswer = () => {
+    if (fileInputRefAnswer.current) {
+      fileInputRefAnswer.current.click()
     }
   }
 
-  const imageUrl = cover ? URL.createObjectURL(cover as File) : null
+  const imageUrlQuestion = coverQuestion ? URL.createObjectURL(coverQuestion as File) : null
+  const imageUrlAnswer = coverAnswer ? URL.createObjectURL(coverAnswer as File) : null
 
   const onSubmit = (data: AddNewCardArgs) => {
     onOpenChange(false)
     const formData = new FormData()
 
-    if (cover instanceof File) {
-      formData.append('cover', cover)
+    if (coverQuestion instanceof File) {
+      formData.append('questionImg', coverQuestion)
+    }
+    if (coverAnswer instanceof File) {
+      formData.append('answerImg', coverAnswer)
     }
     formData.append('question', data.question)
     formData.append('answer', data.answer)
 
-    setCover(null)
+    setCoverQuestion(null)
+    setCoverAnswer(null)
+
     reset()
 
     onSubmitForm(formData)
@@ -77,8 +97,14 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
   }
 
   return (
-    <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={title}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Modal
+      className={s.wrapper}
+      onOpenChange={onOpenChange}
+      open={isOpen}
+      scrollClassName={s.scroll}
+      title={title}
+    >
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <Typography className={s.title} variant={'h4'}>
           Question
         </Typography>
@@ -88,14 +114,17 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
           label={'Question?'}
           name={'question'}
         />
+        {imageUrlQuestion && (
+          <img alt={'cover'} className={s.coverImage} src={imageUrlQuestion as string} />
+        )}
         <Button
           className={s.button}
           fullWidth
-          onClick={openFileInput}
+          onClick={openFileInputQuestion}
           type={'button'}
           variant={'secondary'}
         >
-          <InputFile handleFileChange={handleFileChange} ref={fileInputRef} />
+          <InputFile handleFileChange={handleFileChangeQuestion} ref={fileInputRefQuestion} />
           <Icon iconId={'image_outline'} />
           <Typography variant={'subtitle2'}>Change Image</Typography>
         </Button>
@@ -105,15 +134,17 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
           Question
         </Typography>
         <ControlledInput className={s.input} control={control} label={'Answer?'} name={'answer'} />
-        {imageUrl && <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />}
+        {imageUrlAnswer && (
+          <img alt={'cover'} className={s.coverImage} src={imageUrlAnswer as string} />
+        )}
         <Button
           className={s.button}
           fullWidth
-          onClick={openFileInput}
+          onClick={openFileInputAnswer}
           type={'button'}
           variant={'secondary'}
         >
-          <InputFile handleFileChange={handleFileChange} ref={fileInputRef} />
+          <InputFile handleFileChange={handleFileChangeAnswer} ref={fileInputRefAnswer} />
           <Icon iconId={'image_outline'} />
           <Typography variant={'subtitle2'}>Change Image</Typography>
         </Button>

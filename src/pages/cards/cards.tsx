@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -7,24 +7,18 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
+import { AddNewCard } from '@/features/card/addNewCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
+import { useGetMeQuery } from '@/services/auth/auth.service'
 import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
 
 import s from './cards.module.scss'
 
 import defaultImage from '../../assets/default.png'
-import { AddNewCard } from "@/features/card/addNewCard";
-
-// type CardsProps = {
-//   id: string
-//   isOwner: boolean
-//   title: string
-// }
 
 export const Cards = () => {
   // const isOwner = false
-  const isOwner = true
 
   const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
   const onOpenChange = (value: boolean) => {
@@ -34,6 +28,7 @@ export const Cards = () => {
   console.log(isOpenAddNewCard)
 
   const { deckId } = useParams()
+  const navigate = useNavigate()
 
   const {
     currentPage,
@@ -49,6 +44,9 @@ export const Cards = () => {
     sort,
   } = useCardFilter()
 
+  const { data: meData } = useGetMeQuery()
+  const isOwner = deckData?.userId === meData?.id
+
   const { data } = useGetDecksByIDCardsQuery({
     currentPage: +currentPage,
     id: deckId || '',
@@ -56,6 +54,10 @@ export const Cards = () => {
     orderBy: orderBy,
     question: debounceSearch,
   })
+
+  const learnCardsHandler = () => {
+    navigate(`/cards/${deckId}/learn`)
+  }
 
   return (
     <div className={s.wrapper}>
@@ -67,7 +69,7 @@ export const Cards = () => {
         {isOwner ? (
           <Button onClick={() => setIsOpenAddNewCard(true)}>Add New Card</Button>
         ) : (
-          <Button>Learn Cards</Button>
+          <Button onClick={learnCardsHandler}>Learn Cards</Button>
         )}
       </div>
 

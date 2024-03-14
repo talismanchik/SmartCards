@@ -16,3 +16,5 @@ export type LoginArgs = {
   password: string
   rememberMe: boolean
 }
+
+export type UpdateProfileArgs = FormData

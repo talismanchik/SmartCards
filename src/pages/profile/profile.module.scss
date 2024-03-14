@@ -1,0 +1,84 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 33px 36px 41px;
+
+  .title {
+    text-align: center;
+  }
+
+  .avatarContainer {
+    position: relative;
+
+    height: 96px;
+    margin-top: 27px;
+    margin-bottom: 6px;
+
+    color: var(--color-light-900);
+
+    .avatar {
+      max-width: 96px;
+      border-radius: 50%;
+    }
+
+    .buttonEditAvatar {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
+    .buttonTrashAvatar {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+    }
+
+  }
+
+  .saveChangeButton{
+    margin-top: 36px;
+  }
+
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .userNameBlock {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .userEmailBlock {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      color: var(--color-dark-100);
+    }
+  }
+}
+
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 16px;
+
+
+  transition: 0.2s;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  &:active {
+    scale: 0.9;
+    color: var(--color-light-900);
+  }
+}
