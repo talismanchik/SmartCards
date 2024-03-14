@@ -18,12 +18,12 @@ export type InitialStateType = ValueType[]
 export type RadioGroupProps = {
   disabled?: boolean
   onValueChange?: (newValue: string) => void
-  value?: string
+  value: string
   values?: InitialStateType
 } & ComponentPropsWithoutRef<typeof Root>
 
 export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
-  ({ disabled = false, onValueChange, value, values, ...restProps }, ref) => {
+  ({ disabled = false, onValueChange, value = '1', values, ...restProps }, ref) => {
     const classNames = {
       label: clsx(s.label),
       root: clsx(s.radioGroupRoot),

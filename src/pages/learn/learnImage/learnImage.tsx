@@ -11,11 +11,12 @@ export const LearnImage = ({ image, subtitle, title }: Props) => {
   return (
     <>
       <Typography className={s.title} variant={'subtitle1'}>
-        {title}:{' '}
-        <Typography className={s.subtitle} variant={'body1'}>
-          {subtitle}
-        </Typography>
+        {title}: &nbsp;
       </Typography>
+      <Typography className={s.subtitle} variant={'body1'}>
+        {subtitle}
+      </Typography>
+
       <div className={s.imageWrapper}>
         {image && <img alt={title} className={s.image} src={image} />}
       </div>

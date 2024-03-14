@@ -15,12 +15,6 @@ import s from './cards.module.scss'
 
 import defaultImage from '../../assets/default.png'
 
-// type CardsProps = {
-//   id: string
-//   isOwner: boolean
-//   title: string
-// }
-
 export const Cards = () => {
   const { deckId } = useParams()
   const navigate = useNavigate()

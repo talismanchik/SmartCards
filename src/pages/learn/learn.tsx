@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { ControlledRadioGroup } from '@/components/controlled/controlledRadioGroup'
@@ -10,15 +9,10 @@ import { ValueType } from '@/components/ui/radioGroup'
 import { Typography } from '@/components/ui/typography'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { LearnImage } from '@/pages/learn/learnImage/learnImage'
+import { useGradeForm } from '@/pages/learn/useGradeForm'
 import { useGetLearnCardQuery } from '@/services/cards/cardsService'
-import { z } from 'zod'
 
 import s from './learn.module.scss'
-
-export type GradeFormValues = z.infer<typeof gradeSchema>
-const gradeSchema = z.object({
-  grade: z.string(),
-})
 
 export const Learn = () => {
   const { deckId } = useParams()
@@ -27,16 +21,7 @@ export const Learn = () => {
   const { data: learnData } = useGetLearnCardQuery({
     id: deckId || '',
   })
-
-  const { control, handleSubmit } = useForm<GradeFormValues>()
-
-  const grade: ValueType[] = [
-    { id: '1', title: 'Did not know', value: '1' },
-    { id: '2', title: 'Forgot', value: '2' },
-    { id: '3', title: 'A lot of thought', value: '3' },
-    { id: '4', title: 'Confused', value: '4' },
-    { id: '5', title: 'Knew the answer', value: '5' },
-  ]
+  const { control, handleSubmit } = useGradeForm()
 
   const onSubmit = handleSubmit(data => {
     console.log(data)
@@ -85,3 +70,11 @@ export const Learn = () => {
     </>
   )
 }
+
+const grade: ValueType[] = [
+  { id: '1', title: 'Did not know', value: '1' },
+  { id: '2', title: 'Forgot', value: '2' },
+  { id: '3', title: 'A lot of thought', value: '3' },
+  { id: '4', title: 'Confused', value: '4' },
+  { id: '5', title: 'Knew the answer', value: '5' },
+]
