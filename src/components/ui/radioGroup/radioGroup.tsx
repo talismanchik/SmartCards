@@ -23,7 +23,7 @@ export type RadioGroupProps = {
 } & ComponentPropsWithoutRef<typeof Root>
 
 export const RadioGroup = forwardRef<ElementRef<typeof Root>, RadioGroupProps>(
-  ({ disabled = false, onValueChange, value = '1', values, ...restProps }, ref) => {
+  ({ disabled = false, onValueChange, value, values, ...restProps }, ref) => {
     const classNames = {
       label: clsx(s.label),
       root: clsx(s.radioGroupRoot),

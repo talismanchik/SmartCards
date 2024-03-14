@@ -1,32 +1,36 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { ControlledRadioGroup } from '@/components/controlled/controlledRadioGroup'
+import { GradeForm } from '@/components/forms/gradeForm'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { LinkBack } from '@/components/ui/linkBack'
-import { ValueType } from '@/components/ui/radioGroup'
 import { Typography } from '@/components/ui/typography'
-import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
-import { LearnImage } from '@/pages/learn/learnImage/learnImage'
-import { useGradeForm } from '@/pages/learn/useGradeForm'
-import { useGetLearnCardQuery } from '@/services/cards/cardsService'
+import { LearnImage } from '@/pages/learn/learnImage'
+import {
+  useCreateLearnGradeMutation,
+  useGetDeckQuery,
+  useGetLearnCardQuery,
+} from '@/services/cards/cardsService'
 
 import s from './learn.module.scss'
 
 export const Learn = () => {
   const { deckId } = useParams()
-  const { deckData } = useCardFilter()
   const [show, setShow] = useState(false)
   const { data: learnData } = useGetLearnCardQuery({
     id: deckId || '',
   })
-  const { control, handleSubmit } = useGradeForm()
-
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-    setShow(false)
+  const { data: deckData } = useGetDeckQuery({
+    id: deckId || '',
   })
+
+  const [createLearnGrade] = useCreateLearnGradeMutation()
+
+  const onSubmit = (data: { grade: string }) => {
+    createLearnGrade({ cardId: learnData?.id || '', grade: +data.grade })
+    setShow(false)
+  }
 
   return (
     <>
@@ -55,26 +59,10 @@ export const Learn = () => {
               subtitle={learnData?.answer}
               title={'Answer'}
             />
-            <form className={s.gradeForm} onSubmit={onSubmit}>
-              <Typography className={s.gradeTitle} variant={'subtitle1'}>
-                Rate yourself:
-              </Typography>
-              <ControlledRadioGroup control={control} name={'grade'} values={grade} />
-              <Button className={s.submit} fullWidth type={'submit'}>
-                Next Question
-              </Button>
-            </form>
+            <GradeForm onSubmit={onSubmit} />
           </>
         )}
       </Card>
     </>
   )
 }
-
-const grade: ValueType[] = [
-  { id: '1', title: 'Did not know', value: '1' },
-  { id: '2', title: 'Forgot', value: '2' },
-  { id: '3', title: 'A lot of thought', value: '3' },
-  { id: '4', title: 'Confused', value: '4' },
-  { id: '5', title: 'Knew the answer', value: '5' },
-]

@@ -1,29 +1,40 @@
 import { baseApi } from '@/services/baseApi'
 import {
+  CreateLearnGradeArgs,
   GetDeckArgs,
   GetDeckByIDCardsResponse,
   GetDeckByIDRCardsArgs,
   GetDeckResponse,
+  GetLearnCardArgs,
+  LearnResponse,
 } from '@/services/cards/cards.types'
 
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      createLearnGrade: builder.mutation<LearnResponse, CreateLearnGradeArgs>({
+        invalidatesTags: ['Cards'],
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: `v1/decks/${args.cardId}/learn`,
+        }),
+      }),
       getDeck: builder.query<GetDeckResponse, GetDeckArgs>({
-        providesTags: ['Decks'],
+        providesTags: ['Cards'],
         query: args => ({
           url: `v1/decks/${args.id}`,
         }),
       }),
       getDecksByIDCards: builder.query<GetDeckByIDCardsResponse, GetDeckByIDRCardsArgs>({
-        providesTags: ['Decks'],
+        providesTags: ['Cards'],
         query: ({ id, ...args }) => ({
           params: args ?? undefined,
           url: `v1/decks/${id}/cards`,
         }),
       }),
-      getLearnCard: builder.query<GetLearnResponse, GetLearnCardArgs>({
-        providesTags: ['Decks'],
+      getLearnCard: builder.query<LearnResponse, GetLearnCardArgs>({
+        providesTags: ['Cards'],
         query: args => ({
           url: `v1/decks/${args.id}/learn`,
         }),
@@ -32,24 +43,9 @@ export const cardsService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDeckQuery, useGetDecksByIDCardsQuery, useGetLearnCardQuery } = cardsService
-
-type GetLearnCardArgs = {
-  id: string
-  previousCardId?: string
-}
-export type GetLearnResponse = {
-  answer: string
-  answerImg: string
-  answerVideo: string
-  created: string
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg: string
-  questionVideo: string
-  shots: number
-  updated: string
-  userId: string
-}
+export const {
+  useCreateLearnGradeMutation,
+  useGetDeckQuery,
+  useGetDecksByIDCardsQuery,
+  useGetLearnCardQuery,
+} = cardsService
