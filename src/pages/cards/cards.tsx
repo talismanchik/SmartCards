@@ -51,7 +51,7 @@ export const Cards = () => {
   })
 
   const learnCardsHandler = () => {
-    navigate('/learn')
+    navigate(`/cards/${deckId}/learn`)
   }
 
   return (

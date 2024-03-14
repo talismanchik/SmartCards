@@ -1,19 +1,24 @@
 import { Typography } from '@/components/ui/typography'
 
-import s from '@/pages/learn/learn.module.scss'
+import s from './learnImage.module.scss'
 
 type Props = {
   image?: string
-  subtitle: string
+  subtitle?: string
   title: string
 }
 export const LearnImage = ({ image, subtitle, title }: Props) => {
   return (
     <>
-      <Typography className={s.question} variant={'subtitle1'}>
-        {title}: {subtitle}
+      <Typography className={s.title} variant={'subtitle1'}>
+        {title}:{' '}
+        <Typography className={s.subtitle} variant={'body1'}>
+          {subtitle}
+        </Typography>
       </Typography>
-      {image && <img alt={title} src={image} />}
+      <div className={s.imageWrapper}>
+        {image && <img alt={title} className={s.image} src={image} />}
+      </div>
     </>
   )
 }

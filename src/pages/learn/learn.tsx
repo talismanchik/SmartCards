@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { ControlledRadioGroup } from '@/components/controlled/controlledRadioGroup'
 import { Button } from '@/components/ui/button'
@@ -7,12 +8,12 @@ import { Card } from '@/components/ui/card'
 import { LinkBack } from '@/components/ui/linkBack'
 import { ValueType } from '@/components/ui/radioGroup'
 import { Typography } from '@/components/ui/typography'
+import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { LearnImage } from '@/pages/learn/learnImage/learnImage'
+import { useGetLearnCardQuery } from '@/services/cards/cardsService'
 import { z } from 'zod'
 
 import s from './learn.module.scss'
-
-import image from '../../assets/defaultImg.png'
 
 export type GradeFormValues = z.infer<typeof gradeSchema>
 const gradeSchema = z.object({
@@ -20,7 +21,12 @@ const gradeSchema = z.object({
 })
 
 export const Learn = () => {
+  const { deckId } = useParams()
+  const { deckData } = useCardFilter()
   const [show, setShow] = useState(false)
+  const { data: learnData } = useGetLearnCardQuery({
+    id: deckId || '',
+  })
 
   const { control, handleSubmit } = useForm<GradeFormValues>()
 
@@ -42,11 +48,15 @@ export const Learn = () => {
       <LinkBack />
       <Card className={s.learnWrapper}>
         <Typography className={s.titleLearn} variant={'h1'}>
-          Learn Deck Name
+          Learn {deckData?.name}
         </Typography>
-        <LearnImage image={image} subtitle={'Question - qqq'} title={'Question'} />
-        <Typography className={s.count} variant={'subtitle2'}>
-          Count of attempts: 10
+        <LearnImage
+          image={learnData?.questionImg}
+          subtitle={learnData?.question}
+          title={'Question'}
+        />
+        <Typography className={s.count} variant={'body2'}>
+          Count of attempts: {learnData?.shots}
         </Typography>
         {!show && (
           <Button fullWidth onClick={() => setShow(true)}>
@@ -55,7 +65,11 @@ export const Learn = () => {
         )}
         {show && (
           <>
-            <LearnImage subtitle={'Answer - aaa'} title={'Answer'} />
+            <LearnImage
+              image={learnData?.answerImg}
+              subtitle={learnData?.answer}
+              title={'Answer'}
+            />
             <form className={s.gradeForm} onSubmit={onSubmit}>
               <Typography className={s.gradeTitle} variant={'subtitle1'}>
                 Rate yourself:

@@ -44,7 +44,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <Learn />,
-    path: '/learn',
+    path: `/cards/:deckId?/learn`,
   },
 ]
 

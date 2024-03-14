@@ -22,8 +22,34 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/decks/${id}/cards`,
         }),
       }),
+      getLearnCard: builder.query<GetLearnResponse, GetLearnCardArgs>({
+        providesTags: ['Decks'],
+        query: args => ({
+          url: `v1/decks/${args.id}/learn`,
+        }),
+      }),
     }
   },
 })
 
-export const { useGetDeckQuery, useGetDecksByIDCardsQuery } = cardsService
+export const { useGetDeckQuery, useGetDecksByIDCardsQuery, useGetLearnCardQuery } = cardsService
+
+type GetLearnCardArgs = {
+  id: string
+  previousCardId?: string
+}
+export type GetLearnResponse = {
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  grade: number
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  shots: number
+  updated: string
+  userId: string
+}
