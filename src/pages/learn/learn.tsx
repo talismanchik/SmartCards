@@ -27,8 +27,8 @@ export const Learn = () => {
 
   const [createLearnGrade] = useCreateLearnGradeMutation()
 
-  const onSubmit = (data: { grade: string }) => {
-    createLearnGrade({ cardId: learnData?.id || '', grade: +data.grade })
+  const onSubmit = (grade: string) => {
+    createLearnGrade({ cardId: learnData?.id || '', grade: +grade })
     setShow(false)
   }
 

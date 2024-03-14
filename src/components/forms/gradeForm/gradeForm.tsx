@@ -7,13 +7,13 @@ import { Typography } from '@/components/ui/typography'
 import s from './gradeForm.module.scss'
 
 type Props = {
-  onSubmit: (data: { grade: string }) => void
+  onSubmit: (grade: string) => void
 }
 export const GradeForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit } = useGradeForm()
 
   const onSubmitForm = handleSubmit(data => {
-    onSubmit(data)
+    onSubmit(data.grade)
   })
 
   return (
