@@ -1,4 +1,11 @@
-import { LoginArgs, MeResponse, UpdateProfileArgs, loginResponse } from '@/services/auth/auth.types'
+import {
+  LoginArgs,
+  MeResponse,
+  SignUpArgs,
+  SignUpResponse,
+  UpdateProfileArgs,
+  loginResponse,
+} from '@/services/auth/auth.types'
 import { baseApi } from '@/services/baseApi'
 
 export const authService = baseApi.injectEndpoints({
@@ -25,6 +32,14 @@ export const authService = baseApi.injectEndpoints({
           url: 'v1/auth/logout',
         }),
       }),
+      signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+        invalidatesTags: ['Me'],
+        query: body => ({
+          body,
+          method: 'POST',
+          url: 'v1/auth/sign-up',
+        }),
+      }),
       updateProfile: builder.mutation<MeResponse, UpdateProfileArgs>({
         invalidatesTags: ['Me'],
         query: body => ({
@@ -37,5 +52,10 @@ export const authService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetMeQuery, useLogInMutation, useLogOutMutation, useUpdateProfileMutation } =
-  authService
+export const {
+  useGetMeQuery,
+  useLogInMutation,
+  useLogOutMutation,
+  useSignUpMutation,
+  useUpdateProfileMutation,
+} = authService

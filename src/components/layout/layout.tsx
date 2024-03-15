@@ -26,7 +26,7 @@ export const Layout = () => {
 
   return (
     <div>
-      <Header meData={meData} />
+      <Header isAuthenticated={isAuthenticated} meData={meData} />
       <div className={s.container}>
         <Outlet context={{ isAuthenticated } satisfies AuthContext} />
       </div>

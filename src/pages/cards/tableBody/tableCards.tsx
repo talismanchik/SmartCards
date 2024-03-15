@@ -1,7 +1,10 @@
+import { useState } from 'react'
+
 import { GradeStar } from '@/components/ui/gradeStar'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
+import { DeleteCard } from '@/features/deleteCard'
 import { DeckByIDCardsItems } from '@/services/cards/cards.types'
 
 import s from '../cards.module.scss'
@@ -12,6 +15,8 @@ type Props = {
   isOwner: boolean
 }
 export const TableCards = ({ cards, isOwner }: Props) => {
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
+
   return (
     <TableRow key={cards.id}>
       <TableDataCell>
@@ -51,12 +56,20 @@ export const TableCards = ({ cards, isOwner }: Props) => {
       {isOwner && (
         <TableDataCell>
           <div className={s.iconsWrapper}>
-            <div className={s.iconWrap}>
-              <Icon className={s.editIcon} iconId={'edit'} />
-            </div>
             <button className={s.iconWrap}>
-              <Icon className={s.trashIcon} iconId={'trash_outline'} />
+              <Icon className={s.editIcon} iconId={'edit'} />
             </button>
+            <div>
+              <button className={s.iconWrap} onClick={() => setIsOpenDelete(true)}>
+                <Icon className={s.trashIcon} iconId={'trash_outline'} />
+              </button>
+              <DeleteCard
+                id={cards.id}
+                isOpen={isOpenDelete}
+                onOpenChange={value => setIsOpenDelete(value)}
+                title={'Delete Card'}
+              />
+            </div>
           </div>
         </TableDataCell>
       )}
