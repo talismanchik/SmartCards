@@ -115,7 +115,7 @@ export const Cards = () => {
       )}
       {isOpenAddNewCard && (
         <AddNewCard
-          deckId={deckId}
+          deckId={deckId ?? ''}
           isOpen={isOpenAddNewCard}
           onOpenChange={onOpenChange}
           title={'Add New Card'}

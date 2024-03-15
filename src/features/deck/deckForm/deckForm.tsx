@@ -76,12 +76,16 @@ export const DeckForm = ({
     onSubmitForm(formData)
   }
 
-  const onClose = () => {
-    onOpenChange(false)
+  const onClosedModal = (value: boolean) => {
+    if (!value) {
+      setCover(null)
+      reset()
+    }
+    onOpenChange(value)
   }
 
   return (
-    <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={title}>
+    <Modal className={s.wrapper} onOpenChange={onClosedModal} open={isOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput className={s.input} control={control} label={'Name Deck'} name={'name'} />
         {imageUrl && <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />}
@@ -98,7 +102,7 @@ export const DeckForm = ({
         </Button>
         <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
         <div className={s.buttonWrapper}>
-          <Button onClick={onClose} type={'button'} variant={'secondary'}>
+          <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>
             Cancel
           </Button>
           <Button type={'submit'}>{title}</Button>
