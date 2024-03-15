@@ -35,8 +35,8 @@ const addNewCardFormSchema = z.object({
 export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCardFormProps) => {
   const { control, handleSubmit, reset } = useForm<AddNewCardFormValues>({
     defaultValues: {
-      answer: 'Name',
-      question: 'Name',
+      answer: '',
+      question: '',
     },
     resolver: zodResolver(addNewCardFormSchema),
   })
@@ -111,7 +111,7 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
         <ControlledInput
           className={s.input}
           control={control}
-          label={'Question?'}
+          label={'Question'}
           name={'question'}
         />
         {imageUrlQuestion && (
@@ -131,9 +131,9 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
         <br />
         <br />
         <Typography className={s.title} variant={'h4'}>
-          Question
+          Answer
         </Typography>
-        <ControlledInput className={s.input} control={control} label={'Answer?'} name={'answer'} />
+        <ControlledInput className={s.input} control={control} label={'Answer'} name={'answer'} />
         {imageUrlAnswer && (
           <img alt={'cover'} className={s.coverImage} src={imageUrlAnswer as string} />
         )}
