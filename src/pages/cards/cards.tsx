@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -6,6 +7,7 @@ import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
+import { AddNewCard } from '@/features/card/addNewCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetMeQuery } from '@/services/auth/auth.service'
@@ -16,6 +18,15 @@ import s from './cards.module.scss'
 import defaultImage from '../../assets/default.png'
 
 export const Cards = () => {
+  // const isOwner = false
+
+  const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
+  const onOpenChange = (value: boolean) => {
+    setIsOpenAddNewCard(value)
+  }
+
+  console.log(isOpenAddNewCard)
+
   const { deckId } = useParams()
   const navigate = useNavigate()
 
@@ -56,7 +67,7 @@ export const Cards = () => {
           {deckData?.name}
         </Typography>
         {isOwner ? (
-          <Button>Add New Card</Button>
+          <Button onClick={() => setIsOpenAddNewCard(true)}>Add New Card</Button>
         ) : (
           data && data.items.length > 0 && <Button onClick={learnCardsHandler}>Learn Cards</Button>
         )}
@@ -101,6 +112,14 @@ export const Cards = () => {
         </>
       ) : (
         <div className={s.noContent}>No content with these terms...</div>
+      )}
+      {isOpenAddNewCard && (
+        <AddNewCard
+          deckId={deckId}
+          isOpen={isOpenAddNewCard}
+          onOpenChange={onOpenChange}
+          title={'Add New Card'}
+        />
       )}
     </div>
   )
