@@ -36,7 +36,12 @@ export const DeckForm = ({
   onSubmitForm,
   title,
 }: AddNewDeckFormProps) => {
-  const { control, handleSubmit, reset } = useForm<AddNewDeckFormValues>({
+  const {
+    control,
+    // formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<AddNewDeckFormValues>({
     defaultValues: {
       isPrivate: editValues?.isPrivate || false,
       name: editValues?.name || '',
@@ -78,7 +83,11 @@ export const DeckForm = ({
 
   const onClose = () => {
     onOpenChange(false)
+    setCover('')
+    reset()
   }
+
+  // console.log(errors)
 
   return (
     <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={title}>
