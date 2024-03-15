@@ -7,16 +7,16 @@ import { useDeleteDeckMutation } from '@/services/decks/decksService'
 import s from './deleteDeck.module.scss'
 
 type DeleteDeckProps = {
-  deckId: UpdateDeleteDeckArgs
   deckName: string
+  id: UpdateDeleteDeckArgs
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   title: string
 }
-export const DeleteDeck = ({ deckId, deckName, isOpen, onOpenChange, title }: DeleteDeckProps) => {
+export const DeleteDeck = ({ deckName, id, isOpen, onOpenChange, title }: DeleteDeckProps) => {
   const [deleteDeckById] = useDeleteDeckMutation()
   const onSubmitDeleteDeck = () => {
-    deleteDeckById(deckId)
+    deleteDeckById(id)
     onOpenChange(false)
   }
   const onClose = () => {
@@ -31,7 +31,7 @@ export const DeleteDeck = ({ deckId, deckName, isOpen, onOpenChange, title }: De
           {deckName}?
         </Typography>
         <br />
-        The deck will be removed.
+        The entity will be removed.
       </Typography>
       <div className={s.buttonWrapper}>
         <Button onClick={onClose} variant={'secondary'}>

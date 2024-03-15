@@ -23,6 +23,7 @@ export const SignInForm = ({ children, className, onSubmitForm }: Props) => {
     <form className={`${s.form} ${className}`} onSubmit={onSubmit}>
       <ControlledInput control={control} label={'Email'} name={'email'} />
       <ControlledInput
+        className={s.password}
         control={control}
         label={'Password'}
         name={'password'}

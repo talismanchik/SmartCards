@@ -22,7 +22,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <SignUp />,
-    path: '/logout',
+    path: '/signup',
   },
   {
     element: <ErrorPage />,
@@ -60,6 +60,7 @@ export const router = createBrowserRouter([
         element: <PublicRoutes />,
       },
     ],
+
     element: <Layout />,
   },
 ])

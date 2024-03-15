@@ -28,6 +28,13 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/decks/${args.cardId}/learn`,
         }),
       }),
+      deleteCard: builder.mutation<void, { id: string }>({
+        invalidatesTags: ['Cards'],
+        query: args => ({
+          method: 'DELETE',
+          url: `v1/cards/${args.id}`,
+        }),
+      }),
       getDeck: builder.query<GetDeckResponse, GetDeckArgs>({
         providesTags: ['Cards'],
         query: args => ({
@@ -54,6 +61,7 @@ export const cardsService = baseApi.injectEndpoints({
 export const {
   useCreateCardMutation,
   useCreateLearnGradeMutation,
+  useDeleteCardMutation,
   useGetDeckQuery,
   useGetDecksByIDCardsQuery,
   useGetLearnCardQuery,

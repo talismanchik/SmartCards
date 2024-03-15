@@ -77,8 +77,8 @@ export const TableDecks = ({ deck }: props) => {
               <Icon iconId={'trash_outline'} />
             </button>
             <DeleteDeck
-              deckId={{ id: deck.id }}
               deckName={deck.name}
+              id={{ id: deck.id }}
               isOpen={isOpenDelete}
               onOpenChange={value => setIsOpenDelete(value)}
               title={'Delete Deck'}
