@@ -11,7 +11,7 @@ import clsx from 'clsx'
 import s from './header.module.scss'
 
 type Props = {
-  isAuthenticated: boolean
+  isAuthenticated?: boolean
   meData?: MeResponse
 }
 
