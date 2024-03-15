@@ -1,17 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+
 import { SignUpForm } from '@/components/forms/signUpForm'
 import { SignUpFormValues } from '@/components/forms/signUpForm/useSignUpForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useSignUpMutation } from '@/services/auth/auth.service'
 
 import s from './signUp.module.scss'
 
-// type Props = {
-//   onSubmit?: (data: SignUpFormValues) => void
-// }
-
 export const SignUp = () => {
+  const navigate = useNavigate()
+  const [signUp] = useSignUpMutation()
   const onSubmitFormHandler = (data: SignUpFormValues) => {
-    console.log(data)
+    const { confirmPassword, ...newData } = data
+
+    signUp(newData)
+  }
+  const navigateToSignIn = () => {
+    navigate('/login')
   }
 
   return (
@@ -24,7 +30,13 @@ export const SignUp = () => {
         <Typography className={s.footerTitle} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography as={'a'} className={s.signIn} href={'#'} variant={'subtitle1'}>
+        <Typography
+          as={'a'}
+          className={s.signIn}
+          href={'#'}
+          onClick={navigateToSignIn}
+          variant={'subtitle1'}
+        >
           Sign In
         </Typography>
       </div>

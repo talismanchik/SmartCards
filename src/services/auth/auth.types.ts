@@ -18,3 +18,21 @@ export type LoginArgs = {
 }
 
 export type UpdateProfileArgs = FormData
+
+export type SignUpArgs = {
+  email: string
+  name?: string
+  password: string
+  sendConfirmationEmail: boolean
+  subject?: string
+}
+
+export type SignUpResponse = {
+  avatar: string
+  created: string
+  email: string
+  id: string
+  isEmailVerified: boolean
+  name: string
+  updated: string
+}

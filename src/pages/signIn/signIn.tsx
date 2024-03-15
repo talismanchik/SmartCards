@@ -35,8 +35,7 @@ export const SignIn = () => {
         <Typography
           as={'a'}
           className={s.signUp}
-          href={''}
-          onClick={() => navigate('/logout')}
+          onClick={() => navigate('/signup')}
           variant={'subtitle1'}
         >
           Sign Up
