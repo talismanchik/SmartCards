@@ -114,7 +114,12 @@ export const Cards = () => {
         <div className={s.noContent}>No content with these terms...</div>
       )}
       {isOpenAddNewCard && (
-        <AddNewCard isOpen={isOpenAddNewCard} onOpenChange={onOpenChange} title={'Add New Card'} />
+        <AddNewCard
+          deckId={deckId}
+          isOpen={isOpenAddNewCard}
+          onOpenChange={onOpenChange}
+          title={'Add New Card'}
+        />
       )}
     </div>
   )

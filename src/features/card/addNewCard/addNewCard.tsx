@@ -1,16 +1,17 @@
 import { CardForm } from '@/features/card/cardForm'
+import { useCreateCardMutation } from '@/services/cards/cardsService'
 
 type AddNewCardProps = {
+  deckId: string
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   title: string
 }
-export const AddNewCard = ({ isOpen, onOpenChange, title }: AddNewCardProps) => {
-  // const [deleteDeckById] = useDeleteDeckMutation()
+export const AddNewCard = ({ deckId, isOpen, onOpenChange, title }: AddNewCardProps) => {
+  const [createCard] = useCreateCardMutation()
 
   const onSubmitForm = (data: FormData) => {
-    // createCard(data)
-    alert('New card added: ' + data)
+    createCard({ data: data, id: deckId })
   }
 
   return (
