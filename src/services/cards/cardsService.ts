@@ -12,6 +12,14 @@ import {
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      createCard: builder.mutation<LearnResponse, { data: FormData; id: string }>({
+        invalidatesTags: ['Cards'],
+        query: args => ({
+          body: args.data,
+          method: 'POST',
+          url: `v1/decks/${args.id}/cards`,
+        }),
+      }),
       createLearnGrade: builder.mutation<LearnResponse, CreateLearnGradeArgs>({
         invalidatesTags: ['Cards'],
         query: args => ({
@@ -51,6 +59,7 @@ export const cardsService = baseApi.injectEndpoints({
 })
 
 export const {
+  useCreateCardMutation,
   useCreateLearnGradeMutation,
   useDeleteCardMutation,
   useGetDeckQuery,
