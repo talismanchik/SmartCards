@@ -56,18 +56,20 @@ export const TableCards = ({ cards, isOwner }: Props) => {
       {isOwner && (
         <TableDataCell>
           <div className={s.iconsWrapper}>
-            <div className={s.iconWrap}>
+            <button className={s.iconWrap}>
               <Icon className={s.editIcon} iconId={'edit'} />
-            </div>
-            <button className={s.iconWrap} onClick={() => setIsOpenDelete(true)}>
-              <Icon className={s.trashIcon} iconId={'trash_outline'} />
             </button>
-            <DeleteCard
-              id={cards.id}
-              isOpen={isOpenDelete}
-              onOpenChange={value => setIsOpenDelete(value)}
-              title={'Delete Card'}
-            />
+            <div>
+              <button className={s.iconWrap} onClick={() => setIsOpenDelete(true)}>
+                <Icon className={s.trashIcon} iconId={'trash_outline'} />
+              </button>
+              <DeleteCard
+                id={cards.id}
+                isOpen={isOpenDelete}
+                onOpenChange={value => setIsOpenDelete(value)}
+                title={'Delete Card'}
+              />
+            </div>
           </div>
         </TableDataCell>
       )}
