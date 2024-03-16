@@ -10,6 +10,7 @@ import { Layout, useAuthContext } from '@/components/layout/layout'
 import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks/decks'
 import { ErrorPage } from '@/pages/error/errorPage'
+import { Learn } from '@/pages/learn'
 import { Profile } from '@/pages/profile/profile'
 import { SignIn } from '@/pages/signIn/signIn'
 import { SignUp } from '@/pages/signUp'
@@ -21,7 +22,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <SignUp />,
-    path: '/logout',
+    path: '/signup',
   },
   {
     element: <ErrorPage />,
@@ -41,6 +42,10 @@ const privateRoutes: RouteObject[] = [
     element: <Profile />,
     path: '/profile',
   },
+  {
+    element: <Learn />,
+    path: `/cards/:deckId?/learn`,
+  },
 ]
 
 export const router = createBrowserRouter([
@@ -55,6 +60,7 @@ export const router = createBrowserRouter([
         element: <PublicRoutes />,
       },
     ],
+
     element: <Layout />,
   },
 ])

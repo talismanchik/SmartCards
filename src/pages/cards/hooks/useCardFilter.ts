@@ -28,8 +28,6 @@ export const useCardFilter = () => {
     id: deckId || '',
   })
 
-  console.log(deckData)
-
   const changeFiltersParam = (field: string, value: null | string) => {
     const query = Object.fromEntries(searchParams)
 

@@ -15,10 +15,11 @@ import clsx from 'clsx'
 import s from './header.module.scss'
 
 type Props = {
+  isAuthenticated?: boolean
   meData?: MeResponse
 }
 
-export const Header = ({ meData }: Props) => {
+export const Header = ({ isAuthenticated, meData }: Props) => {
   const classNames = {
     container: clsx(s.container),
     header: clsx(s.header),
@@ -46,14 +47,14 @@ export const Header = ({ meData }: Props) => {
         >
           <Logo />
         </a>
-        {meData ? (
+        {isAuthenticated ? (
           <div className={classNames.userInfo}>
             <Typography
               className={classNames.userName}
               onClick={navigateToProfile}
               variant={'subtitle1'}
             >
-              {meData.name}
+              {meData && meData.name}
             </Typography>
             <DropdownNew
               label={
@@ -61,7 +62,7 @@ export const Header = ({ meData }: Props) => {
                   <img
                     alt={'user avatar'}
                     className={classNames.userAvatar}
-                    src={meData.avatar ?? defaultAvatar}
+                    src={meData?.avatar ?? defaultAvatar}
                   />
                   <div className={s.dropdownUserInfo}>
                     <Typography variant={'subtitle2'}>Ivan</Typography>
@@ -75,7 +76,7 @@ export const Header = ({ meData }: Props) => {
                 <img
                   alt={'User avatar'}
                   className={classNames.userAvatar}
-                  src={meData.avatar ?? defaultAvatar}
+                  src={meData?.avatar ?? defaultAvatar}
                 />
               }
             >
@@ -91,7 +92,9 @@ export const Header = ({ meData }: Props) => {
             </DropdownNew>
           </div>
         ) : (
-          <Button variant={'secondary'}>Sign in</Button>
+          <Button onClick={() => navigate('/login')} variant={'secondary'}>
+            Sign in
+          </Button>
         )}
       </div>
     </header>

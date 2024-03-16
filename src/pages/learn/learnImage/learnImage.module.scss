@@ -1,0 +1,20 @@
+.title {
+  display: inline-block;
+}
+
+.subtitle {
+  display: inline;
+}
+
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+
+  .image {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+  }
+}

@@ -52,3 +52,39 @@ export type GetDeckAuthorResponse = {
   id: string
   name: string
 }
+
+export type CreateLearnGradeArgs = {
+  cardId: string
+  grade: number
+}
+
+export type GetLearnCardArgs = {
+  id: string
+  previousCardId?: string
+}
+
+export type CreateCardArgs = {
+  answer: string
+  answerImg?: string
+  answerVideo?: string
+  id: string
+  question: string
+  questionImg?: string
+  questionVideo?: string
+}
+
+export type LearnResponse = {
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  grade: number
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  shots: number
+  updated: string
+  userId: string
+}

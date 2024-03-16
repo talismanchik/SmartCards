@@ -16,12 +16,22 @@ type Props = {
   onOpenChange: (value: boolean) => void
   // onSubmit: () => void
   open: boolean
+  scrollClassName?: string
   title: string
 }
-export const Modal = ({ buttons, children, className, onOpenChange, open, title }: Props) => {
+export const Modal = ({
+  buttons,
+  children,
+  className,
+  onOpenChange,
+  open,
+  scrollClassName,
+  title,
+}: Props) => {
   const classNames = {
-    content: clsx(s.content, className),
+    content: clsx(className, s.content),
     overlay: clsx(s.overlay),
+    scroll: clsx(s.scroll),
   }
 
   return (
@@ -31,7 +41,7 @@ export const Modal = ({ buttons, children, className, onOpenChange, open, title 
           <Content className={classNames.content}>
             <Card>
               <ModalHeader title={title} />
-              <ContentContainer>{children}</ContentContainer>
+              <ContentContainer className={scrollClassName}>{children}</ContentContainer>
               <ModalFooter buttons={buttons} />
             </Card>
           </Content>
