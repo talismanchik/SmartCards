@@ -1,31 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox'
 import { ControlledInput } from '@/components/controlled/controlledInput'
 import { Button } from '@/components/ui/button'
 import { ImageContainer } from '@/components/ui/imageContainer'
 import { Modal } from '@/components/ui/modal/Modal'
+import { useDeckForm } from '@/features/deck/deckForm/useDeckForm'
 import { EditValues } from '@/features/deck/updateDeck'
 import { CreateDeckArgs } from '@/services/decks/decks.types'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './deckForm.module.scss'
 
-type AddNewDeckFormProps = {
+type DeckFormProps = {
   editValues?: EditValues
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onSubmitForm: (data: FormData) => void
   title: string
 }
-export type AddNewDeckFormValues = z.infer<typeof addNewDeckFormSchema>
-
-const addNewDeckFormSchema = z.object({
-  isPrivate: z.boolean().optional().default(false),
-  name: z.string(),
-})
 
 export const DeckForm = ({
   editValues,
@@ -33,21 +25,15 @@ export const DeckForm = ({
   onOpenChange,
   onSubmitForm,
   title,
-}: AddNewDeckFormProps) => {
-  const { control, handleSubmit, reset, resetField } = useForm<AddNewDeckFormValues>({
-    defaultValues: {
-      isPrivate: editValues?.isPrivate || false,
-      name: editValues?.name || '',
-    },
-    resolver: zodResolver(addNewDeckFormSchema),
-  })
+}: DeckFormProps) => {
+  const { control, handleSubmit, reset, resetField } = useDeckForm(editValues)
 
   useEffect(() => {
     resetField('isPrivate', { defaultValue: editValues?.isPrivate })
     resetField('name', { defaultValue: editValues?.name })
   }, [editValues, resetField])
 
-  const [cover, setCover] = useState<File | null | string>(null)
+  const [cover, setCover] = useState<File | null>(null)
 
   const handleSaveFile = (file: File | undefined) => {
     setCover(file || null)
