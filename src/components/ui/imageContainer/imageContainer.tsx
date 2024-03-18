@@ -24,7 +24,7 @@ export const ImageContainer = ({ handleSaveFile, imageUrl }: Props) => {
   }
 
   return (
-    <div>
+    <>
       {imageUrl && <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />}
       <Button
         className={s.button}
@@ -37,6 +37,6 @@ export const ImageContainer = ({ handleSaveFile, imageUrl }: Props) => {
         <Icon iconId={'image_outline'} />
         <Typography variant={'subtitle2'}>Upload Image</Typography>
       </Button>
-    </div>
+    </>
   )
 }

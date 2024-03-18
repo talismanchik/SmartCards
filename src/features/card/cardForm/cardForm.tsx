@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledInput } from '@/components/controlled/controlledInput'
 import { Button } from '@/components/ui/button'
-import { Icon } from '@/components/ui/icon/Icon'
-import { InputFile } from '@/components/ui/inputFile'
+import { ImageContainer } from '@/components/ui/imageContainer'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
 import { EditValues } from '@/features/card/updateCard'
@@ -54,32 +53,15 @@ export const CardForm = ({
     resetField('answer', { defaultValue: editValues?.answer })
   }, [editValues, resetField])
 
-  const fileInputRefQuestion = useRef<HTMLInputElement | null>(null)
-  const fileInputRefAnswer = useRef<HTMLInputElement | null>(null)
   const [coverQuestion, setCoverQuestion] = useState<File | null | string>(null)
   const [coverAnswer, setCoverAnswer] = useState<File | null | string>(null)
 
-  const handleFileChangeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-
-    setCoverQuestion(selectedFile || null)
+  const handleSaveFileQuestion = (file: File | undefined) => {
+    setCoverQuestion(file || null)
   }
 
-  const openFileInputQuestion = () => {
-    if (fileInputRefQuestion.current) {
-      fileInputRefQuestion.current.click()
-    }
-  }
-  const handleFileChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-
-    setCoverAnswer(selectedFile || null)
-  }
-
-  const openFileInputAnswer = () => {
-    if (fileInputRefAnswer.current) {
-      fileInputRefAnswer.current.click()
-    }
+  const handleSaveFileAnswer = (file: File | undefined) => {
+    setCoverAnswer(file || null)
   }
 
   const imageUrlQuestion = coverQuestion
@@ -111,14 +93,19 @@ export const CardForm = ({
     onSubmitForm(formData)
   }
 
-  const onClose = () => {
-    onOpenChange(false)
+  const onClosedModal = (value: boolean) => {
+    if (!value) {
+      setCoverQuestion(null)
+      setCoverAnswer(null)
+      reset()
+    }
+    onOpenChange(value)
   }
 
   return (
     <Modal
       className={s.wrapper}
-      onOpenChange={onOpenChange}
+      onOpenChange={onClosedModal}
       open={isOpen}
       scrollClassName={s.scroll}
       title={title}
@@ -133,42 +120,16 @@ export const CardForm = ({
           label={'Question'}
           name={'question'}
         />
-        {imageUrlQuestion && (
-          <img alt={'cover'} className={s.coverImage} src={imageUrlQuestion as string} />
-        )}
-        <Button
-          className={s.button}
-          fullWidth
-          onClick={openFileInputQuestion}
-          type={'button'}
-          variant={'secondary'}
-        >
-          <InputFile handleFileChange={handleFileChangeQuestion} ref={fileInputRefQuestion} />
-          <Icon iconId={'image_outline'} />
-          <Typography variant={'subtitle2'}>Change Image</Typography>
-        </Button>
+        <ImageContainer handleSaveFile={handleSaveFileQuestion} imageUrl={imageUrlQuestion} />
         <br />
         <br />
         <Typography className={s.title} variant={'h4'}>
           Answer
         </Typography>
         <ControlledInput className={s.input} control={control} label={'Answer'} name={'answer'} />
-        {imageUrlAnswer && (
-          <img alt={'cover'} className={s.coverImage} src={imageUrlAnswer as string} />
-        )}
-        <Button
-          className={s.button}
-          fullWidth
-          onClick={openFileInputAnswer}
-          type={'button'}
-          variant={'secondary'}
-        >
-          <InputFile handleFileChange={handleFileChangeAnswer} ref={fileInputRefAnswer} />
-          <Icon iconId={'image_outline'} />
-          <Typography variant={'subtitle2'}>Change Image</Typography>
-        </Button>
+        <ImageContainer handleSaveFile={handleSaveFileAnswer} imageUrl={imageUrlAnswer} />
         <div className={s.buttonWrapper}>
-          <Button onClick={onClose} type={'button'} variant={'secondary'}>
+          <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>
             Cancel
           </Button>
           <Button type={'submit'}>{title}</Button>
