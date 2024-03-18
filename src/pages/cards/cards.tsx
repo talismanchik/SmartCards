@@ -11,15 +11,12 @@ import { AddNewCard } from '@/features/card/addNewCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetMeQuery } from '@/services/auth/auth.service'
-import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
 
 import s from './cards.module.scss'
 
 import defaultImage from '../../assets/default.png'
 
 export const Cards = () => {
-  // const isOwner = false
-
   const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
   const onOpenChange = (value: boolean) => {
     setIsOpenAddNewCard(value)
@@ -32,28 +29,19 @@ export const Cards = () => {
 
   const {
     currentPage,
-    debounceSearch,
+    data,
     deckData,
     inputSearch,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
-    orderBy,
     portionSize,
     sort,
   } = useCardFilter()
 
   const { data: meData } = useGetMeQuery()
   const isOwner = deckData?.userId === meData?.id
-
-  const { data } = useGetDecksByIDCardsQuery({
-    currentPage: +currentPage,
-    id: deckId || '',
-    itemsPerPage: +portionSize,
-    orderBy: orderBy,
-    question: debounceSearch,
-  })
 
   const learnCardsHandler = () => {
     navigate(`/cards/${deckId}/learn`)

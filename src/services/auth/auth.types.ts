@@ -17,7 +17,7 @@ export type LoginArgs = {
   rememberMe: boolean
 }
 
-export type UpdateProfileArgs = { name: string } | FormData
+export type UpdateProfileArgs = FormData
 
 export type SignUpArgs = {
   email: string

@@ -26,7 +26,6 @@ export const UpdateDeck = ({
 }: UpdateDeckProps) => {
   const [updateDeckById] = useUpdateDeckMutation()
   const onSubmitForm = (data: FormData) => {
-    console.log(data)
     updateDeckById({ body: data, id })
   }
   const editValues: EditValues = {
