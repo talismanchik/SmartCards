@@ -11,7 +11,6 @@ export const AddNewDeck = ({ isOpen, onOpenChange, title }: AddNewDeckProps) => 
   const [createDeck] = useCreateDeckMutation()
   const onSubmitForm = (data: FormData) => {
     createDeck(data)
-    console.log(data)
   }
 
   return (
