@@ -36,7 +36,12 @@ export const DeckForm = ({
   onSubmitForm,
   title,
 }: AddNewDeckFormProps) => {
-  const { control, handleSubmit, reset } = useForm<AddNewDeckFormValues>({
+  const {
+    control,
+    // formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<AddNewDeckFormValues>({
     defaultValues: {
       isPrivate: editValues?.isPrivate || false,
       name: editValues?.name || '',
