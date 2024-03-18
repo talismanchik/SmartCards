@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled/controlledCheckbox'
@@ -36,13 +36,19 @@ export const DeckForm = ({
   onSubmitForm,
   title,
 }: AddNewDeckFormProps) => {
-  const { control, handleSubmit, reset } = useForm<AddNewDeckFormValues>({
+  const { control, handleSubmit, reset, resetField } = useForm<AddNewDeckFormValues>({
     defaultValues: {
       isPrivate: editValues?.isPrivate || false,
       name: editValues?.name || '',
     },
     resolver: zodResolver(addNewDeckFormSchema),
   })
+
+  useEffect(() => {
+    resetField('isPrivate', { defaultValue: editValues?.isPrivate })
+    resetField('name', { defaultValue: editValues?.name })
+  }, [editValues, resetField])
+
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [cover, setCover] = useState<File | null | string>(null)
 
