@@ -5,12 +5,12 @@ import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import { UpdateCard } from '@/features/card/updateCard'
-import { DeleteCard } from '@/features/deleteCard'
 import { DeckByIDCardsItems } from '@/services/cards/cards.types'
 
 import s from '../cards.module.scss'
 
 import defaultImage from '../../../assets/default.png'
+import { DeleteCard } from '../../../features/card/deleteCard'
 type Props = {
   cards: DeckByIDCardsItems
   isOwner: boolean
