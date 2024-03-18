@@ -9,6 +9,7 @@ import { AddNewDeck } from '@/features/deck/addNewDeck'
 import { Filters } from '@/pages/decks/filters/filters'
 import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import { TableDecks } from '@/pages/decks/tableBody/tableDecks'
+import { useGetMeQuery } from '@/services/auth/auth.service'
 import clsx from 'clsx'
 
 import s from './decks.module.scss'
@@ -26,6 +27,8 @@ export const Decks = () => {
     sort,
   } = useDecksFilter()
 
+  const { data: meData } = useGetMeQuery()
+  const myId = meData?.id
   const [isOpen, setIsOpen] = useState(false)
   const pagination = getDecksData?.pagination
 
@@ -58,7 +61,7 @@ export const Decks = () => {
         <Filters />
         <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
           {getDecksData?.items.map(item => {
-            return <TableDecks deck={item} key={item.id} />
+            return <TableDecks deck={item} key={item.id} myId={myId} />
           })}
         </TableComponent>
         {pagination && (

@@ -21,9 +21,6 @@ export const Cards = () => {
   const onOpenChange = (value: boolean) => {
     setIsOpenAddNewCard(value)
   }
-
-  console.log(isOpenAddNewCard)
-
   const { deckId } = useParams()
   const navigate = useNavigate()
 
