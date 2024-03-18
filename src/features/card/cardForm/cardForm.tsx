@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledInput } from '@/components/controlled/controlledInput'
@@ -7,12 +7,14 @@ import { Icon } from '@/components/ui/icon/Icon'
 import { InputFile } from '@/components/ui/inputFile'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
+import { EditValues } from '@/features/card/updateCard'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './cardForm.module.scss'
 
 type AddNewCardFormProps = {
+  editValues?: EditValues
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onSubmitForm: (data: FormData) => void
@@ -32,14 +34,26 @@ const addNewCardFormSchema = z.object({
   question: z.string(),
 })
 
-export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCardFormProps) => {
-  const { control, handleSubmit, reset } = useForm<AddNewCardFormValues>({
+export const CardForm = ({
+  editValues,
+  isOpen,
+  onOpenChange,
+  onSubmitForm,
+  title,
+}: AddNewCardFormProps) => {
+  const { control, handleSubmit, reset, resetField } = useForm<AddNewCardFormValues>({
     defaultValues: {
-      answer: '',
-      question: '',
+      answer: editValues?.answer ?? '',
+      question: editValues?.question ?? '',
     },
     resolver: zodResolver(addNewCardFormSchema),
   })
+
+  useEffect(() => {
+    resetField('question', { defaultValue: editValues?.question })
+    resetField('answer', { defaultValue: editValues?.answer })
+  }, [editValues, resetField])
+
   const fileInputRefQuestion = useRef<HTMLInputElement | null>(null)
   const fileInputRefAnswer = useRef<HTMLInputElement | null>(null)
   const [coverQuestion, setCoverQuestion] = useState<File | null | string>(null)
@@ -68,8 +82,13 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
     }
   }
 
-  const imageUrlQuestion = coverQuestion ? URL.createObjectURL(coverQuestion as File) : null
-  const imageUrlAnswer = coverAnswer ? URL.createObjectURL(coverAnswer as File) : null
+  const imageUrlQuestion = coverQuestion
+    ? URL.createObjectURL(coverQuestion as File)
+    : editValues?.coverQuestion
+
+  const imageUrlAnswer = coverAnswer
+    ? URL.createObjectURL(coverAnswer as File)
+    : editValues?.coverAnswer
 
   const onSubmit = (data: AddNewCardArgs) => {
     onOpenChange(false)
