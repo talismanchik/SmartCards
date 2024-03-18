@@ -10,7 +10,7 @@ import { EditValues } from '@/features/card/updateCard'
 
 import s from './cardForm.module.scss'
 
-type AddNewCardFormProps = {
+type CardFormProps = {
   editValues?: EditValues
   isOpen: boolean
   onOpenChange: (value: boolean) => void
@@ -30,7 +30,7 @@ export const CardForm = ({
   onOpenChange,
   onSubmitForm,
   title,
-}: AddNewCardFormProps) => {
+}: CardFormProps) => {
   const { control, handleSubmit, reset, resetField } = useCardForm(editValues)
 
   useEffect(() => {
@@ -87,6 +87,13 @@ export const CardForm = ({
     onOpenChange(value)
   }
 
+  const deleteCoverQuestion = () => {
+    setCoverQuestion(null)
+  }
+  const deleteCoverAnswer = () => {
+    setCoverAnswer(null)
+  }
+
   return (
     <Modal
       className={s.wrapper}
@@ -103,12 +110,20 @@ export const CardForm = ({
           label={'Question'}
           name={'question'}
         />
-        <ImageContainer handleSaveFile={handleSaveFileQuestion} imageUrl={imageUrlQuestion} />
+        <ImageContainer
+          deleteCoverHandler={deleteCoverQuestion}
+          handleSaveFile={handleSaveFileQuestion}
+          imageUrl={imageUrlQuestion}
+        />
         <br />
         <br />
         <Typography variant={'h4'}>Answer</Typography>
         <ControlledInput className={s.input} control={control} label={'Answer'} name={'answer'} />
-        <ImageContainer handleSaveFile={handleSaveFileAnswer} imageUrl={imageUrlAnswer} />
+        <ImageContainer
+          deleteCoverHandler={deleteCoverAnswer}
+          handleSaveFile={handleSaveFileAnswer}
+          imageUrl={imageUrlAnswer}
+        />
         <div className={s.buttonWrapper}>
           <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>
             Cancel

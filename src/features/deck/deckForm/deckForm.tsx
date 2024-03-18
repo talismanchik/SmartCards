@@ -27,13 +27,12 @@ export const DeckForm = ({
   title,
 }: DeckFormProps) => {
   const { control, handleSubmit, reset, resetField } = useDeckForm(editValues)
+  const [cover, setCover] = useState<File | null>(null)
 
   useEffect(() => {
     resetField('isPrivate', { defaultValue: editValues?.isPrivate })
     resetField('name', { defaultValue: editValues?.name })
   }, [editValues, resetField])
-
-  const [cover, setCover] = useState<File | null>(null)
 
   const handleSaveFile = (file: File | undefined) => {
     setCover(file || null)
@@ -65,11 +64,20 @@ export const DeckForm = ({
     onOpenChange(value)
   }
 
+  const deleteCoverHandler = () => {
+    debugger
+    setCover(null)
+  }
+
   return (
     <Modal className={s.wrapper} onOpenChange={onClosedModal} open={isOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput className={s.input} control={control} label={'Name Deck'} name={'name'} />
-        <ImageContainer handleSaveFile={handleSaveFile} imageUrl={imageUrl} />
+        <ImageContainer
+          deleteCoverHandler={deleteCoverHandler}
+          handleSaveFile={handleSaveFile}
+          imageUrl={imageUrl}
+        />
         <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
         <div className={s.buttonWrapper}>
           <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>

@@ -14,15 +14,13 @@ import { useGetMeQuery } from '@/services/auth/auth.service'
 
 import s from './cards.module.scss'
 
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/defaultImg.png'
 
 export const Cards = () => {
   const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
   const onOpenChange = (value: boolean) => {
     setIsOpenAddNewCard(value)
   }
-
-  console.log(isOpenAddNewCard)
 
   const { deckId } = useParams()
   const navigate = useNavigate()

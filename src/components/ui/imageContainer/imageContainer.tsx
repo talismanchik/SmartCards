@@ -8,10 +8,11 @@ import { Typography } from '@/components/ui/typography'
 import s from './imageContainer.module.scss'
 
 type Props = {
+  deleteCoverHandler: () => void
   handleSaveFile: (file: File | undefined) => void
   imageUrl: File | null | string | undefined
 }
-export const ImageContainer = ({ handleSaveFile, imageUrl }: Props) => {
+export const ImageContainer = ({ deleteCoverHandler, handleSaveFile, imageUrl }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const openFileInput = () => {
@@ -25,7 +26,14 @@ export const ImageContainer = ({ handleSaveFile, imageUrl }: Props) => {
 
   return (
     <>
-      {imageUrl && <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />}
+      {imageUrl && (
+        <div className={s.imageWrapper}>
+          <img alt={'cover'} className={s.coverImage} src={imageUrl as string} />
+          <div className={s.icon} onClick={() => deleteCoverHandler()}>
+            <Icon iconId={'trash_outline'} />
+          </div>
+        </div>
+      )}
       <Button
         className={s.button}
         fullWidth
@@ -35,7 +43,7 @@ export const ImageContainer = ({ handleSaveFile, imageUrl }: Props) => {
       >
         <InputFile handleFileChange={handleFileChange} ref={fileInputRef} />
         <Icon iconId={'image_outline'} />
-        <Typography variant={'subtitle2'}>Upload Image</Typography>
+        <Typography variant={'subtitle2'}>{imageUrl ? 'Change Image' : 'Upload Image'}</Typography>
       </Button>
     </>
   )
