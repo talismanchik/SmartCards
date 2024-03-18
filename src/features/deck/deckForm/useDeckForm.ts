@@ -8,7 +8,7 @@ export type DeckFormValues = z.infer<typeof deckFormSchema>
 
 export const deckFormSchema = z.object({
   isPrivate: z.boolean().optional().default(false),
-  name: z.string(),
+  name: z.string().min(3).max(30),
 })
 
 export const useDeckForm = (editValues: EditValues | undefined) => {

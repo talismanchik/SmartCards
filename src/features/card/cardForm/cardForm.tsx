@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 import { ControlledInput } from '@/components/controlled/controlledInput'
 import { Button } from '@/components/ui/button'
 import { ImageContainer } from '@/components/ui/imageContainer'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
+import { useCardForm } from '@/features/card/cardForm/useCardForm'
 import { EditValues } from '@/features/card/updateCard'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './cardForm.module.scss'
 
@@ -20,18 +18,11 @@ type AddNewCardFormProps = {
   title: string
 }
 
-export type AddNewCardFormValues = z.infer<typeof addNewCardFormSchema>
-
 type AddNewCardArgs = {
   answer: string
   cover?: File | null | string
   question: string
 }
-
-const addNewCardFormSchema = z.object({
-  answer: z.string(),
-  question: z.string(),
-})
 
 export const CardForm = ({
   editValues,
@@ -40,13 +31,7 @@ export const CardForm = ({
   onSubmitForm,
   title,
 }: AddNewCardFormProps) => {
-  const { control, handleSubmit, reset, resetField } = useForm<AddNewCardFormValues>({
-    defaultValues: {
-      answer: editValues?.answer ?? '',
-      question: editValues?.question ?? '',
-    },
-    resolver: zodResolver(addNewCardFormSchema),
-  })
+  const { control, handleSubmit, reset, resetField } = useCardForm(editValues)
 
   useEffect(() => {
     resetField('question', { defaultValue: editValues?.question })
@@ -110,10 +95,8 @@ export const CardForm = ({
       scrollClassName={s.scroll}
       title={title}
     >
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <Typography className={s.title} variant={'h4'}>
-          Question
-        </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography variant={'h4'}>Question</Typography>
         <ControlledInput
           className={s.input}
           control={control}
@@ -123,9 +106,7 @@ export const CardForm = ({
         <ImageContainer handleSaveFile={handleSaveFileQuestion} imageUrl={imageUrlQuestion} />
         <br />
         <br />
-        <Typography className={s.title} variant={'h4'}>
-          Answer
-        </Typography>
+        <Typography variant={'h4'}>Answer</Typography>
         <ControlledInput className={s.input} control={control} label={'Answer'} name={'answer'} />
         <ImageContainer handleSaveFile={handleSaveFileAnswer} imageUrl={imageUrlAnswer} />
         <div className={s.buttonWrapper}>
