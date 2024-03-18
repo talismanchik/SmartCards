@@ -81,13 +81,13 @@ export const DeckForm = ({
     onSubmitForm(formData)
   }
 
-  const onClose = () => {
-    onOpenChange(false)
-    setCover('')
-    reset()
+  const onClosedModal = (value: boolean) => {
+    if (!value) {
+      setCover(null)
+      reset()
+    }
+    onOpenChange(value)
   }
-
-  // console.log(errors)
 
   return (
     <Modal className={s.wrapper} onOpenChange={onOpenChange} open={isOpen} title={title}>
