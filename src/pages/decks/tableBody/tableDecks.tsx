@@ -14,12 +14,15 @@ import s from '@/components/ui/table/table.module.scss'
 
 type props = {
   deck: Deck
+  myId: string | undefined
 }
 
-export const TableDecks = ({ deck }: props) => {
+export const TableDecks = ({ deck, myId }: props) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const navigate = useNavigate()
+  const isMyDeck = deck.author.id === myId
+
   const onLinkToCards = (id: string) => {
     navigate(`/cards/${id}`)
   }
@@ -54,36 +57,41 @@ export const TableDecks = ({ deck }: props) => {
       </TableDataCell>
       <TableDataCell>
         <div className={s.iconContainer}>
-          <div>
-            <button className={styles.iconWrapper} onClick={() => setIsOpenUpdate(true)}>
-              <Icon iconId={'edit_outline'} />
-            </button>
-            <UpdateDeck
-              cover={deck.cover}
-              id={deck.id}
-              isOpen={isOpenUpdate}
-              isPrivate={deck.isPrivate}
-              name={deck.name}
-              onOpenChange={value => setIsOpenUpdate(value)}
-              title={'Update Deck'}
-            />
-          </div>
+          {isMyDeck && (
+            <div>
+              <button className={styles.iconWrapper} onClick={() => setIsOpenUpdate(true)}>
+                <Icon iconId={'edit_outline'} />
+              </button>
+              <UpdateDeck
+                cover={deck.cover}
+                id={deck.id}
+                isOpen={isOpenUpdate}
+                isPrivate={deck.isPrivate}
+                name={deck.name}
+                onOpenChange={value => setIsOpenUpdate(value)}
+                title={'Update Deck'}
+              />
+            </div>
+          )}
 
           <a className={styles.iconWrapper}>
             <Icon iconId={'play_circle_outline'} />
           </a>
-          <div>
-            <button className={styles.iconWrapper} onClick={() => setIsOpenDelete(true)}>
-              <Icon iconId={'trash_outline'} />
-            </button>
-            <DeleteDeck
-              deckName={deck.name}
-              id={{ id: deck.id }}
-              isOpen={isOpenDelete}
-              onOpenChange={value => setIsOpenDelete(value)}
-              title={'Delete Deck'}
-            />
-          </div>
+
+          {isMyDeck && (
+            <div>
+              <button className={styles.iconWrapper} onClick={() => setIsOpenDelete(true)}>
+                <Icon iconId={'trash_outline'} />
+              </button>
+              <DeleteDeck
+                deckName={deck.name}
+                id={{ id: deck.id }}
+                isOpen={isOpenDelete}
+                onOpenChange={value => setIsOpenDelete(value)}
+                title={'Delete Deck'}
+              />
+            </div>
+          )}
         </div>
       </TableDataCell>
     </TableRow>
