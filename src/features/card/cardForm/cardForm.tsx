@@ -36,10 +36,17 @@ export const CardForm = ({
   useEffect(() => {
     resetField('question', { defaultValue: editValues?.question })
     resetField('answer', { defaultValue: editValues?.answer })
+
+    setCoverQuestion(editValues?.coverQuestion ?? null)
+    setCoverAnswer(editValues?.coverAnswer ?? null)
   }, [editValues, resetField])
 
-  const [coverQuestion, setCoverQuestion] = useState<File | null | string>(null)
-  const [coverAnswer, setCoverAnswer] = useState<File | null | string>(null)
+  const [coverQuestion, setCoverQuestion] = useState<File | null | string>(
+    editValues?.coverQuestion ?? null
+  )
+  const [coverAnswer, setCoverAnswer] = useState<File | null | string>(
+    editValues?.coverAnswer ?? null
+  )
 
   const handleSaveFileQuestion = (file: File | undefined) => {
     setCoverQuestion(file || null)
@@ -49,18 +56,16 @@ export const CardForm = ({
     setCoverAnswer(file || null)
   }
 
-  const imageUrlQuestion = coverQuestion
-    ? URL.createObjectURL(coverQuestion as File)
-    : editValues?.coverQuestion
-
-  const imageUrlAnswer = coverAnswer
-    ? URL.createObjectURL(coverAnswer as File)
-    : editValues?.coverAnswer
-
   const onSubmit = (data: AddNewCardArgs) => {
     onOpenChange(false)
     const formData = new FormData()
 
+    if (!coverQuestion) {
+      formData.append('questionImg', '')
+    }
+    if (!coverAnswer) {
+      formData.append('answerImg', '')
+    }
     if (coverQuestion instanceof File) {
       formData.append('questionImg', coverQuestion)
     }
@@ -94,6 +99,17 @@ export const CardForm = ({
     setCoverAnswer(null)
   }
 
+  const compileToImage = (file: File | null | undefined) => {
+    if (!file) {
+      return
+    }
+    if (file instanceof File) {
+      return URL.createObjectURL(file as File)
+    }
+
+    return file
+  }
+
   return (
     <Modal
       className={s.wrapper}
@@ -113,7 +129,7 @@ export const CardForm = ({
         <ImageContainer
           deleteCoverHandler={deleteCoverQuestion}
           handleSaveFile={handleSaveFileQuestion}
-          imageUrl={imageUrlQuestion}
+          imageUrl={compileToImage(coverQuestion as File)}
         />
         <br />
         <br />
@@ -122,7 +138,7 @@ export const CardForm = ({
         <ImageContainer
           deleteCoverHandler={deleteCoverAnswer}
           handleSaveFile={handleSaveFileAnswer}
-          imageUrl={imageUrlAnswer}
+          imageUrl={compileToImage(coverAnswer as File)}
         />
         <div className={s.buttonWrapper}>
           <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>

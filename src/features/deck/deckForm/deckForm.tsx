@@ -27,22 +27,28 @@ export const DeckForm = ({
   title,
 }: DeckFormProps) => {
   const { control, handleSubmit, reset, resetField } = useDeckForm(editValues)
-  const [cover, setCover] = useState<File | null>(null)
+  const [cover, setCover] = useState<File | null | string>(editValues?.cover ?? null)
 
   useEffect(() => {
     resetField('isPrivate', { defaultValue: editValues?.isPrivate })
     resetField('name', { defaultValue: editValues?.name })
+
+    setCover(editValues?.cover ?? null)
   }, [editValues, resetField])
 
   const handleSaveFile = (file: File | undefined) => {
     setCover(file || null)
   }
 
-  const imageUrl = cover ? URL.createObjectURL(cover as File) : editValues?.cover
+  // const imageUrl = cover ? URL.createObjectURL(cover as File) : editValues?.cover
 
   const onSubmit = (data: CreateDeckArgs) => {
     onOpenChange(false)
     const formData = new FormData()
+
+    if (!cover) {
+      formData.append('cover', '')
+    }
 
     if (cover instanceof File) {
       formData.append('cover', cover)
@@ -65,8 +71,18 @@ export const DeckForm = ({
   }
 
   const deleteCoverHandler = () => {
-    debugger
     setCover(null)
+  }
+
+  const compileToImage = (file: File | null | undefined) => {
+    if (!file) {
+      return
+    }
+    if (file instanceof File) {
+      return URL.createObjectURL(file as File)
+    }
+
+    return file
   }
 
   return (
@@ -76,7 +92,7 @@ export const DeckForm = ({
         <ImageContainer
           deleteCoverHandler={deleteCoverHandler}
           handleSaveFile={handleSaveFile}
-          imageUrl={imageUrl}
+          imageUrl={compileToImage(cover as File)}
         />
         <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
         <div className={s.buttonWrapper}>
