@@ -96,11 +96,25 @@
           align-items: center;
           justify-content: center;
 
+          .iconWrapperPlay {
+            all: unset;
+            cursor: pointer;
+
+            &:hover {
+              scale: 1.1;
+            }
+
+            &.disabled {
+              pointer-events: none;
+              stroke: var(--color-dark-700);
+            }
+          }
+
           .iconWrapper {
             all: unset;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
               scale: 1.1;
             }
           }

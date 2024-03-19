@@ -12,23 +12,26 @@ import clsx from 'clsx'
 
 import s from '@/components/ui/table/table.module.scss'
 
-type props = {
+type Props = {
   deck: Deck
+  learnDeckHandler: (id: string) => void
   myId: string | undefined
 }
 
-export const TableDecks = ({ deck, myId }: props) => {
+export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const navigate = useNavigate()
   const isMyDeck = deck.author.id === myId
+  const isEmpty = deck.cardsCount === 0
 
   const onLinkToCards = (id: string) => {
     navigate(`/cards/${id}`)
   }
 
   const styles = {
-    iconWrapper: clsx(s.iconWrapper),
+    iconWrapper: clsx(s.iconWrapper, isEmpty && s.disabled),
+    iconWrapperPlay: clsx(s.iconWrapperPlay, isEmpty && s.disabled),
     nameWrapper: clsx(s.nameWrapper),
   }
 
@@ -74,9 +77,9 @@ export const TableDecks = ({ deck, myId }: props) => {
             </div>
           )}
 
-          <a className={styles.iconWrapper}>
+          <button className={styles.iconWrapperPlay} onClick={() => learnDeckHandler(deck.id)}>
             <Icon iconId={'play_circle_outline'} />
-          </a>
+          </button>
 
           {isMyDeck && (
             <div>
