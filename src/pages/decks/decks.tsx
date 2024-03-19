@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
@@ -31,6 +32,7 @@ export const Decks = () => {
   const myId = meData?.id
   const [isOpen, setIsOpen] = useState(false)
   const pagination = getDecksData?.pagination
+  const navigate = useNavigate()
 
   const styles = {
     filterButton: clsx(s.filterButton),
@@ -44,6 +46,9 @@ export const Decks = () => {
   }
   if (getDecksError) {
     return <h1>Error: {JSON.stringify(getDecksError)}...</h1>
+  }
+  const learnDeckHandler = (id: string) => {
+    navigate(`/cards/${id}/learn`)
   }
 
   return (
@@ -61,7 +66,14 @@ export const Decks = () => {
         <Filters />
         <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
           {getDecksData?.items.map(item => {
-            return <TableDecks deck={item} key={item.id} myId={myId} />
+            return (
+              <TableDecks
+                deck={item}
+                key={item.id}
+                learnDeckHandler={learnDeckHandler}
+                myId={myId}
+              />
+            )
           })}
         </TableComponent>
         {pagination && (
