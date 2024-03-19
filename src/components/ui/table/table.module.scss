@@ -34,7 +34,8 @@
         &:hover:not(.notActive) {
           cursor: pointer;
           background-color: var(--color-dark-300);
-          transition: background-color 0.3s;
+
+          //transition: background-color 0.3s;
         }
       }
 
@@ -127,7 +128,8 @@
 
       &:hover {
         background-color: var(--color-dark-700);
-        transition: background-color 0.3s;
+
+        //transition: background-color 0.3s;
       }
     }
   }
