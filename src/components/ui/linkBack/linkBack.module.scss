@@ -13,4 +13,9 @@
     color: var(--color-accent-300);
     transition: 0.2s ease-in-out;
   }
+
+  &:active {
+    color: var(--color-accent-700);
+    transition: 0.2s ease-in-out;
+  }
 }
