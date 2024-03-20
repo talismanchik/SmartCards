@@ -1,6 +1,5 @@
-import s from './loader.module.scss'
-
-export const Loader = () => {
+import s from './spinner.module.scss'
+export const Spinner = () => {
   return (
     <div className={s.wrapper}>
       <span className={s.loader}></span>

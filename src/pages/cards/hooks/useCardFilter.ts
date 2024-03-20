@@ -16,7 +16,7 @@ export const useCardFilter = () => {
 
   const { deckId } = useParams()
 
-  const { data, isLoading } = useGetDecksByIDCardsQuery({
+  const { data, isLoading: isLoadingGetDeck } = useGetDecksByIDCardsQuery({
     currentPage: +currentPage,
     id: deckId || '',
     itemsPerPage: +portionSize,
@@ -24,7 +24,7 @@ export const useCardFilter = () => {
     question: debounceSearch,
   })
 
-  const { data: deckData } = useGetDeckQuery({
+  const { data: deckData, isLoading: isLoadingDeck } = useGetDeckQuery({
     id: deckId || '',
   })
 
@@ -63,7 +63,8 @@ export const useCardFilter = () => {
     debounceSearch,
     deckData,
     inputSearch,
-    isLoading,
+    isLoadingDeck,
+    isLoadingGetDeck,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
