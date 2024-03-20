@@ -5,6 +5,7 @@ import { GradeForm } from '@/components/forms/gradeForm'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { LinkBack } from '@/components/ui/linkBack'
+import { Spinner } from '@/components/ui/spinner'
 import { Typography } from '@/components/ui/typography'
 import { LearnImage } from '@/pages/learn/learnImage'
 import {
@@ -18,7 +19,7 @@ import s from './learn.module.scss'
 export const Learn = () => {
   const { deckId } = useParams()
   const [show, setShow] = useState(false)
-  const { data: learnData } = useGetLearnCardQuery({
+  const { data: learnData, isLoading } = useGetLearnCardQuery({
     id: deckId || '',
   })
   const { data: deckData } = useGetDeckQuery({
@@ -30,6 +31,10 @@ export const Learn = () => {
   const onSubmit = (grade: string) => {
     createLearnGrade({ cardId: learnData?.id || '', grade: +grade })
     setShow(false)
+  }
+
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
