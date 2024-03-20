@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
+import { Spinner } from '@/components/ui/spinner'
 import { TabItem } from '@/components/ui/tabSwitcher'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
@@ -42,7 +43,7 @@ export const Decks = () => {
   }
 
   if (decksIsLoading || minMaxCardsLoading) {
-    return <h1>Loading...</h1>
+    return <Spinner />
   }
   if (getDecksError) {
     return <h1>Error: {JSON.stringify(getDecksError)}...</h1>

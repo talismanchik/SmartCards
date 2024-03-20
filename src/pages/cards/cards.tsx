@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
+import { Spinner } from '@/components/ui/spinner'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/card/addNewCard'
@@ -30,6 +31,8 @@ export const Cards = () => {
     data,
     deckData,
     inputSearch,
+    isLoadingDeck,
+    isLoadingGetDeck,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
@@ -40,6 +43,10 @@ export const Cards = () => {
 
   const { data: meData } = useGetMeQuery()
   const isOwner = deckData?.userId === meData?.id
+
+  if (isLoadingGetDeck || isLoadingDeck) {
+    return <Spinner />
+  }
 
   const learnCardsHandler = () => {
     navigate(`/cards/${deckId}/learn`)
