@@ -1,25 +1,22 @@
-import { ChangeEvent, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 
 import { ControlledInput } from '@/components/controlled/controlledInput'
 import { Button } from '@/components/ui/button'
-import { Icon } from '@/components/ui/icon/Icon'
-import { InputFile } from '@/components/ui/inputFile'
+import { ImageContainer } from '@/components/ui/imageContainer'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useCardForm } from '@/features/card/cardForm/useCardForm'
+import { EditValues } from '@/features/card/updateCard'
 
 import s from './cardForm.module.scss'
 
-type AddNewCardFormProps = {
+type CardFormProps = {
+  editValues?: EditValues
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onSubmitForm: (data: FormData) => void
   title: string
 }
-
-export type AddNewCardFormValues = z.infer<typeof addNewCardFormSchema>
 
 type AddNewCardArgs = {
   answer: string
@@ -27,54 +24,48 @@ type AddNewCardArgs = {
   question: string
 }
 
-const addNewCardFormSchema = z.object({
-  answer: z.string(),
-  question: z.string(),
-})
+export const CardForm = ({
+  editValues,
+  isOpen,
+  onOpenChange,
+  onSubmitForm,
+  title,
+}: CardFormProps) => {
+  const { control, handleSubmit, reset, resetField } = useCardForm(editValues)
 
-export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCardFormProps) => {
-  const { control, handleSubmit, reset } = useForm<AddNewCardFormValues>({
-    defaultValues: {
-      answer: '',
-      question: '',
-    },
-    resolver: zodResolver(addNewCardFormSchema),
-  })
-  const fileInputRefQuestion = useRef<HTMLInputElement | null>(null)
-  const fileInputRefAnswer = useRef<HTMLInputElement | null>(null)
-  const [coverQuestion, setCoverQuestion] = useState<File | null | string>(null)
-  const [coverAnswer, setCoverAnswer] = useState<File | null | string>(null)
+  useEffect(() => {
+    resetField('question', { defaultValue: editValues?.question })
+    resetField('answer', { defaultValue: editValues?.answer })
 
-  const handleFileChangeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
+    setCoverQuestion(editValues?.coverQuestion ?? null)
+    setCoverAnswer(editValues?.coverAnswer ?? null)
+  }, [editValues, resetField])
 
-    setCoverQuestion(selectedFile || null)
+  const [coverQuestion, setCoverQuestion] = useState<File | null | string>(
+    editValues?.coverQuestion ?? null
+  )
+  const [coverAnswer, setCoverAnswer] = useState<File | null | string>(
+    editValues?.coverAnswer ?? null
+  )
+
+  const handleSaveFileQuestion = (file: File | undefined) => {
+    setCoverQuestion(file || null)
   }
 
-  const openFileInputQuestion = () => {
-    if (fileInputRefQuestion.current) {
-      fileInputRefQuestion.current.click()
-    }
+  const handleSaveFileAnswer = (file: File | undefined) => {
+    setCoverAnswer(file || null)
   }
-  const handleFileChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-
-    setCoverAnswer(selectedFile || null)
-  }
-
-  const openFileInputAnswer = () => {
-    if (fileInputRefAnswer.current) {
-      fileInputRefAnswer.current.click()
-    }
-  }
-
-  const imageUrlQuestion = coverQuestion ? URL.createObjectURL(coverQuestion as File) : null
-  const imageUrlAnswer = coverAnswer ? URL.createObjectURL(coverAnswer as File) : null
 
   const onSubmit = (data: AddNewCardArgs) => {
     onOpenChange(false)
     const formData = new FormData()
 
+    if (!coverQuestion) {
+      formData.append('questionImg', '')
+    }
+    if (!coverAnswer) {
+      formData.append('answerImg', '')
+    }
     if (coverQuestion instanceof File) {
       formData.append('questionImg', coverQuestion)
     }
@@ -92,64 +83,65 @@ export const CardForm = ({ isOpen, onOpenChange, onSubmitForm, title }: AddNewCa
     onSubmitForm(formData)
   }
 
-  const onClose = () => {
-    onOpenChange(false)
+  const onClosedModal = (value: boolean) => {
+    if (!value) {
+      setCoverQuestion(null)
+      setCoverAnswer(null)
+      reset()
+    }
+    onOpenChange(value)
+  }
+
+  const deleteCoverQuestion = () => {
+    setCoverQuestion(null)
+  }
+  const deleteCoverAnswer = () => {
+    setCoverAnswer(null)
+  }
+
+  const compileToImage = (file: File | null | undefined) => {
+    if (!file) {
+      return
+    }
+    if (file instanceof File) {
+      return URL.createObjectURL(file as File)
+    }
+
+    return file
   }
 
   return (
     <Modal
       className={s.wrapper}
-      onOpenChange={onOpenChange}
+      onOpenChange={onClosedModal}
       open={isOpen}
       scrollClassName={s.scroll}
       title={title}
     >
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <Typography className={s.title} variant={'h4'}>
-          Question
-        </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography variant={'h4'}>Question</Typography>
         <ControlledInput
           className={s.input}
           control={control}
           label={'Question'}
           name={'question'}
         />
-        {imageUrlQuestion && (
-          <img alt={'cover'} className={s.coverImage} src={imageUrlQuestion as string} />
-        )}
-        <Button
-          className={s.button}
-          fullWidth
-          onClick={openFileInputQuestion}
-          type={'button'}
-          variant={'secondary'}
-        >
-          <InputFile handleFileChange={handleFileChangeQuestion} ref={fileInputRefQuestion} />
-          <Icon iconId={'image_outline'} />
-          <Typography variant={'subtitle2'}>Change Image</Typography>
-        </Button>
+        <ImageContainer
+          deleteCoverHandler={deleteCoverQuestion}
+          handleSaveFile={handleSaveFileQuestion}
+          imageUrl={compileToImage(coverQuestion as File)}
+        />
         <br />
         <br />
-        <Typography className={s.title} variant={'h4'}>
-          Answer
-        </Typography>
+        <Typography variant={'h4'}>Answer</Typography>
         <ControlledInput className={s.input} control={control} label={'Answer'} name={'answer'} />
-        {imageUrlAnswer && (
-          <img alt={'cover'} className={s.coverImage} src={imageUrlAnswer as string} />
-        )}
-        <Button
-          className={s.button}
-          fullWidth
-          onClick={openFileInputAnswer}
-          type={'button'}
-          variant={'secondary'}
-        >
-          <InputFile handleFileChange={handleFileChangeAnswer} ref={fileInputRefAnswer} />
-          <Icon iconId={'image_outline'} />
-          <Typography variant={'subtitle2'}>Change Image</Typography>
-        </Button>
+        <ImageContainer
+          deleteCoverHandler={deleteCoverAnswer}
+          handleSaveFile={handleSaveFileAnswer}
+          imageUrl={compileToImage(coverAnswer as File)}
+        />
         <div className={s.buttonWrapper}>
-          <Button onClick={onClose} type={'button'} variant={'secondary'}>
+          <Button onClick={() => onClosedModal(false)} type={'button'} variant={'secondary'}>
             Cancel
           </Button>
           <Button type={'submit'}>{title}</Button>

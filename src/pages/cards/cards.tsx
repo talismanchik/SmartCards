@@ -5,41 +5,38 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
+import { Spinner } from '@/components/ui/spinner'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/card/addNewCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetMeQuery } from '@/services/auth/auth.service'
-import { useGetDecksByIDCardsQuery } from '@/services/cards/cardsService'
 
 import s from './cards.module.scss'
 
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/defaultImg.png'
 
 export const Cards = () => {
-  // const isOwner = false
-
   const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
   const onOpenChange = (value: boolean) => {
     setIsOpenAddNewCard(value)
   }
-
-  console.log(isOpenAddNewCard)
 
   const { deckId } = useParams()
   const navigate = useNavigate()
 
   const {
     currentPage,
-    debounceSearch,
+    data,
     deckData,
     inputSearch,
+    isLoadingDeck,
+    isLoadingGetDeck,
     onChangeCurrentPage,
     onChangeInputValue,
     onChangePortionSize,
     onChangeSort,
-    orderBy,
     portionSize,
     sort,
   } = useCardFilter()
@@ -47,13 +44,9 @@ export const Cards = () => {
   const { data: meData } = useGetMeQuery()
   const isOwner = deckData?.userId === meData?.id
 
-  const { data } = useGetDecksByIDCardsQuery({
-    currentPage: +currentPage,
-    id: deckId || '',
-    itemsPerPage: +portionSize,
-    orderBy: orderBy,
-    question: debounceSearch,
-  })
+  if (isLoadingGetDeck || isLoadingDeck) {
+    return <Spinner />
+  }
 
   const learnCardsHandler = () => {
     navigate(`/cards/${deckId}/learn`)

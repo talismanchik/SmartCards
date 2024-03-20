@@ -12,20 +12,26 @@ import clsx from 'clsx'
 
 import s from '@/components/ui/table/table.module.scss'
 
-type props = {
+type Props = {
   deck: Deck
+  learnDeckHandler: (id: string) => void
+  myId: string | undefined
 }
 
-export const TableDecks = ({ deck }: props) => {
+export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const navigate = useNavigate()
+  const isMyDeck = deck.author.id === myId
+  const isEmpty = deck.cardsCount === 0
+
   const onLinkToCards = (id: string) => {
     navigate(`/cards/${id}`)
   }
 
   const styles = {
-    iconWrapper: clsx(s.iconWrapper),
+    iconWrapper: clsx(s.iconWrapper, isEmpty && s.disabled),
+    iconWrapperPlay: clsx(s.iconWrapperPlay, isEmpty && s.disabled),
     nameWrapper: clsx(s.nameWrapper),
   }
 
@@ -54,36 +60,41 @@ export const TableDecks = ({ deck }: props) => {
       </TableDataCell>
       <TableDataCell>
         <div className={s.iconContainer}>
-          <div>
-            <button className={styles.iconWrapper} onClick={() => setIsOpenUpdate(true)}>
-              <Icon iconId={'edit_outline'} />
-            </button>
-            <UpdateDeck
-              cover={deck.cover}
-              id={deck.id}
-              isOpen={isOpenUpdate}
-              isPrivate={deck.isPrivate}
-              name={deck.name}
-              onOpenChange={value => setIsOpenUpdate(value)}
-              title={'Update Deck'}
-            />
-          </div>
+          {isMyDeck && (
+            <div>
+              <button className={styles.iconWrapper} onClick={() => setIsOpenUpdate(true)}>
+                <Icon iconId={'edit_outline'} />
+              </button>
+              <UpdateDeck
+                cover={deck.cover}
+                id={deck.id}
+                isOpen={isOpenUpdate}
+                isPrivate={deck.isPrivate}
+                name={deck.name}
+                onOpenChange={value => setIsOpenUpdate(value)}
+                title={'Update Deck'}
+              />
+            </div>
+          )}
 
-          <a className={styles.iconWrapper}>
+          <button className={styles.iconWrapperPlay} onClick={() => learnDeckHandler(deck.id)}>
             <Icon iconId={'play_circle_outline'} />
-          </a>
-          <div>
-            <button className={styles.iconWrapper} onClick={() => setIsOpenDelete(true)}>
-              <Icon iconId={'trash_outline'} />
-            </button>
-            <DeleteDeck
-              deckName={deck.name}
-              id={{ id: deck.id }}
-              isOpen={isOpenDelete}
-              onOpenChange={value => setIsOpenDelete(value)}
-              title={'Delete Deck'}
-            />
-          </div>
+          </button>
+
+          {isMyDeck && (
+            <div>
+              <button className={styles.iconWrapper} onClick={() => setIsOpenDelete(true)}>
+                <Icon iconId={'trash_outline'} />
+              </button>
+              <DeleteDeck
+                deckName={deck.name}
+                id={{ id: deck.id }}
+                isOpen={isOpenDelete}
+                onOpenChange={value => setIsOpenDelete(value)}
+                title={'Delete Deck'}
+              />
+            </div>
+          )}
         </div>
       </TableDataCell>
     </TableRow>

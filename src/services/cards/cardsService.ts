@@ -8,6 +8,7 @@ import {
   GetLearnCardArgs,
   LearnResponse,
 } from '@/services/cards/cards.types'
+import { Deck } from '@/services/decks/decks.types'
 
 export const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -54,6 +55,14 @@ export const cardsService = baseApi.injectEndpoints({
           url: `v1/decks/${args.id}/learn`,
         }),
       }),
+      updateCard: builder.mutation<Deck, { body: FormData; id: string | undefined }>({
+        invalidatesTags: ['Cards'],
+        query: args => ({
+          body: args.body,
+          method: 'PATCH',
+          url: `v1/cards/${args.id}`,
+        }),
+      }),
     }
   },
 })
@@ -65,4 +74,5 @@ export const {
   useGetDeckQuery,
   useGetDecksByIDCardsQuery,
   useGetLearnCardQuery,
+  useUpdateCardMutation,
 } = cardsService

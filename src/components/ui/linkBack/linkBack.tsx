@@ -19,7 +19,7 @@ export const LinkBack = ({ text = 'Back to Previous Page', to }: LinkBackProps) 
   return (
     <div className={s.previousPage} onClick={backToHandler}>
       <Icon iconId={'arrow_back_outline'} />
-      <Typography variant={'body2'}>{text}</Typography>
+      <Typography variant={'h4'}>{text}</Typography>
     </div>
   )
 }

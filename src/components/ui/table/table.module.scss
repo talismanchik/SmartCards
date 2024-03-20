@@ -34,7 +34,8 @@
         &:hover:not(.notActive) {
           cursor: pointer;
           background-color: var(--color-dark-300);
-          transition: background-color 0.3s;
+
+          //transition: background-color 0.3s;
         }
       }
 
@@ -94,13 +95,27 @@
           display: flex;
           gap: 10px;
           align-items: center;
-          justify-content: right;
+          justify-content: center;
+
+          .iconWrapperPlay {
+            all: unset;
+            cursor: pointer;
+
+            &:hover {
+              scale: 1.1;
+            }
+
+            &.disabled {
+              pointer-events: none;
+              stroke: var(--color-dark-700);
+            }
+          }
 
           .iconWrapper {
             all: unset;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
               scale: 1.1;
             }
           }
@@ -113,7 +128,8 @@
 
       &:hover {
         background-color: var(--color-dark-700);
-        transition: background-color 0.3s;
+
+        //transition: background-color 0.3s;
       }
     }
   }

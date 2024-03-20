@@ -63,16 +63,6 @@ export type GetLearnCardArgs = {
   previousCardId?: string
 }
 
-export type CreateCardArgs = {
-  answer: string
-  answerImg?: string
-  answerVideo?: string
-  id: string
-  question: string
-  questionImg?: string
-  questionVideo?: string
-}
-
 export type LearnResponse = {
   answer: string
   answerImg: string
