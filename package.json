@@ -30,8 +30,8 @@
     "@types/react-scroll": "^1.8.10",
     "async-mutex": "^0.4.1",
     "clsx": "^2.1.0",
-    "lodash.debounce": "^4.0.8",
     "framer-motion": "^11.0.5",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
@@ -64,7 +64,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "sass": "^1.70.0",
     "storybook": "^7.6.12",
-    "stylelint": "^16.2.1",
+    "stylelint": "^16.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }

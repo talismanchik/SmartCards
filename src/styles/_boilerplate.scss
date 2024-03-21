@@ -10,8 +10,8 @@ html {
 *::before,
 *::after {
   scrollbar-color: var(--color-accent-500) var(--color-dark-900);
-  scrollbar-width: thin;
   box-sizing: border-box;
+  scrollbar-width: thin;
 }
 
 input,
