@@ -22,7 +22,10 @@ export const EditProfileBody = ({ userEmail, userName }: Props) => {
 
   const onChangeNickName = (data: ChangeNameValues) => {
     if (userName !== data.name) {
-      updateProfile(data)
+      const formData = new FormData()
+
+      formData.append('name', data.name)
+      updateProfile(formData)
     }
     setEditNickName(false)
   }

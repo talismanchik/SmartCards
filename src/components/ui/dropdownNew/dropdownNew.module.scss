@@ -1,0 +1,41 @@
+.triggerButton{
+  all: unset;
+}
+
+.separator{
+  height: 1px;
+  margin-block: 12px;
+  background-color: var(--color-dark-500);
+}
+
+
+
+.content{
+  z-index: 1000;
+
+  padding: 12px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+
+  transition: 1s;
+
+  .arrow{
+    position: absolute;
+    top: -3px;
+    left: calc(50% - 3px);
+    transform: rotate(45deg);
+
+    width: 7px;
+    height: 7px;
+
+    background-color: var(--color-dark-700);
+    border: 1px solid var(--color-dark-500);
+    border-top: none;
+    border-left: none;
+  }
+}
+
+
+
