@@ -3,6 +3,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .titleDropWrap {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .title {
+        margin-right: 6px;
+      }
+
+      .triggerDropdown {
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 2px;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .button {
+    min-width: 160px;
   }
 
   .deckImage {
@@ -41,6 +69,19 @@
   }
 }
 
+.dropItem {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+
+  &[data-highlighted] {
+    background-color: var(--color-dark-500);
+    border-radius: 4px;
+    outline: none;
+  }
+}
+
 .iconsWrapper {
   display: flex;
 
@@ -68,4 +109,10 @@
 
 .gradeStyle {
   width: 15%;
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--color-dark-100);
+  stroke: var(--color-dark-700);
 }

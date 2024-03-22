@@ -9,9 +9,12 @@ import { Spinner } from '@/components/ui/spinner'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/card/addNewCard'
+import { DropdownCard } from '@/pages/cards/dropdownCard/dropdownCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetMeQuery } from '@/services/auth/auth.service'
+import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
+import { useDeleteDeckMutation } from '@/services/decks/decksService'
 
 import s from './cards.module.scss'
 
@@ -19,12 +22,10 @@ import defaultImage from '../../assets/defaultImg.png'
 
 export const Cards = () => {
   const [isOpenAddNewCard, setIsOpenAddNewCard] = useState(false)
-  const onOpenChange = (value: boolean) => {
-    setIsOpenAddNewCard(value)
-  }
 
   const { deckId } = useParams()
   const navigate = useNavigate()
+  const [deleteDeckById] = useDeleteDeckMutation()
 
   const {
     currentPage,
@@ -48,21 +49,49 @@ export const Cards = () => {
     return <Spinner />
   }
 
+  const onOpenChange = (value: boolean) => {
+    setIsOpenAddNewCard(value)
+  }
   const learnCardsHandler = () => {
     navigate(`/cards/${deckId}/learn`)
+  }
+
+  const onDeleteDeck = (id: UpdateDeleteDeckArgs) => {
+    if (id) {
+      deleteDeckById(id)
+      onOpenChange(false)
+      navigate(-1)
+    }
   }
 
   return (
     <div className={s.wrapper}>
       <LinkBack />
       <div className={s.titleButtonWrapper}>
-        <Typography className={s.title} variant={'h1'}>
-          {deckData?.name}
-        </Typography>
+        <div className={s.titleDropWrap}>
+          <Typography className={s.title} variant={'h1'}>
+            {deckData?.name}
+          </Typography>
+          {isOwner && (
+            <DropdownCard
+              deckData={deckData}
+              learnCards={learnCardsHandler}
+              onDeleteDeck={onDeleteDeck}
+            />
+          )}
+        </div>
+
         {isOwner ? (
-          <Button onClick={() => setIsOpenAddNewCard(true)}>Add New Card</Button>
+          <Button className={s.button} onClick={() => setIsOpenAddNewCard(true)}>
+            Add New Card
+          </Button>
         ) : (
-          data && data.items.length > 0 && <Button onClick={learnCardsHandler}>Learn Cards</Button>
+          data &&
+          data.items.length > 0 && (
+            <Button className={s.button} onClick={learnCardsHandler}>
+              Learn Cards
+            </Button>
+          )
         )}
       </div>
 
