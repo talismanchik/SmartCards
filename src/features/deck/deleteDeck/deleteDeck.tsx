@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
 import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
-import { useDeleteDeckMutation } from '@/services/decks/decksService'
 
 import s from './deleteDeck.module.scss'
 
@@ -10,17 +9,23 @@ type DeleteDeckProps = {
   deckName: string
   id: UpdateDeleteDeckArgs
   isOpen: boolean
+  onDeleteDeck: (id: UpdateDeleteDeckArgs) => void
   onOpenChange: (value: boolean) => void
   title: string
 }
-export const DeleteDeck = ({ deckName, id, isOpen, onOpenChange, title }: DeleteDeckProps) => {
-  const [deleteDeckById] = useDeleteDeckMutation()
-  const onSubmitDeleteDeck = () => {
-    deleteDeckById(id)
-    onOpenChange(false)
-  }
+export const DeleteDeck = ({
+  deckName,
+  id,
+  isOpen,
+  onDeleteDeck,
+  onOpenChange,
+  title,
+}: DeleteDeckProps) => {
   const onClose = () => {
     onOpenChange(false)
+  }
+  const onSubmitDeleteDeck = () => {
+    onDeleteDeck(id)
   }
 
   return (
