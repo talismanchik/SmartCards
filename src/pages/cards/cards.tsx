@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import { CustomSeparator, DropdownNew } from '@/components/ui/dropdownNew'
+import { Icon } from '@/components/ui/icon/Icon'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
 import { Pagination } from '@/components/ui/pagination'
@@ -12,6 +14,7 @@ import { AddNewCard } from '@/features/card/addNewCard'
 import { useCardFilter } from '@/pages/cards/hooks/useCardFilter'
 import { TableCards } from '@/pages/cards/tableBody/tableCards'
 import { useGetMeQuery } from '@/services/auth/auth.service'
+import { Item } from '@radix-ui/react-dropdown-menu'
 
 import s from './cards.module.scss'
 
@@ -56,9 +59,38 @@ export const Cards = () => {
     <div className={s.wrapper}>
       <LinkBack />
       <div className={s.titleButtonWrapper}>
-        <Typography className={s.title} variant={'h1'}>
-          {deckData?.name}
-        </Typography>
+        <div className={s.titleDropWrap}>
+          <Typography className={s.title} variant={'h1'}>
+            {deckData?.name}
+          </Typography>
+          <DropdownNew
+            trigger={
+              <Icon
+                className={s.triggerDropdown}
+                height={'24'}
+                iconId={'more_vertical'}
+                viewBox={'0 0 22 22'}
+                width={'24'}
+              />
+            }
+          >
+            <Item className={s.dropItem}>
+              <Icon iconId={'play_circle_outline'} />
+              <Typography variant={'caption'}>Learn</Typography>
+            </Item>
+            <CustomSeparator />
+            <Item className={s.dropItem}>
+              <Icon iconId={'edit_outline'} />
+              <Typography variant={'caption'}>Edit</Typography>
+            </Item>
+            <CustomSeparator />
+            <Item className={s.dropItem}>
+              <Icon iconId={'trash_outline'} />
+              <Typography variant={'caption'}>Delete</Typography>
+            </Item>
+          </DropdownNew>
+        </div>
+
         {isOwner ? (
           <Button onClick={() => setIsOpenAddNewCard(true)}>Add New Card</Button>
         ) : (

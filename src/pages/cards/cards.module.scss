@@ -3,6 +3,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .titleDropWrap {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .title {
+        margin-right: 6px;
+      }
+
+      .triggerDropdown {
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 2px;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
   }
 
   .deckImage {
@@ -38,6 +62,19 @@
       height: 50px;
       object-fit: cover;
     }
+  }
+}
+
+.dropItem {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+
+  &[data-highlighted] {
+    background-color: var(--color-dark-500);
+    border-radius: 4px;
+    outline: none;
   }
 }
 
