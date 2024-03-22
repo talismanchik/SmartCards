@@ -8,6 +8,7 @@ import { UpdateDeck } from '@/features/deck/updateDeck'
 import { GetDeckResponse } from '@/services/cards/cards.types'
 import { UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 import { Item } from '@radix-ui/react-dropdown-menu'
+import clsx from 'clsx'
 
 import s from '@/pages/cards/cards.module.scss'
 type Props = {
@@ -19,6 +20,10 @@ type Props = {
 export const DropdownCard = ({ deckData, learnCards, onDeleteDeck }: Props) => {
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
+
+  const styles = {
+    dropItem: clsx(s.dropItem, !deckData?.cardsCount && s.disabled),
+  }
 
   return (
     <>
@@ -33,7 +38,7 @@ export const DropdownCard = ({ deckData, learnCards, onDeleteDeck }: Props) => {
           />
         }
       >
-        <Item className={s.dropItem} onClick={learnCards}>
+        <Item className={styles.dropItem} onClick={learnCards}>
           <Icon iconId={'play_circle_outline'} />
           <Typography variant={'caption'}>Learn</Typography>
         </Item>

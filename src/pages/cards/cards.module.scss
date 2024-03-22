@@ -30,7 +30,7 @@
   }
 
   .button {
-    width: 160px;
+    min-width: 160px;
   }
 
   .deckImage {
@@ -109,4 +109,10 @@
 
 .gradeStyle {
   width: 15%;
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--color-dark-100);
+  stroke: var(--color-dark-700);
 }
