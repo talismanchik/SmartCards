@@ -24,6 +24,7 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
     container: clsx(s.container),
     header: clsx(s.header),
     logo: clsx(s.logo),
+    triggerAvatar: clsx(s.userAvatar, s.triggerAvatar),
     userAvatar: clsx(s.userAvatar),
     userInfo: clsx(s.userInfo),
     userName: clsx(s.userName),
@@ -75,7 +76,7 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
               trigger={
                 <img
                   alt={'User avatar'}
-                  className={classNames.userAvatar}
+                  className={classNames.triggerAvatar}
                   src={meData?.avatar ?? defaultAvatar}
                 />
               }
