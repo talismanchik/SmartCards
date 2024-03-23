@@ -34,8 +34,6 @@
         &:hover:not(.notActive) {
           cursor: pointer;
           background-color: var(--color-dark-300);
-
-          //transition: background-color 0.3s;
         }
       }
 
@@ -120,17 +118,15 @@
             }
           }
         }
-
-        &:first-child {
-          cursor: pointer;
-        }
       }
 
       &:hover {
         background-color: var(--color-dark-700);
-
-        //transition: background-color 0.3s;
       }
     }
   }
+}
+
+.cursorPointer{
+  cursor: pointer;
 }

@@ -31,7 +31,9 @@ export const TableCards = ({ cards, isOwner }: Props) => {
               <img alt={'default-image'} src={defaultImage} />
             )}
           </div>
-          <Typography variant={'body2'}>{cards.question}</Typography>
+          <Typography title={cards.question} variant={'body2'}>
+            {cards.question}
+          </Typography>
         </div>
       </TableDataCell>
       <TableDataCell>
@@ -43,7 +45,9 @@ export const TableCards = ({ cards, isOwner }: Props) => {
               <img alt={'answer-image'} src={defaultImage} />
             )}
           </div>
-          <Typography variant={'body2'}>{cards.answer}</Typography>
+          <Typography title={cards.answer} variant={'body2'}>
+            {cards.answer}
+          </Typography>
         </div>
       </TableDataCell>
       <TableDataCell>
