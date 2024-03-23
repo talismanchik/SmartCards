@@ -16,8 +16,8 @@ import s from '@/pages/decks/decks.module.scss'
 export const Filters = () => {
   const {
     authorId,
-    change,
     changeFiltersParam,
+    changeSliderParams,
     clearFilter,
     deckName,
     maxCardsCount,
@@ -33,11 +33,12 @@ export const Filters = () => {
     changeFiltersParam('name', null)
   }
   const clearFiltersHandler = () => {
+    setTab('allCards')
     clearFilter()
   }
 
   const onChangeNumberOfCards = (numberOfCards: number[]) => {
-    change(numberOfCards)
+    changeSliderParams(numberOfCards)
   }
 
   const [tab, setTab] = useState(authorId ? 'myCards' : 'allCards')

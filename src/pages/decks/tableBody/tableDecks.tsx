@@ -34,7 +34,7 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
   const styles = {
     iconWrapper: clsx(s.iconWrapper, isEmpty && s.disabled),
     iconWrapperPlay: clsx(s.iconWrapperPlay, isEmpty && s.disabled),
-    nameWrapper: clsx(s.nameWrapper),
+    nameWrapper: clsx(s.nameWrapper, s.cursorPointer),
   }
 
   const onDeleteDeck = (id: UpdateDeleteDeckArgs) => {
@@ -53,7 +53,9 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
           ) : (
             <img alt={'default-image'} className={s.tableImage} src={defaultImage} />
           )}
-          <Typography variant={'body2'}>{deck.name}</Typography>
+          <Typography title={deck.name} variant={'body2'}>
+            {deck.name}
+          </Typography>
         </div>
       </TableDataCell>
       <TableDataCell>
