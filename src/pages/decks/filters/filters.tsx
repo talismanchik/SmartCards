@@ -38,21 +38,13 @@ export const Filters = () => {
 
   const onChangeNumberOfCards = (numberOfCards: number[]) => {
     change(numberOfCards)
-    /* if (numberOfCards[0] !== +minCardsCount) {
-      changeFiltersParam('minCardsCount', numberOfCards[0] + '')
-    }
-    if (numberOfCards[1] !== +maxCardsCount) {
-      changeFiltersParam('maxCardsCount', numberOfCards[1] + '')
-    }*/
   }
 
-  // ........................................
   const [tab, setTab] = useState(authorId ? 'myCards' : 'allCards')
-  const zaglushka = (value: string) => {
+  const onChangeTabSwitcher = (value: string) => {
     setTab(value)
     meData && changeFiltersParam('authorId', value === 'myCards' ? meData.id : null)
   }
-  // ..........................................
 
   const styles = {
     filterButton: clsx(s.filterButton),
@@ -71,7 +63,7 @@ export const Filters = () => {
       <TabSwitcher
         items={tabSwitcherItems}
         label={'Show decks cards'}
-        onValueChange={zaglushka}
+        onValueChange={onChangeTabSwitcher}
         value={tab}
       />
       <Slider
