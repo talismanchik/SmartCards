@@ -7,7 +7,8 @@ import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { UpdateDeck } from '@/features/deck/updateDeck'
-import { Deck } from '@/services/decks/decks.types'
+import { Deck, UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
+import { useDeleteDeckMutation } from '@/services/decks/decksService'
 import clsx from 'clsx'
 
 import s from '@/components/ui/table/table.module.scss'
@@ -19,6 +20,7 @@ type Props = {
 }
 
 export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
+  const [deleteDeckById] = useDeleteDeckMutation()
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
   const navigate = useNavigate()
@@ -33,6 +35,13 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
     iconWrapper: clsx(s.iconWrapper, isEmpty && s.disabled),
     iconWrapperPlay: clsx(s.iconWrapperPlay, isEmpty && s.disabled),
     nameWrapper: clsx(s.nameWrapper),
+  }
+
+  const onDeleteDeck = (id: UpdateDeleteDeckArgs) => {
+    if (id) {
+      deleteDeckById(id)
+      setIsOpenDelete(false)
+    }
   }
 
   return (
@@ -90,6 +99,7 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
                 deckName={deck.name}
                 id={{ id: deck.id }}
                 isOpen={isOpenDelete}
+                onDeleteDeck={onDeleteDeck}
                 onOpenChange={value => setIsOpenDelete(value)}
                 title={'Delete Deck'}
               />
