@@ -12,7 +12,7 @@ export const useDecksFilter = () => {
   const deckName = queryParams.get('name') || ''
   const orderBy = queryParams.get('orderBy')
   const authorId = queryParams.get('authorId')
-  const minCardsCount = queryParams.get('minCardsCount') || '1' || ''
+  const minCardsCount = queryParams.get('minCardsCount') || '1'
   const maxCardsCount = queryParams.get('maxCardsCount') || minMaxCards?.max || ''
   const currentPage = queryParams.get('currentPage') || '1'
   const itemsPerPage = queryParams.get('itemsPerPage') || '10'
