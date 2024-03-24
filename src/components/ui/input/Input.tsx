@@ -94,6 +94,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...rest}
           />
         </div>
+
         {error && (
           <Typography className={classNames.errorCaption} variant={'body2'}>
             {error}
