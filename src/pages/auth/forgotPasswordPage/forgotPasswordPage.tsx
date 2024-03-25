@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+
 import { ForgotPasswordForm } from '@/components/forms/forgotPasswordForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -25,9 +27,9 @@ export const ForgotPasswordPage = () => {
         <Typography className={s.footerTitle} variant={'body2'}>
           Did you remember your password?
         </Typography>
-        <Typography as={'a'} className={s.tryLoggingIn} href={''} variant={'subtitle1'}>
-          Try logging in
-        </Typography>
+        <NavLink className={s.tryLoggingIn} to={'/login'}>
+          <Typography variant={'subtitle1'}>Try logging in</Typography>
+        </NavLink>
       </div>
     </Card>
   )

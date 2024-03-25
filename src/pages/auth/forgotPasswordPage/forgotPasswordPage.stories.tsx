@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { ForgotPasswordPage } from '@/pages/forgotPasswordPage/forgotPasswordPage'
+import { ForgotPasswordPage } from '@/pages/auth/forgotPasswordPage/forgotPasswordPage'
 
 const meta = {
   argTypes: {},

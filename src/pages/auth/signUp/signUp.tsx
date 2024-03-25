@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { SignUpForm } from '@/components/forms/signUpForm'
 import { SignUpFormValues } from '@/components/forms/signUpForm/useSignUpForm'
@@ -9,15 +9,11 @@ import { useSignUpMutation } from '@/services/auth/auth.service'
 import s from './signUp.module.scss'
 
 export const SignUp = () => {
-  const navigate = useNavigate()
   const [signUp] = useSignUpMutation()
   const onSubmitFormHandler = (data: SignUpFormValues) => {
     const { confirmPassword, ...newData } = data
 
     signUp(newData)
-  }
-  const navigateToSignIn = () => {
-    navigate('/login')
   }
 
   return (
@@ -30,15 +26,9 @@ export const SignUp = () => {
         <Typography className={s.footerTitle} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography
-          as={'a'}
-          className={s.signIn}
-          href={'#'}
-          onClick={navigateToSignIn}
-          variant={'subtitle1'}
-        >
-          Sign In
-        </Typography>
+        <NavLink className={s.signIn} to={'/login'}>
+          <Typography variant={'subtitle1'}>Sign In</Typography>
+        </NavLink>
       </div>
     </Card>
   )

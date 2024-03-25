@@ -1,18 +1,18 @@
 import type { Meta } from '@storybook/react'
 
-import { SignUp } from '@/pages/signUp/signUp'
+import { SignIn } from '@/pages/auth/signIn/signIn'
 
 const meta = {
   argTypes: {},
-  component: SignUp,
+  component: SignIn,
   tags: ['autodocs'],
-  title: 'Pages/SignUp',
-} satisfies Meta<typeof SignUp>
+  title: 'Pages/SignIn',
+} satisfies Meta<typeof SignIn>
 
 export default meta
 
 export const Default = {
   render() {
-    return <SignUp />
+    return <SignIn />
   },
 }
