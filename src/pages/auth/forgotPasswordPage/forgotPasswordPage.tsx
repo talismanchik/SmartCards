@@ -1,14 +1,19 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { ForgotPasswordForm } from '@/components/forms/forgotPasswordForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { sendEmailMessage } from '@/pages/auth/forgotPasswordPage/sendEmailMessage'
+import { useRecoverPasswordMutation } from '@/services/auth/auth.service'
 
 import s from './forgotPasswordPage.module.scss'
 
 export const ForgotPasswordPage = () => {
-  const onSubmitForm = (data: { email: string }) => {
-    console.log(data)
+  const [recoverPassword] = useRecoverPasswordMutation()
+  const navigate = useNavigate()
+  const onSubmitForm = async (data: { email: string }) => {
+    recoverPassword({ email: data.email, html: sendEmailMessage })
+    navigate('/check-email', { state: { email: data.email } })
   }
 
   return (

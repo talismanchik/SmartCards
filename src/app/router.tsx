@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Layout, useAuthContext } from '@/components/layout/layout'
+import { CheckEmailPage } from '@/pages/auth/checkEmail/checkEmailPage'
+import { CreateNewPasswordPage } from '@/pages/auth/createNewPasswordPage'
 import { ForgotPasswordPage } from '@/pages/auth/forgotPasswordPage'
 import { SignIn } from '@/pages/auth/signIn/signIn'
 import { SignUp } from '@/pages/auth/signUp'
@@ -28,6 +30,14 @@ const publicRoutes: RouteObject[] = [
   {
     element: <ForgotPasswordPage />,
     path: '/forgot-password',
+  },
+  {
+    element: <CheckEmailPage />,
+    path: '/check-email',
+  },
+  {
+    element: <CreateNewPasswordPage />,
+    path: '/recover-password/:token',
   },
   {
     element: <ErrorPage />,

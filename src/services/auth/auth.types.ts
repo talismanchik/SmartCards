@@ -36,3 +36,13 @@ export type SignUpResponse = {
   name: string
   updated: string
 }
+
+export type RecoverPasswordArgs = {
+  email: string
+  html: string
+}
+
+export type CreateNewPasswordArgs = {
+  password: string
+  token: string
+}

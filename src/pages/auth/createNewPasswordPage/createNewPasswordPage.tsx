@@ -1,12 +1,22 @@
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { CreateNewPasswordForm } from '@/components/forms/createNewPasswordForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useCreateNewPasswordMutation } from '@/services/auth/auth.service'
 
 import s from './createNewPasswordPage.module.scss'
 
 export const CreateNewPasswordPage = () => {
-  const onSubmitForm = (data: { password: string }) => {
-    console.log(data)
+  const { token } = useParams<{ token: string }>()
+  const navigate = useNavigate()
+  const [createNewPassword] = useCreateNewPasswordMutation()
+
+  const onSubmitForm = async (data: { password: string }) => {
+    if (token) {
+      await createNewPassword({ password: data.password, token })
+      navigate('/login')
+    }
   }
 
   return (
