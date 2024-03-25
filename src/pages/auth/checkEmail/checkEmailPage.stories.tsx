@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { CheckEmailPage } from '@/pages/checkEmail/checkEmailPage'
+import { CheckEmailPage } from '@/pages/auth/checkEmail/checkEmailPage'
 
 const meta = {
   argTypes: {},

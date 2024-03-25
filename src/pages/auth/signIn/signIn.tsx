@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { SignInForm } from '@/components/forms/signInForm'
 import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
@@ -23,7 +23,12 @@ export const SignIn = () => {
       </Typography>
       <SignInForm onSubmitForm={submitLoginForm}>
         <div className={s.forgotPassword}>
-          <Typography as={'a'} href={''} variant={'body2'}>
+          <Typography
+            as={'a'}
+            className={s.forgotText}
+            onClick={() => navigate('/forgot-password')}
+            variant={'body2'}
+          >
             Forgot Password?
           </Typography>
         </div>
@@ -32,14 +37,9 @@ export const SignIn = () => {
         <Typography className={s.footerTitle} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Typography
-          as={'a'}
-          className={s.signUp}
-          onClick={() => navigate('/signup')}
-          variant={'subtitle1'}
-        >
-          Sign Up
-        </Typography>
+        <NavLink className={s.signUp} to={'/signup'}>
+          <Typography variant={'subtitle1'}>Sign Up</Typography>
+        </NavLink>
       </div>
     </Card>
   )
