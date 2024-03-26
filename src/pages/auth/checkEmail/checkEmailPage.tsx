@@ -11,8 +11,6 @@ export const CheckEmailPage = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
 
-  console.log(state)
-
   return (
     <Card className={s.card}>
       <Typography className={s.title} variant={'h1'}>

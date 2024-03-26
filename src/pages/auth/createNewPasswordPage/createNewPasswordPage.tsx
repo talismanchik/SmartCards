@@ -9,8 +9,6 @@ import s from './createNewPasswordPage.module.scss'
 
 export const CreateNewPasswordPage = () => {
   const { token } = useParams()
-
-  console.log(token)
   const navigate = useNavigate()
   const [createNewPassword] = useCreateNewPasswordMutation()
 

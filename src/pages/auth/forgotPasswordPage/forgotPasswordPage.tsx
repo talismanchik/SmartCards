@@ -23,7 +23,7 @@ export const ForgotPasswordPage = () => {
       </Typography>
       <ForgotPasswordForm onSubmitForm={onSubmitForm}>
         <div className={s.forgotPasswordPage}>
-          <Typography as={'a'} className={s.info} href={''} variant={'body2'}>
+          <Typography className={s.info} variant={'body2'}>
             Enter your email address and we will send you further instructions
           </Typography>
         </div>
