@@ -20,7 +20,9 @@
     color: var(--color-light-900);
 
     .avatar {
-      max-width: 96px;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
       border-radius: 50%;
     }
 
@@ -68,7 +70,11 @@
   align-items: center;
   justify-content: center;
 
-  height: 16px;
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-dark-300);
+  border-radius: 4px;
 
 
   transition: 0.2s;
