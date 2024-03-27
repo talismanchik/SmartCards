@@ -6,7 +6,7 @@ import { fieldGetDecksArgs } from '@/services/decks/decks.types'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksService'
 
 export const useDecksFilter = () => {
-  const { data: minMaxCards, isLoading: minMaxCardsLoading } = useGetMinMaxCardsQuery()
+  const { data: minMaxCards } = useGetMinMaxCardsQuery()
 
   const [queryParams, setQueryParams] = useSearchParams({})
   const deckName = queryParams.get('name') || ''
@@ -23,6 +23,7 @@ export const useDecksFilter = () => {
   const {
     data: getDecksData,
     error: getDecksError,
+    isFetching,
     isLoading: decksIsLoading,
   } = useGetDecksQuery(
     {
@@ -79,11 +80,11 @@ export const useDecksFilter = () => {
     decksIsLoading,
     getDecksData,
     getDecksError,
+    isFetching,
     itemsPerPage,
     maxCardsCount,
     minCardsCount,
     minMaxCards,
-    minMaxCardsLoading,
     onChangeSort,
     orderBy,
     queryParams,

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LinkBack } from '@/components/ui/linkBack/linkBack'
+import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { Spinner } from '@/components/ui/spinner'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
@@ -32,6 +33,7 @@ export const Cards = () => {
     data,
     deckData,
     inputSearch,
+    isFetching,
     isLoadingDeck,
     isLoadingGetDeck,
     onChangeCurrentPage,
@@ -65,85 +67,88 @@ export const Cards = () => {
   }
 
   return (
-    <div className={s.wrapper}>
-      <LinkBack />
-      <div className={s.titleButtonWrapper}>
-        <div className={s.titleDropWrap}>
-          <Typography className={s.title} variant={'h1'}>
-            {deckData?.name}
-          </Typography>
-          {isOwner && (
-            <DropdownCard
-              deckData={deckData}
-              learnCards={learnCardsHandler}
-              onDeleteDeck={onDeleteDeck}
-            />
+    <>
+      {isFetching && <Loader />}
+      <div className={s.wrapper}>
+        <LinkBack />
+        <div className={s.titleButtonWrapper}>
+          <div className={s.titleDropWrap}>
+            <Typography className={s.title} variant={'h1'}>
+              {deckData?.name}
+            </Typography>
+            {isOwner && (
+              <DropdownCard
+                deckData={deckData}
+                learnCards={learnCardsHandler}
+                onDeleteDeck={onDeleteDeck}
+              />
+            )}
+          </div>
+
+          {isOwner ? (
+            <Button className={s.button} onClick={() => setIsOpenAddNewCard(true)}>
+              Add New Card
+            </Button>
+          ) : (
+            data &&
+            data.items.length > 0 && (
+              <Button className={s.button} onClick={learnCardsHandler}>
+                Learn Cards
+              </Button>
+            )
           )}
         </div>
 
-        {isOwner ? (
-          <Button className={s.button} onClick={() => setIsOpenAddNewCard(true)}>
-            Add New Card
-          </Button>
-        ) : (
-          data &&
-          data.items.length > 0 && (
-            <Button className={s.button} onClick={learnCardsHandler}>
-              Learn Cards
-            </Button>
-          )
-        )}
-      </div>
-
-      <div className={s.deckImage}>
-        {deckData?.cover ? (
-          <img alt={'question-image'} src={deckData?.cover} />
-        ) : (
-          <img alt={'default-image'} src={defaultImage} />
-        )}
-      </div>
-      <Input
-        className={s.input}
-        clearField={() => onChangeInputValue('')}
-        onValueChange={onChangeInputValue}
-        placeholder={'Search by question'}
-        value={inputSearch}
-        variant={'searchDecoration'}
-      />
-      {data && data.items.length > 0 ? (
-        <>
-          <TableComponent
-            onChangeSort={onChangeSort}
-            sort={sort}
-            titles={columns}
-            withOptions={isOwner}
-          >
-            {data.items.map(items => {
-              return <TableCards cards={items} isOwner={isOwner} key={items.id} />
-            })}
-          </TableComponent>
-          <Pagination
-            className={s.pagination}
-            currentPage={+currentPage}
-            onPageChange={onChangeCurrentPage}
-            onValueChange={onChangePortionSize}
-            pageSize={+portionSize}
-            placeholder={data.pagination.itemsPerPage.toString()}
-            totalCount={data.pagination.totalItems}
-          />
-        </>
-      ) : (
-        <div className={s.noContent}>No content with these terms...</div>
-      )}
-      {isOpenAddNewCard && (
-        <AddNewCard
-          deckId={deckId ?? ''}
-          isOpen={isOpenAddNewCard}
-          onOpenChange={onOpenChange}
-          title={'Add New Card'}
+        <div className={s.deckImage}>
+          {deckData?.cover ? (
+            <img alt={'question-image'} src={deckData?.cover} />
+          ) : (
+            <img alt={'default-image'} src={defaultImage} />
+          )}
+        </div>
+        <Input
+          className={s.input}
+          clearField={() => onChangeInputValue('')}
+          onValueChange={onChangeInputValue}
+          placeholder={'Search by question'}
+          value={inputSearch}
+          variant={'searchDecoration'}
         />
-      )}
-    </div>
+        {data && data.items.length > 0 ? (
+          <>
+            <TableComponent
+              onChangeSort={onChangeSort}
+              sort={sort}
+              titles={columns}
+              withOptions={isOwner}
+            >
+              {data.items.map(items => {
+                return <TableCards cards={items} isOwner={isOwner} key={items.id} />
+              })}
+            </TableComponent>
+            <Pagination
+              className={s.pagination}
+              currentPage={+currentPage}
+              onPageChange={onChangeCurrentPage}
+              onValueChange={onChangePortionSize}
+              pageSize={+portionSize}
+              placeholder={data.pagination.itemsPerPage.toString()}
+              totalCount={data.pagination.totalItems}
+            />
+          </>
+        ) : (
+          <div className={s.noContent}>No content with these terms...</div>
+        )}
+        {isOpenAddNewCard && (
+          <AddNewCard
+            deckId={deckId ?? ''}
+            isOpen={isOpenAddNewCard}
+            onOpenChange={onOpenChange}
+            title={'Add New Card'}
+          />
+        )}
+      </div>
+    </>
   )
 }
 

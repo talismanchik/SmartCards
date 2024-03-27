@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
-import { Spinner } from '@/components/ui/spinner'
 import { TabItem } from '@/components/ui/tabSwitcher'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
@@ -20,11 +20,10 @@ export const Decks = () => {
   const {
     changeFiltersParam,
     currentPage,
-    decksIsLoading,
     getDecksData,
     getDecksError,
+    isFetching,
     itemsPerPage,
-    minMaxCardsLoading,
     onChangeSort,
     sort,
   } = useDecksFilter()
@@ -42,9 +41,6 @@ export const Decks = () => {
     topRow: clsx(s.topRow),
   }
 
-  if (decksIsLoading || minMaxCardsLoading) {
-    return <Spinner />
-  }
   if (getDecksError) {
     return <h1>Error: {JSON.stringify(getDecksError)}...</h1>
   }
@@ -54,6 +50,7 @@ export const Decks = () => {
 
   return (
     <>
+      {isFetching && <Loader />}
       <div className={styles.topRow}>
         <Typography variant={'h1'}>Decks list</Typography>
         <Button onClick={() => setIsOpen(true)}>Add New Deck</Button>

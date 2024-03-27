@@ -1,8 +1,6 @@
 import { Outlet, useOutletContext } from 'react-router-dom'
 
 import { Header } from '@/components/header/header'
-import { Loader } from '@/components/ui/loader'
-import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 
 import s from './layout.module.scss'
@@ -21,20 +19,17 @@ export function useAuthContext() {
 export const Layout = () => {
   const { data: meData, isError, isLoading } = useGetMeQuery()
   const isAuthenticated = !isError && !isLoading
-  const { decksIsLoading, minMaxCardsLoading } = useDecksFilter()
-  const loading = decksIsLoading || minMaxCardsLoading
 
   if (isLoading) {
     return null
   }
 
   return (
-    <div>
-      {loading && <Loader />}
+    <>
       <Header isAuthenticated={isAuthenticated} meData={meData} />
       <div className={s.container}>
         <Outlet context={{ isAuthenticated } satisfies AuthContext} />
       </div>
-    </div>
+    </>
   )
 }
