@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { DeckForm } from '@/features/deck/deckForm'
 import { useUpdateDeckMutation } from '@/services/decks/decksService'
 
@@ -25,8 +27,11 @@ export const UpdateDeck = ({
   title,
 }: UpdateDeckProps) => {
   const [updateDeckById] = useUpdateDeckMutation()
-  const onSubmitForm = (data: FormData) => {
-    updateDeckById({ body: data, id })
+  const onSubmitForm = async (data: FormData) => {
+    await toast.promise(updateDeckById({ body: data, id }).unwrap(), {
+      error: "Couldn't update",
+      success: 'Deck was updated',
+    })
   }
   const editValues: EditValues = {
     cover,

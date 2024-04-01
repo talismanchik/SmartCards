@@ -46,6 +46,7 @@ export const Cards = () => {
 
   const { data: meData } = useGetMeQuery()
   const isOwner = deckData?.userId === meData?.id
+  const notIsEmpty = data && data.items.length > 0
 
   if (isLoadingGetDeck || isLoadingDeck) {
     return <Spinner />
@@ -90,8 +91,7 @@ export const Cards = () => {
               Add New Card
             </Button>
           ) : (
-            data &&
-            data.items.length > 0 && (
+            notIsEmpty && (
               <Button className={s.button} onClick={learnCardsHandler}>
                 Learn Cards
               </Button>
@@ -114,7 +114,7 @@ export const Cards = () => {
           value={inputSearch}
           variant={'searchDecoration'}
         />
-        {data && data.items.length > 0 ? (
+        {notIsEmpty ? (
           <>
             <TableComponent
               onChangeSort={onChangeSort}

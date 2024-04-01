@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { CardForm } from '@/features/card/cardForm'
 import { useCreateCardMutation } from '@/services/cards/cardsService'
 
@@ -10,8 +12,11 @@ type AddNewCardProps = {
 export const AddNewCard = ({ deckId, isOpen, onOpenChange, title }: AddNewCardProps) => {
   const [createCard] = useCreateCardMutation()
 
-  const onSubmitForm = (data: FormData) => {
-    createCard({ data: data, id: deckId })
+  const onSubmitForm = async (data: FormData) => {
+    await toast.promise(createCard({ data: data, id: deckId }).unwrap(), {
+      error: 'Failed to add new card',
+      success: 'Added',
+    })
   }
 
   return (

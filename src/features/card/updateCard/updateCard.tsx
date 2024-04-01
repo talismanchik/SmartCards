@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { CardForm } from '@/features/card/cardForm'
 import { useUpdateCardMutation } from '@/services/cards/cardsService'
 
@@ -28,8 +30,11 @@ export const UpdateCard = ({
   title,
 }: UpdateCardProps) => {
   const [updateCardById] = useUpdateCardMutation()
-  const onSubmitForm = (data: FormData) => {
-    updateCardById({ body: data, id: cardId })
+  const onSubmitForm = async (data: FormData) => {
+    await toast.promise(updateCardById({ body: data, id: cardId }).unwrap(), {
+      error: "Couldn't update",
+      success: 'Card was updated',
+    })
   }
   const editValues: EditValues = {
     answer,

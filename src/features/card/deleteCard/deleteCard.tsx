@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal/Modal'
 import { Typography } from '@/components/ui/typography'
@@ -13,8 +15,11 @@ type DeleteCardProps = {
 }
 export const DeleteCard = ({ id, isOpen, onOpenChange, title }: DeleteCardProps) => {
   const [deleteCard] = useDeleteCardMutation()
-  const onSubmitDeleteCard = () => {
-    deleteCard({ id })
+  const onSubmitDeleteCard = async () => {
+    await toast.promise(deleteCard({ id }).unwrap(), {
+      error: "Couldn't Delete",
+      success: 'Card was deleted',
+    })
     onOpenChange(false)
   }
   const onClose = () => {

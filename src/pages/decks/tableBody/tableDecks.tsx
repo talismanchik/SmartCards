@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import defaultImage from '@/assets/defaultImg.png'
 import { Icon } from '@/components/ui/icon/Icon'
@@ -37,11 +38,14 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
     nameWrapper: clsx(s.nameWrapper, s.cursorPointer),
   }
 
-  const onDeleteDeck = (id: UpdateDeleteDeckArgs) => {
+  const onDeleteDeck = async (id: UpdateDeleteDeckArgs) => {
     if (id) {
-      deleteDeckById(id)
-      setIsOpenDelete(false)
+      await toast.promise(deleteDeckById(id).unwrap(), {
+        error: "Couldn't Delete",
+        success: 'Deck was deleted',
+      })
     }
+    setIsOpenDelete(false)
   }
 
   return (

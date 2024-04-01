@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decksService'
 
@@ -9,9 +11,11 @@ type AddNewDeckProps = {
 
 export const AddNewDeck = ({ isOpen, onOpenChange, title }: AddNewDeckProps) => {
   const [createDeck] = useCreateDeckMutation()
-  const onSubmitForm = (data: FormData) => {
-    createDeck(data)
-    console.log(data)
+  const onSubmitForm = async (data: FormData) => {
+    await toast.promise(createDeck(data).unwrap(), {
+      error: 'Failed to add new deck',
+      success: 'Added',
+    })
   }
 
   return (

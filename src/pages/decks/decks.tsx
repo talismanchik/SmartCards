@@ -31,8 +31,8 @@ export const Decks = () => {
   const { data: meData } = useGetMeQuery()
   const myId = meData?.id
   const [isOpen, setIsOpen] = useState(false)
-  const pagination = getDecksData?.pagination
   const navigate = useNavigate()
+  const notIsEmpty = getDecksData && getDecksData.items.length > 0
 
   const styles = {
     filterButton: clsx(s.filterButton),
@@ -62,28 +62,32 @@ export const Decks = () => {
       </div>
       <>
         <Filters />
-        <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
-          {getDecksData?.items.map(item => {
-            return (
-              <TableDecks
-                deck={item}
-                key={item.id}
-                learnDeckHandler={learnDeckHandler}
-                myId={myId}
-              />
-            )
-          })}
-        </TableComponent>
-        {pagination && (
-          <Pagination
-            className={styles.pagination}
-            currentPage={+currentPage}
-            onPageChange={pageNumber => changeFiltersParam('currentPage', pageNumber + '')}
-            onValueChange={value => changeFiltersParam('itemsPerPage', value)}
-            pageSize={+itemsPerPage}
-            placeholder={pagination.itemsPerPage + ''}
-            totalCount={pagination.totalItems}
-          />
+        {notIsEmpty ? (
+          <>
+            <TableComponent onChangeSort={onChangeSort} sort={sort} titles={titles} withOptions>
+              {getDecksData?.items.map(item => {
+                return (
+                  <TableDecks
+                    deck={item}
+                    key={item.id}
+                    learnDeckHandler={learnDeckHandler}
+                    myId={myId}
+                  />
+                )
+              })}
+            </TableComponent>
+            <Pagination
+              className={styles.pagination}
+              currentPage={+currentPage}
+              onPageChange={pageNumber => changeFiltersParam('currentPage', pageNumber + '')}
+              onValueChange={value => changeFiltersParam('itemsPerPage', value)}
+              pageSize={+itemsPerPage}
+              placeholder={getDecksData.pagination.itemsPerPage + ''}
+              totalCount={getDecksData.pagination.totalItems}
+            />
+          </>
+        ) : (
+          <div className={s.noContent}>No content with these terms...</div>
         )}
       </>
     </>
