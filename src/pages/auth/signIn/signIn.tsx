@@ -1,10 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { SignInForm } from '@/components/forms/signInForm'
 import { SignInFormValues } from '@/components/forms/signInForm/useSignInForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { useLogInMutation } from '@/services/auth/auth.service'
+import { ErrorResponse } from '@/services/auth/auth.types'
 
 import s from './signIn.module.scss'
 
@@ -12,8 +14,14 @@ export const SignIn = () => {
   const [login] = useLogInMutation()
   const navigate = useNavigate()
 
-  const submitLoginForm = (data: SignInFormValues) => {
-    login(data)
+  const submitLoginForm = async (data: SignInFormValues) => {
+    try {
+      await login(data).unwrap()
+    } catch (e: unknown) {
+      const err = e as ErrorResponse
+
+      toast.error(err.data.message ?? 'Could not sign in')
+    }
   }
 
   return (

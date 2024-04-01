@@ -46,3 +46,15 @@ export type CreateNewPasswordArgs = {
   password: string
   token: string
 }
+
+export type ErrorResponse = {
+  data: {
+    message: string
+  }
+}
+
+export type ServerError = {
+  data: {
+    errorMessages: string[]
+  }
+}

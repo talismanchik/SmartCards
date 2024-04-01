@@ -1,19 +1,27 @@
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { SignUpForm } from '@/components/forms/signUpForm'
 import { SignUpFormValues } from '@/components/forms/signUpForm/useSignUpForm'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { useSignUpMutation } from '@/services/auth/auth.service'
+import { ServerError } from '@/services/auth/auth.types'
 
 import s from './signUp.module.scss'
 
 export const SignUp = () => {
   const [signUp] = useSignUpMutation()
-  const onSubmitFormHandler = (data: SignUpFormValues) => {
-    const { confirmPassword, ...newData } = data
+  const onSubmitFormHandler = async (data: SignUpFormValues) => {
+    try {
+      const { confirmPassword, ...newData } = data
 
-    signUp(newData)
+      await signUp(newData).unwrap()
+    } catch (e: unknown) {
+      const err = e as ServerError
+
+      toast.error(err.data.errorMessages[0] ?? 'Could not sign up')
+    }
   }
 
   return (
