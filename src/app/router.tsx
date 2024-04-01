@@ -75,7 +75,6 @@ export const router = createBrowserRouter([
         element: <PublicRoutes />,
       },
     ],
-
     element: <Layout />,
   },
 ])
