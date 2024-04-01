@@ -21,7 +21,6 @@ export const Decks = () => {
     changeFiltersParam,
     currentPage,
     getDecksData,
-    getDecksError,
     isFetching,
     itemsPerPage,
     onChangeSort,
@@ -41,9 +40,6 @@ export const Decks = () => {
     topRow: clsx(s.topRow),
   }
 
-  if (getDecksError) {
-    return <h1>Error: {JSON.stringify(getDecksError)}...</h1>
-  }
   const learnDeckHandler = (id: string) => {
     navigate(`/cards/${id}/learn`)
   }
