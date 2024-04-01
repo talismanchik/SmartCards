@@ -37,6 +37,10 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
     location.pathname != '/profile' && navigate('/profile')
   }
 
+  const navigateToLogin = () => {
+    navigate('/login')
+  }
+
   return (
     <header className={classNames.header}>
       <div className={classNames.container}>
@@ -93,7 +97,7 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
             </DropdownNew>
           </div>
         ) : (
-          <Button onClick={() => navigate('/login')} variant={'secondary'}>
+          <Button onClick={navigateToLogin} variant={'secondary'}>
             Sign in
           </Button>
         )}
