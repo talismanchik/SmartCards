@@ -37,6 +37,10 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
     location.pathname != '/profile' && navigate('/profile')
   }
 
+  const scrollToTop = () => {
+    scroll.scrollToTop()
+  }
+
   const navigateToLogin = () => {
     navigate('/login')
   }
@@ -44,12 +48,7 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
   return (
     <header className={classNames.header}>
       <div className={classNames.container}>
-        <a
-          className={classNames.logo}
-          onClick={() => {
-            scroll.scrollToTop()
-          }}
-        >
+        <a className={classNames.logo} onClick={scrollToTop}>
           <Logo />
         </a>
         {isAuthenticated ? (
@@ -70,9 +69,9 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
                     src={meData?.avatar ?? defaultAvatar}
                   />
                   <div className={s.dropdownUserInfo}>
-                    <Typography variant={'subtitle2'}>Ivan</Typography>
+                    <Typography variant={'subtitle2'}>{meData?.name}</Typography>
                     <Typography className={s.dropdownUserEmail} variant={'caption'}>
-                      ivan@email.com
+                      {meData?.email}
                     </Typography>
                   </div>
                 </div>
