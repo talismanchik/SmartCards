@@ -1,3 +1,10 @@
+import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
+
 export const DeckMobile = () => {
-  return <div>Deck Mobile</div>
+  return (
+    <TableRow>
+      Deck Mobile
+      <TableDataCell> cell </TableDataCell>
+    </TableRow>
+  )
 }
