@@ -6,3 +6,9 @@
   background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-300);
 }
+
+@media screen and (width <= 840px) {
+  .root {
+    width: 330px;
+  }
+}

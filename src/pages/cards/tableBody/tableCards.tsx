@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { useWindowWidth } from '@/components/hooks/useWindowWidth'
 import { GradeStar } from '@/components/ui/gradeStar'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
@@ -19,6 +20,7 @@ type Props = {
 export const TableCards = ({ cards, isOwner }: Props) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenUpdate, setIsOpenUpdate] = useState(false)
+  const mobileWidth = useWindowWidth()
 
   return (
     <TableRow key={cards.id}>
@@ -50,11 +52,15 @@ export const TableCards = ({ cards, isOwner }: Props) => {
           </Typography>
         </div>
       </TableDataCell>
-      <TableDataCell>
-        <Typography variant={'body2'}>
-          {new Date(cards.updated).toLocaleDateString('ru-RU')}
-        </Typography>
-      </TableDataCell>
+
+      {!mobileWidth && (
+        <TableDataCell>
+          <Typography variant={'body2'}>
+            {new Date(cards.updated).toLocaleDateString('ru-RU')}
+          </Typography>
+        </TableDataCell>
+      )}
+
       <TableDataCell>
         <Typography variant={'body2'}>
           <GradeStar grade={cards.grade} />

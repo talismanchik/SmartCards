@@ -1,4 +1,9 @@
 .container {
   padding: 18px 24px;
+}
 
+@media screen and (width <= 840px) {
+  .container {
+    padding: 8px 14px;
+  }
 }

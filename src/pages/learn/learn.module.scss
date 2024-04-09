@@ -11,3 +11,13 @@
     color: var(--color-dark-100);
   }
 }
+
+@media screen and (width <= 840px) {
+  .learnWrapper {
+    padding: 13px 14px 20px;
+
+    .titleLearn {
+      margin-bottom: 10px;
+    }
+  }
+}
