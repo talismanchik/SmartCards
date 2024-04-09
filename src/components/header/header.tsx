@@ -41,6 +41,10 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
     scroll.scrollToTop()
   }
 
+  const logOutHandler = () => {
+    logOut()
+  }
+
   const navigateToLogin = () => {
     navigate('/login')
   }
@@ -89,7 +93,7 @@ export const Header = ({ isAuthenticated, meData }: Props) => {
                 <Typography variant={'caption'}>My Profile</Typography>
               </Item>
               <CustomSeparator />
-              <Item className={s.dropdownItem} onClick={() => logOut()}>
+              <Item className={s.dropdownItem} onClick={logOutHandler}>
                 <Icon iconId={'log_out'} />
                 <Typography variant={'caption'}>Logout</Typography>
               </Item>
