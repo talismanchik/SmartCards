@@ -44,3 +44,14 @@
 .noContent {
   text-align: center;
 }
+
+@media screen and (width <= 840px) {
+  .filtersWrapper {
+    display: flex;
+    justify-content: center;
+
+    .filterButton {
+      width: 100%;
+    }
+  }
+}

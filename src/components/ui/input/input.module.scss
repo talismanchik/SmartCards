@@ -157,3 +157,9 @@
   font-size: var(--font-size-xs);
   color: var(--color-danger-300);
 }
+
+@media screen and (width <= 840px) {
+  .root {
+    width: 100%;
+  }
+}
