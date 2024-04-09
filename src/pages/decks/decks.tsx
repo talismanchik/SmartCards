@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useWindowWidth } from '@/components/hooks/useWindowWidth'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
@@ -9,7 +8,6 @@ import { TabItem } from '@/components/ui/tabSwitcher'
 import { Column, TableComponent } from '@/components/ui/table/tableComponent'
 import { Typography } from '@/components/ui/typography'
 import { AddNewDeck } from '@/features/deck/addNewDeck'
-import { DeckMobile } from '@/pages/decks/decksMobile'
 import { Filters } from '@/pages/decks/filters/filters'
 import { useDecksFilter } from '@/pages/decks/hooks/useDecksFilter'
 import { TableDecks } from '@/pages/decks/tableBody/tableDecks'
@@ -28,8 +26,6 @@ export const Decks = () => {
     onChangeSort,
     sort,
   } = useDecksFilter()
-
-  const mobileWidth = useWindowWidth()
 
   const { data: meData } = useGetMeQuery()
   const myId = meData?.id
@@ -92,7 +88,7 @@ export const Decks = () => {
   )
 }
 
-const titles: Column[] = [
+export const titles: Column[] = [
   {
     key: 'name',
     style: s.nameStyle,

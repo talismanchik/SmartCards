@@ -1,10 +1,32 @@
-import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
+import { TableDataCell } from '@/components/ui/table/tableConstructor'
+import { Typography } from '@/components/ui/typography'
+import { titles } from '@/pages/decks/decks'
+import { Deck } from '@/services/decks/decks.types'
 
-export const DeckMobile = () => {
+type Props = {
+  deck: Deck
+}
+export const DeckMobile = ({ deck }: Props) => {
   return (
-    <TableRow>
-      Deck Mobile
-      <TableDataCell> cell </TableDataCell>
-    </TableRow>
+    <>
+      <TableDataCell>
+        {titles.map(el => {
+          return (
+            <Typography key={el.key} variant={'subtitle2'}>
+              {el.title}
+            </Typography>
+          )
+        })}
+      </TableDataCell>
+
+      <TableDataCell>
+        <Typography variant={'body2'}>{deck.name}</Typography>
+        <Typography variant={'body2'}>{deck.cardsCount}</Typography>
+        <Typography variant={'body2'}>
+          {new Date(deck.updated).toLocaleDateString('ru-RU')}
+        </Typography>
+        <Typography variant={'body2'}>{deck.author.name}</Typography>
+      </TableDataCell>
+    </>
   )
 }

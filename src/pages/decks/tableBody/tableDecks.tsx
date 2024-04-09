@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import defaultImage from '@/assets/defaultImg.png'
+import { useWindowWidth } from '@/components/hooks/useWindowWidth'
 import { Icon } from '@/components/ui/icon/Icon'
 import { TableDataCell, TableRow } from '@/components/ui/table/tableConstructor'
 import { Typography } from '@/components/ui/typography'
 import { DeleteDeck } from '@/features/deck/deleteDeck'
 import { UpdateDeck } from '@/features/deck/updateDeck'
+import { DeckMobile } from '@/pages/decks/decksMobile'
 import { Deck, UpdateDeleteDeckArgs } from '@/services/decks/decks.types'
 import { useDeleteDeckMutation } from '@/services/decks/decksService'
 import clsx from 'clsx'
@@ -27,6 +29,8 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
   const navigate = useNavigate()
   const isMyDeck = deck.author.id === myId
   const isEmpty = deck.cardsCount === 0
+
+  const mobileWidth = useWindowWidth()
 
   const onLinkToCards = (id: string) => {
     navigate(`/cards/${id}`)
@@ -50,29 +54,35 @@ export const TableDecks = ({ deck, learnDeckHandler, myId }: Props) => {
 
   return (
     <TableRow key={deck.id}>
-      <TableDataCell onClick={() => onLinkToCards(deck.id)}>
-        <div className={styles.nameWrapper}>
-          {deck.cover ? (
-            <img alt={'question-image'} className={s.tableImage} src={deck.cover} />
-          ) : (
-            <img alt={'default-image'} className={s.tableImage} src={defaultImage} />
-          )}
-          <Typography title={deck.name} variant={'body2'}>
-            {deck.name}
-          </Typography>
-        </div>
-      </TableDataCell>
-      <TableDataCell>
-        <Typography variant={'body2'}>{deck.cardsCount}</Typography>
-      </TableDataCell>
-      <TableDataCell>
-        <Typography variant={'body2'}>
-          {new Date(deck.updated).toLocaleDateString('ru-RU')}
-        </Typography>
-      </TableDataCell>
-      <TableDataCell>
-        <Typography variant={'body2'}>{deck.author.name}</Typography>
-      </TableDataCell>
+      {mobileWidth ? (
+        <DeckMobile deck={deck} />
+      ) : (
+        <>
+          <TableDataCell onClick={() => onLinkToCards(deck.id)}>
+            <div className={styles.nameWrapper}>
+              {deck.cover ? (
+                <img alt={'question-image'} className={s.tableImage} src={deck.cover} />
+              ) : (
+                <img alt={'default-image'} className={s.tableImage} src={defaultImage} />
+              )}
+              <Typography title={deck.name} variant={'body2'}>
+                {deck.name}
+              </Typography>
+            </div>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>{deck.cardsCount}</Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>
+              {new Date(deck.updated).toLocaleDateString('ru-RU')}
+            </Typography>
+          </TableDataCell>
+          <TableDataCell>
+            <Typography variant={'body2'}>{deck.author.name}</Typography>
+          </TableDataCell>
+        </>
+      )}
       <TableDataCell>
         <div className={s.iconContainer}>
           {isMyDeck && (

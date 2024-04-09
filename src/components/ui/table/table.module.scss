@@ -130,3 +130,75 @@
 .cursorPointer {
   cursor: pointer;
 }
+
+@media screen and (width <= 840px) {
+  .table {
+    border: none;
+
+    .tableHead {
+      display: none;
+    }
+
+    .tableBody {
+      display: grid;
+      gap: 24px;
+
+      .tableRow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        max-height: 400px;
+
+        border: 1px solid var(--color-dark-500);
+        border-radius: 4px;
+
+        .tableDataCell {
+          padding: 20px 20px 0;
+
+          &:first-child {
+            grid-area: 1/1/2/2;
+
+            & p {
+              margin-bottom: 18px;
+            }
+          }
+
+          &:nth-child(2) {
+            grid-area: 1/2/2/3;
+            text-align: right;
+
+            & p {
+              overflow: hidden;
+              margin-bottom: 18px;
+            }
+          }
+
+          &:nth-child(3) {
+            display: none;
+          }
+
+          &:last-child {
+            display: flex;
+            grid-area: 2/1/3/3;
+            align-items: center;
+            justify-content: space-around;
+
+            width: 100%;
+            max-height: 40px;
+
+            border-top: 1px solid var(--color-dark-500);
+          }
+
+          .iconContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            width: 100%;
+            margin-bottom: 14px;
+          }
+        }
+      }
+    }
+  }
+}

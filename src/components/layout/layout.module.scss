@@ -1,6 +1,10 @@
-.container{
+.container {
   max-width: 1240px;
   margin: 0 auto;
   padding-top: 95px;
   padding-inline: 50px;
+
+  @media screen and (width <= 840px) {
+    padding-inline: 16px;
+  }
 }
